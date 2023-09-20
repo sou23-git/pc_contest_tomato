@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">pc_contest_tomato</string>
+
+    <string name="menu_load">Load</string>
+    <string name="menu_save">Save</string>
+    <string name="menu_delete">Delete</string>
+
+    <string name="textTimerTitle">Timer!!!</string>
+    <string name="enterButton">決定！</string>
+
+    <string name="icon">アイコン</string>
+    <string name="button_pomo">ポモドーロモード</string>
+    <string name="button_sns">SNSは許さんモード</string>
+    <string name="button_settings">設定</string>
+    <string name="help">ヘルプ</string>
+</resources>
