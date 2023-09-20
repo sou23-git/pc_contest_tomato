@@ -8,9 +8,25 @@
     <string name="textTimerTitle">Timer!!!</string>
     <string name="enterButton">決定！</string>
 
+    //home
     <string name="icon">アイコン</string>
     <string name="button_pomo">ポモドーロモード</string>
     <string name="button_sns">SNSは許さんモード</string>
     <string name="button_settings">設定</string>
     <string name="help">ヘルプ</string>
+
+    //help-1
+    <string name="text_help_page1_title">本アプリは二つのモードが搭載されています。</string>
+    <string name="text_icon_pomo">ポモドーロ\nテクニックモード</string>
+    <string name="text_icon_sns">SNSは許さんモード</string>
+    <string name="text_help_page1_1">
+        ポモドーロテクニックモードは\n
+        ポモドーロテクニックという時間管理テクニックを\n
+        ベースとして作業のアシストを行います。</string>
+    <string name="text_help_page1_2">
+        SNSは許さんモードは\n
+        SNSアプリを使用した場合、\n
+        SNSアプリのロックが行われます。\n
+        勉強中にほかのアプリを使わないためのモードです。
+    </string>
 </resources>
