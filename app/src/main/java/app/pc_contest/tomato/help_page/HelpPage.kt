@@ -2,7 +2,6 @@
 
 package app.pc_contest.tomato.help_page
 
-import android.icu.text.Transliterator.Position
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentStatePagerAdapter
