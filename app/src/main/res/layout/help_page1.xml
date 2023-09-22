@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -29,23 +28,28 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="0.5"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            tools:ignore="NestedWeights">
 
             <ImageView
                 android:id="@+id/icon_pomo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:scaleType="fitCenter"
                 android:layout_weight="1"
-                android:src="@drawable/icon_pomo" />
+                android:contentDescription="@string/desc_icon_pomo"
+                android:scaleType="fitCenter"
+                android:src="@drawable/icon_pomo"
+                tools:ignore="NestedWeights" />
 
             <ImageView
                 android:id="@+id/icon_sns"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:scaleType="fitCenter"
                 android:layout_weight="1"
-                android:src="@drawable/icon_sns" />
+                android:contentDescription="@string/desc_icon_sns"
+                android:scaleType="fitCenter"
+                android:src="@drawable/icon_sns"
+                tools:ignore="ImageContrastCheck" />
 
         </LinearLayout>
 
@@ -120,6 +124,7 @@
                     android:layout_marginStart="4dp"
                     android:layout_marginEnd="4dp"
                     android:layout_weight="1"
+                    android:contentDescription="@string/desc_help_page_num1"
                     android:scaleType="fitCenter"
                     android:src="@drawable/image_help_pagestatus_white_true" />
 
@@ -130,6 +135,7 @@
                     android:layout_marginStart="4dp"
                     android:layout_marginEnd="4dp"
                     android:layout_weight="1"
+                    android:contentDescription="@string/desc_help_page_num2"
                     android:scaleType="fitCenter"
                     android:src="@drawable/image_help_pagestatus_white_false" />
 
@@ -140,6 +146,7 @@
                     android:layout_marginStart="4dp"
                     android:layout_marginEnd="4dp"
                     android:layout_weight="1"
+                    android:contentDescription="@string/desc_help_page_num3"
                     android:scaleType="fitCenter"
                     android:src="@drawable/image_help_pagestatus_white_false" />
 
@@ -150,6 +157,7 @@
                     android:layout_marginStart="4dp"
                     android:layout_marginEnd="4dp"
                     android:layout_weight="1"
+                    android:contentDescription="@string/desc_help_page_num4"
                     android:scaleType="fitCenter"
                     android:src="@drawable/image_help_pagestatus_white_false" />
 

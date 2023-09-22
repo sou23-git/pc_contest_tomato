@@ -29,4 +29,11 @@
         SNSアプリのロックが行われます。\n
         勉強中にほかのアプリを使わないためのモードです。
     </string>
+    //help-1_description
+    <string name="desc_icon_pomo">ポモドーロテクニックモード・アイコン</string>
+    <string name="desc_icon_sns">SNSは許さんモード・アイコン</string>
+    <string name="desc_help_page_num1">１／４</string>
+    <string name="desc_help_page_num2">２／４</string>
+    <string name="desc_help_page_num3">３／４</string>
+    <string name="desc_help_page_num4">４／４</string>
 </resources>
