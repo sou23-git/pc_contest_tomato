@@ -63,11 +63,12 @@
         android:id="@+id/imageButton"
         android:layout_width="100dp"
         android:layout_height="100dp"
+        android:layout_marginBottom="80dp"
         android:background="#00FFFFFF"
         android:scaleType="fitXY"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:srcCompat="@drawable/sn_1_button_start"
-        tools:layout_editor_absoluteX="155dp"
-        tools:layout_editor_absoluteY="589dp" />
+        tools:layout_editor_absoluteX="155dp" />
 
     <ImageView
         android:id="@+id/imageView"
