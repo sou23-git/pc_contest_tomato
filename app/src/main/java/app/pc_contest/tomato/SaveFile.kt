@@ -1,53 +1,59 @@
 package app.pc_contest.tomato
 
-import java.io.BufferedReader
-import java.io.BufferedWriter
-import java.io.FileReader
-import java.io.FileWriter
-import java.io.IOException
-import java.util.regex.Pattern
+import com.github.doyaaaaaken.kotlincsv.client.CsvWriter
+import com.github.doyaaaaaken.kotlincsv.dsl.csvWriter
+import java.io.File
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
+import java.util.*
 
+fun main() {
+    val csvFilePath = "data.csv"
+    val header = listOf("num", "time", "x", "y", "z")
+    val maxDataRows = 100
 
-object test {
-    @JvmStatic
-    fun main(args: Array<String>) {
-        process("20180712.csv", ":00,", "output.csv")
-    }
+    while (true) {
+        // 新しいデータを生成
+        val newData = generateData()
 
-    fun process(read_file: String?, searchString: String?, output_file: String?) {
-        try {
-            FileReader(read_file).use { fr ->
-                BufferedReader(fr).use { br ->
-                    FileWriter(output_file).use { fw ->
-                        BufferedWriter(fw).use { bw ->
-                            var line: String
-                            while (br.readLine().also { line = it } != null) {
-                                val p =
-                                    Pattern.compile(searchString)
-                                val m = p.matcher(line)
-                                if (m.find()) {
-                                    var csvArray: Array<String>
-                                    csvArray =
-                                        line.split(",".toRegex()).dropLastWhile { it.isEmpty() }
-                                            .toTypedArray()
-                                    val time = csvArray[0]
-                                    val press = csvArray[1].toFloat() % 10000
-                                    val pressure =
-                                        String.format("%.2f", press)
-                                    val temperature = csvArray[2]
-                                    val outputLine =
-                                        java.lang.String.join(",", time, pressure, temperature)
-                                    bw.write(outputLine)
-                                    bw.newLine()
-                                } else {
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        } catch (ex: IOException) {
-            ex.printStackTrace()
+        // ファイルが存在しない場合はヘッダー行を書き込む
+        val file = File(csvFilePath)
+        if (!file.exists()) {
+            file.writeText(header.joinToString(","))
         }
+
+        // ファイルを読み込んでデータを保持
+        val data = file.readLines().toMutableList()
+
+        // データが100行を超える場合、古いデータを削除
+        if (data.size >= maxDataRows) {
+            data.removeAt(0)
+        }
+
+        // 新しいデータを追加
+        data.add(newData.joinToString(","))
+
+        // データをCSVファイルに書き込む
+        CsvWriter().open(csvFilePath, append = false) {
+            writeRow(header)
+            for (line in data) {
+                writeRow(line.split(","))
+            }
+        }
+
+        println("新しいデータをCSVファイルに書き込みました。")
+
+        // インターバルを設定（例: 10秒ごとに新しいデータを生成）
+        Thread.sleep(10000)
     }
+}
+
+fun generateData(): List<String> {
+    val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")
+    val currentTime = LocalDateTime.now().format(formatter)
+    val random = Random()
+    val x = random.nextDouble().toString()
+    val y = random.nextDouble().toString()
+    val z = random.nextDouble().toString()
+    return listOf(currentTime, x, y, z)
 }
