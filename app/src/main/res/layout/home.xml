@@ -1,74 +1,77 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:layout_height="match_parent">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="90"
-        android:orientation="horizontal">
 
-        <ImageView
-            android:id="@+id/imageView5"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            app:srcCompat="@drawable/app_bar_top" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="10"
-        android:background="@color/cream"
-        android:orientation="vertical">
+    <ImageView
+        android:id="@+id/imageView5"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="#00FFFFFF"
+        android:scaleType="fitXY"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/top_frame" />
+    <FrameLayout
+        android:id="@+id/frameLayout"
+        android:layout_width="411dp"
+        android:layout_height="58dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <ImageButton
-            android:id="@+id/button_pomo"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="32dp"
-            android:layout_marginTop="32dp"
-            android:layout_marginEnd="32dp"
-            android:layout_marginBottom="0dp"
-            android:layout_weight="0.5"
-            android:background="@color/cream"
-            android:contentDescription="@string/button_pomo"
-            android:scaleType="fitCenter"
-            android:src="@drawable/button_pomo"
-            tools:ignore="NestedWeights" />
+            android:id="@+id/imageButton2"
+            android:layout_width="98dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:background="#00FFFFFF"
+            android:contentDescription="情報アイコン"
+            android:scaleType="fitXY"
+            app:srcCompat="@drawable/app_logo" />
 
-        <ImageButton
-            android:id="@+id/button_sns"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="32dp"
-            android:layout_marginTop="0dp"
-            android:layout_marginEnd="32dp"
-            android:layout_marginBottom="0dp"
-            android:layout_weight="0.5"
-            android:background="@color/cream"
-            android:contentDescription="@string/button_sns"
-            android:scaleType="fitCenter"
-            android:src="@drawable/button_sns" />
+    </FrameLayout>
 
-        <ImageButton
-            android:id="@+id/button_help"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="16dp"
-            android:layout_marginBottom="48dp"
-            android:layout_weight="0.1"
-            android:background="@color/cream"
-            android:contentDescription="@string/help"
-            android:scaleType="fitCenter"
-            android:src="@drawable/help" />
-    </LinearLayout>
+    <ImageButton
+        android:id="@+id/imageButton7"
+        android:layout_width="300dp"
+        android:layout_height="150dp"
+        android:layout_marginTop="150dp"
+        android:background="#00FFFFFF"
+        android:scaleType="fitXY"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/button_pomo"
+        tools:ignore="SpeakableTextPresentCheck" />
 
-</LinearLayout>
+    <ImageButton
+        android:id="@+id/imageButton8"
+        android:layout_width="300dp"
+        android:layout_height="150dp"
+        android:layout_marginTop="50dp"
+        android:background="#00FFFFFF"
+        android:scaleType="fitXY"
+        app:layout_constraintEnd_toEndOf="@+id/imageView5"
+        app:layout_constraintStart_toStartOf="@+id/imageView5"
+        app:layout_constraintTop_toBottomOf="@+id/imageButton7"
+        app:srcCompat="@drawable/button_sns" />
+
+    <ImageButton
+        android:id="@+id/imageButton9"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginTop="100dp"
+        android:background="#00FFFFFF"
+        android:scaleType="fitXY"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageButton8"
+        app:srcCompat="@drawable/help" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
