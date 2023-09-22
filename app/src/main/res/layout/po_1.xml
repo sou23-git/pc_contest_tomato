@@ -27,7 +27,7 @@
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/sn_frame" />
+        app:srcCompat="@drawable/po_frame" />
 
     <FrameLayout
         android:id="@+id/frameLayout"
@@ -55,7 +55,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
         android:layout_marginTop="80dp"
-        android:text="SNSは許さんモード"
+        android:text="ポモドーロテクニックモード"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -67,7 +67,7 @@
         android:background="#00FFFFFF"
         android:scaleType="fitXY"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:srcCompat="@drawable/sn_1_button_start"
+        app:srcCompat="@drawable/po_1_button_start_"
         tools:layout_editor_absoluteX="155dp" />
 
     <ImageView
@@ -79,7 +79,7 @@
         android:foregroundGravity="center_vertical|center"
         app:layout_constraintStart_toStartOf="@+id/textView2"
         app:layout_constraintTop_toTopOf="@+id/imageView2"
-        app:srcCompat="@drawable/sn_1_decoration_text" />
+        app:srcCompat="@drawable/po_1_decolation_text" />
 
     <TextView
         android:id="@+id/textView2"
@@ -87,10 +87,11 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="1dp"
         android:autoText="true"
-        android:text="作業時間を決めてください"
+        android:text="目標回数を入力してください"
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="@+id/imageView"
-        tools:layout_editor_absoluteX="73dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <FrameLayout
         android:layout_width="404dp"
