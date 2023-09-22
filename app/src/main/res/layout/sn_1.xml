@@ -45,7 +45,7 @@
             android:background="#00FFFFFF"
             android:contentDescription="情報アイコン"
             android:scaleType="fitXY"
-            app:srcCompat="@drawable/app_logo" />
+            app:srcCompat="@drawable/main_icon" />
 
     </FrameLayout>
 
@@ -67,7 +67,8 @@
         android:scaleType="fitXY"
         app:srcCompat="@drawable/sn_1_button_start"
         tools:layout_editor_absoluteX="155dp"
-        tools:layout_editor_absoluteY="589dp" />
+        tools:layout_editor_absoluteY="589dp"
+        tools:ignore="MissingConstraints" />
 
     <ImageView
         android:id="@+id/imageView"
@@ -89,7 +90,8 @@
         android:text="作業時間を決めてください"
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="@+id/imageView"
-        tools:layout_editor_absoluteX="73dp" />
+        tools:layout_editor_absoluteX="73dp"
+        tools:ignore="MissingConstraints" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -6,27 +6,33 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <LinearLayout
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="90"
-        android:orientation="horizontal">
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="@color/white"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme">
 
         <ImageView
-            android:id="@+id/imageView5"
+            android:id="@+id/icom_main_toolbar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            app:srcCompat="@drawable/app_bar_top" />
+            android:scaleType="fitCenter"
+            android:layout_gravity="center"
+            android:src="@drawable/main_icon"
+            android:importantForAccessibility="no" />
 
-    </LinearLayout>
+    </androidx.appcompat.widget.Toolbar>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="0dp"
         android:layout_weight="10"
         android:background="@color/cream"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        tools:ignore="UselessParent">
 
         <ImageButton
             android:id="@+id/button_pomo"
@@ -68,7 +74,8 @@
             android:background="@color/cream"
             android:contentDescription="@string/help"
             android:scaleType="fitCenter"
-            android:src="@drawable/help" />
+            android:src="@drawable/help"
+            tools:ignore="TouchTargetSizeCheck" />
     </LinearLayout>
 
 </LinearLayout>

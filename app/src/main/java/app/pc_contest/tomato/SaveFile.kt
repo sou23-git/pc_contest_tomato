@@ -1,59 +1,50 @@
 package app.pc_contest.tomato
 
+import android.content.Context
+import android.os.Environment
 import com.github.doyaaaaaken.kotlincsv.client.CsvWriter
-import com.github.doyaaaaaken.kotlincsv.dsl.csvWriter
 import java.io.File
-import java.time.LocalDateTime
-import java.time.format.DateTimeFormatter
-import java.util.*
 
-fun main() {
-    val csvFilePath = "data.csv"
-    val header = listOf("num", "time", "x", "y", "z")
-    val maxDataRows = 100
+class SaveFile(private val context: Context) {
 
-    while (true) {
-        // 新しいデータを生成
-        val newData = generateData()
+    fun saveCsv(csvText: List<String>) {
 
-        // ファイルが存在しない場合はヘッダー行を書き込む
-        val file = File(csvFilePath)
-        if (!file.exists()) {
-            file.writeText(header.joinToString(","))
+        val getSensorValue = GetSensorValue()
+        val maxDataRows = 200
+        val header = listOf("num", "time", "x_acc", "y_acc", "z_acc", "x_gyr", "y_gyr", "z_gyr")
+        val fileName = "log.csv"
+        val csvFilePath: String = context.applicationContext.getExternalFilesDir(Environment.DIRECTORY_DOCUMENTS)?.toString()
+            ?.plus("/").plus(fileName) ?: return // 内部ストレージのDocumentのURL
+
+        // ファイルが存在しない場合のみヘッダーを書き込む
+        if (!File(csvFilePath).exists()) {
+            CsvWriter().open(csvFilePath, append = false) {
+                writeRow(header)
+            }
         }
 
         // ファイルを読み込んでデータを保持
-        val data = file.readLines().toMutableList()
+        val data = if (File(csvFilePath).exists()) {
+            File(csvFilePath).readLines().toMutableList()
+        } else {
+            mutableListOf()
+        }
 
-        // データが100行を超える場合、古いデータを削除
+        // データが指定の行数を超える場合、古いデータを削除
         if (data.size >= maxDataRows) {
             data.removeAt(0)
         }
 
         // 新しいデータを追加
+        val indexCsv = (data.firstOrNull()?.split(",")?.get(0)?.toIntOrNull() ?: 0) + 1
+        val newData = listOf(indexCsv.toString()) + csvText.subList(1, csvText.size) // ヘッダー以外のデータを追加
         data.add(newData.joinToString(","))
 
         // データをCSVファイルに書き込む
         CsvWriter().open(csvFilePath, append = false) {
-            writeRow(header)
             for (line in data) {
                 writeRow(line.split(","))
             }
         }
-
-        println("新しいデータをCSVファイルに書き込みました。")
-
-        // インターバルを設定（例: 10秒ごとに新しいデータを生成）
-        Thread.sleep(10000)
     }
-}
-
-fun generateData(): List<String> {
-    val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")
-    val currentTime = LocalDateTime.now().format(formatter)
-    val random = Random()
-    val x = random.nextDouble().toString()
-    val y = random.nextDouble().toString()
-    val z = random.nextDouble().toString()
-    return listOf(currentTime, x, y, z)
 }
