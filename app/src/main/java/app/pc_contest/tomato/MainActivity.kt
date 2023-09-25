@@ -9,16 +9,19 @@ import androidx.fragment.app.FragmentActivity
 import androidx.viewpager.widget.ViewPager
 import app.pc_contest.tomato.help_page.HelpPage
 
-class MainActivity : FragmentActivity() {
+import android.content.Intent
+import android.widget.ImageButton
 
-    var viewPager: ViewPager? = null
-    @SuppressLint("MissingInflatedId")
+class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.help_page)
-        viewPager = findViewById<View>(R.id.pager) as ViewPager
-        viewPager!!.adapter = HelpPage(
-            supportFragmentManager
-        )
+        setContentView(R.layout.activity_main)
+
+        val button = findViewById<ImageButton>(R.id.top_po_button) // レイアウト内のボタンのIDを指定
+
+        button.setOnClickListener {
+            val intent = Intent(this, SecondActivity::class.java) // 遷移先のアクティビティを指定
+            startActivity(intent)
+        }
     }
 }

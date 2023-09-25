@@ -37,7 +37,7 @@
     </FrameLayout>
 
     <ImageButton
-        android:id="@+id/imageButton7"
+        android:id="@+id/top_po_button"
         android:layout_width="300dp"
         android:layout_height="150dp"
         android:layout_marginTop="150dp"
@@ -58,7 +58,7 @@
         android:scaleType="fitXY"
         app:layout_constraintEnd_toEndOf="@+id/imageView5"
         app:layout_constraintStart_toStartOf="@+id/imageView5"
-        app:layout_constraintTop_toBottomOf="@+id/imageButton7"
+        app:layout_constraintTop_toBottomOf="@+id/top_po_button"
         app:srcCompat="@drawable/button_sns" />
 
     <ImageButton
