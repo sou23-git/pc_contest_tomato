@@ -1,10 +1,12 @@
 package app.pc_contest.tomato
 
+import android.annotation.SuppressLint
 import android.hardware.Sensor
 import android.hardware.SensorEvent
 import android.hardware.SensorEventListener
 import android.hardware.SensorManager
 import android.os.Bundle
+import android.widget.Button
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 
@@ -15,9 +17,6 @@ class GetSensorValue : AppCompatActivity(), SensorEventListener {
     private var gyrSensor: Sensor? = null
 
     private lateinit var saveFile: SaveFile
-    private val maxDataRows = 200
-
-    private var cursorCsv: Int = 0
 
     private var accValueX: Float = 0F
     private var accValueY: Float = 0F
@@ -26,8 +25,10 @@ class GetSensorValue : AppCompatActivity(), SensorEventListener {
     private var gyrValueY: Float = 0F
     private var gyrValueZ: Float = 0F
 
-    lateinit var textTemp: TextView
+    private lateinit var textTemp: TextView
+    private lateinit var buttonTemp: Button
 
+    @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.temp)
@@ -39,6 +40,7 @@ class GetSensorValue : AppCompatActivity(), SensorEventListener {
         saveFile = SaveFile(this)
 
         textTemp = findViewById(R.id.text_temp)
+        buttonTemp = findViewById(R.id.button_throw)
     }
     @Suppress("DEPRECATED_IDENTITY_EQUALS")
     override fun onSensorChanged(event: SensorEvent) {
@@ -55,11 +57,13 @@ class GetSensorValue : AppCompatActivity(), SensorEventListener {
             gyrValueY = event.values[1]
             gyrValueZ = event.values[2]
         }
-        val textCsv = mutableListOf("$cursorCsv", "$timeSensorChanged", "$accValueX", "$accValueY", "$accValueZ", "$gyrValueX", "$gyrValueY", "$gyrValueZ")
-        textTemp.text = saveFile.saveCsv(textCsv).toString()
-        cursorCsv++
-        cursorCsv %= maxDataRows
-        textTemp.text = ("$cursorCsv")
+        val textCsv = mutableListOf("$timeSensorChanged", "$accValueX", "$accValueY", "$accValueZ", "$gyrValueX", "$gyrValueY", "$gyrValueZ")
+        textTemp.text = textCsv.toString()
+        saveFile.writeList(textCsv)
+
+        buttonTemp.setOnClickListener {
+            saveFile.writeCsv()
+        }
     }
 
     override fun onAccuracyChanged(p0: Sensor?, p1: Int) {}
