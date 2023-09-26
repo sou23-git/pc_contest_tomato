@@ -56,7 +56,7 @@ class GetSensorValue : AppCompatActivity(), SensorEventListener {
             gyrValueZ = event.values[2]
         }
         val textCsv = mutableListOf("$cursorCsv", "$timeSensorChanged", "$accValueX", "$accValueY", "$accValueZ", "$gyrValueX", "$gyrValueY", "$gyrValueZ")
-        saveFile.saveCsv(textCsv)
+        textTemp.text = saveFile.saveCsv(textCsv).toString()
         cursorCsv++
         cursorCsv %= maxDataRows
         textTemp.text = ("$cursorCsv")
