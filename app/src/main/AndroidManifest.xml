@@ -23,6 +23,7 @@
         </activity>
         <activity android:name=".GetSensorValue" />
         <activity android:name=".PomoPage1Activity" />
+        <activity android:name=".PomoPage2Activity" />
         <activity android:name=".SnsPage1Activity" />
         <activity android:name=".HelpPageActivity" />
         <activity android:name=".GetTime" />

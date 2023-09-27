@@ -39,7 +39,6 @@ class GetTime : AppCompatActivity() {
             timerTime[0] = hourPicker.value
             timerTime[1] = minutePicker.value
             timerTime[2] = secondPicker.value
-            Log.d("NumberPickerValue", (timerTime[0].toString()).plus(timerTime[1].toString()).plus(timerTime[2]))
         }
         buttonHome.setOnClickListener {
             finish()
