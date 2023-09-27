@@ -7,13 +7,13 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import app.pc_contest.tomato.R
 
-class HelpPage2 : Fragment() {
+class HelpFragment1 : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.help_page2, null)
+        return inflater.inflate(R.layout.help_page1, container, false)
     }
 }

@@ -13,9 +13,11 @@
         android:background="#00FFFFFF"
         android:scaleType="fitXY"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/top_frame" />
+
     <FrameLayout
         android:id="@+id/frameLayout"
         android:layout_width="411dp"
@@ -32,7 +34,8 @@
             android:background="#00FFFFFF"
             android:contentDescription="情報アイコン"
             android:scaleType="fitXY"
-            app:srcCompat="@drawable/app_logo" />
+            app:srcCompat="@drawable/app_logo"
+            tools:ignore="HardcodedText" />
 
     </FrameLayout>
 
@@ -47,7 +50,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/button_pomo"
-        tools:ignore="SpeakableTextPresentCheck" />
+        tools:ignore="SpeakableTextPresentCheck"
+        android:importantForAccessibility="no" />
 
     <ImageButton
         android:id="@+id/imageButton8"
@@ -59,7 +63,8 @@
         app:layout_constraintEnd_toEndOf="@+id/imageView5"
         app:layout_constraintStart_toStartOf="@+id/imageView5"
         app:layout_constraintTop_toBottomOf="@+id/imageButton7"
-        app:srcCompat="@drawable/button_sns" />
+        app:srcCompat="@drawable/button_sns"
+        android:importantForAccessibility="no" />
 
     <ImageButton
         android:id="@+id/imageButton9"

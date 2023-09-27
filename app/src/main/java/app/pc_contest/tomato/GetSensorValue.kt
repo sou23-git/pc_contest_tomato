@@ -27,6 +27,7 @@ class GetSensorValue : AppCompatActivity(), SensorEventListener {
 
     private lateinit var textTemp: TextView
     private lateinit var buttonTemp: Button
+    private lateinit var buttonBack: Button
 
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -41,6 +42,11 @@ class GetSensorValue : AppCompatActivity(), SensorEventListener {
 
         textTemp = findViewById(R.id.text_temp)
         buttonTemp = findViewById(R.id.button_throw)
+        buttonBack = findViewById(R.id.buttonBack)
+
+        buttonBack.setOnClickListener{
+            finish()
+        }
     }
     @Suppress("DEPRECATED_IDENTITY_EQUALS")
     override fun onSensorChanged(event: SensorEvent) {

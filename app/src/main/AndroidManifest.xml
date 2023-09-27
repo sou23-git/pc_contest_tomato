@@ -13,7 +13,7 @@
         android:theme="@style/Theme.Pc_contest_tomato"
         tools:targetApi="31">
         <activity
-            android:name=".GetSensorValue"
+            android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -21,6 +21,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".GetSensorValue" />
+        <activity android:name=".PomoPage1Activity" />
+        <activity android:name=".SnsPage1Activity" />
+        <activity android:name=".HelpPageActivity" />
     </application>
 
 </manifest>
