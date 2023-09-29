@@ -1,7 +1,6 @@
 package app.pc_contest.tomato
 
 import android.os.Bundle
-import android.util.Log
 import android.widget.ImageButton
 import android.widget.NumberPicker
 import androidx.appcompat.app.AppCompatActivity
@@ -24,16 +23,10 @@ class GetTime : AppCompatActivity() {
         buttonStart = findViewById(R.id.imageButton)
         buttonHome  = findViewById(R.id.imageButton2)
 
-        hourPicker   = findViewById(R.id.hourPicker)
-        minutePicker = findViewById(R.id.minutePicker)
-        secondPicker = findViewById(R.id.secondPicker)
+        hourPicker   = findViewById(R.id.numPicker)
 
         hourPicker.maxValue = 23
         hourPicker.minValue = 0
-        minutePicker.maxValue = 59
-        minutePicker.minValue = 0
-        secondPicker.maxValue = 59
-        secondPicker.minValue = 0
 
         buttonStart.setOnClickListener {
             timerTime[0] = hourPicker.value

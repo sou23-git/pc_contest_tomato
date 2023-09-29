@@ -1,5 +1,6 @@
 package app.pc_contest.tomato
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.ImageButton
 import android.widget.TextView
@@ -18,7 +19,8 @@ class PomoPage2Activity : AppCompatActivity() {
         buttonHome = findViewById(R.id.imageButton2)
 
         buttonHome.setOnClickListener {
-            //finish() ※戻れたらダメ！
+            val intentToPage3 = Intent(this, PomoPage3Activity::class.java)
+            startActivity(intentToPage3)
         }
     }
 }
