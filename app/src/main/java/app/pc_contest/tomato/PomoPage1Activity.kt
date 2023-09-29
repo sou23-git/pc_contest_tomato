@@ -43,5 +43,4 @@ class PomoPage1Activity : AppCompatActivity() {
             finish()
         }
     }
-
 }
