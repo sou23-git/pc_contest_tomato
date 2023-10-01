@@ -1,4 +1,4 @@
-package app.pc_contest.popuptest
+package app.pc_contest.tomato.PopupTest
 
 import android.annotation.SuppressLint
 import android.content.Intent
@@ -52,7 +52,8 @@ class PopupActivity : AppCompatActivity() {
         }
 
         //背景設定
-        mPopupWindow.setBackgroundDrawable(ResourcesCompat.getDrawable(resources, R.drawable.popup_background, null))
+        mPopupWindow.setBackgroundDrawable(ResourcesCompat.getDrawable(resources,
+            R.drawable.popup_background, null))
 
         // タップ時に他のViewでキャッチされないための設定
         mPopupWindow.isOutsideTouchable = true

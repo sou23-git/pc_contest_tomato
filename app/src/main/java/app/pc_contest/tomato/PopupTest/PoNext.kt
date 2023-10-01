@@ -1,4 +1,4 @@
-package app.pc_contest.popuptest
+package app.pc_contest.tomato.PopupTest
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity

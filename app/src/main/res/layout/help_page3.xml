@@ -1,6 +1,94 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+    <FrameLayout
+        android:id="@+id/frameLayout"
+        android:layout_width="411dp"
+        android:layout_height="58dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageButton
+            android:id="@+id/imageButton2"
+            android:layout_width="98dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:background="#00FFFFFF"
+            android:contentDescription="情報アイコン"
+            android:scaleType="fitXY"
+            app:srcCompat="@drawable/app_logo" />
+
+    </FrameLayout>
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar_help_pagenum"
+        android:layout_width="match_parent"
+        android:layout_height="64dp"
+        android:background="@color/white"
+
+        android:theme="?attr/actionBarTheme"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="628dp"
+        tools:ignore="MissingConstraints">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="128dp"
+            android:layout_marginEnd="128dp"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/image_help_page_num1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_marginEnd="4dp"
+                android:layout_weight="1"
+                android:contentDescription="@string/desc_help_page_num1"
+                android:scaleType="fitCenter"
+                android:src="@drawable/image_help_pagestatus_white_true" />
+
+            <ImageView
+                android:id="@+id/image_help_page_num2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_marginEnd="4dp"
+                android:layout_weight="1"
+                android:contentDescription="@string/desc_help_page_num2"
+                android:scaleType="fitCenter"
+                android:src="@drawable/image_help_pagestatus_white_false" />
+
+            <ImageView
+                android:id="@+id/image_help_page_num3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_marginEnd="4dp"
+                android:layout_weight="1"
+                android:contentDescription="@string/desc_help_page_num3"
+                android:scaleType="fitCenter"
+                android:src="@drawable/image_help_pagestatus_white_false" />
+
+            <ImageView
+                android:id="@+id/image_help_page_num4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_marginEnd="4dp"
+                android:layout_weight="1"
+                android:contentDescription="@string/desc_help_page_num4"
+                android:scaleType="fitCenter"
+                android:src="@drawable/image_help_pagestatus_white_false" />
+
+        </LinearLayout>
+
+    </androidx.appcompat.widget.Toolbar>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
