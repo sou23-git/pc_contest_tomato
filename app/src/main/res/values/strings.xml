@@ -36,4 +36,10 @@
     <string name="desc_help_page_num2">２／４</string>
     <string name="desc_help_page_num3">３／４</string>
     <string name="desc_help_page_num4">４／４</string>
+
+    <string name="place_holder_time">00:00:00</string>
+    <string name="reset">Reset</string>
+    <string name="start">Start</string>
+    <string name="stop">Stop</string>
+
 </resources>

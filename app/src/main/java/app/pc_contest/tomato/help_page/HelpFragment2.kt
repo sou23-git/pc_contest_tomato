@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import app.pc_contest.tomato.R
 
-class HelpFlagment2 : Fragment() {
+class HelpFragment2 : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater,

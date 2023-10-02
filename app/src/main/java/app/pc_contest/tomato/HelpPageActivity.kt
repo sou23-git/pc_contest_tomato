@@ -6,7 +6,7 @@ import android.view.View
 import android.widget.ImageButton
 import androidx.fragment.app.FragmentActivity
 import androidx.viewpager.widget.ViewPager
-import app.pc_contest.tomato.help_page.HelpFlagment2
+import app.pc_contest.tomato.help_page.HelpFragment2
 import app.pc_contest.tomato.help_page.HelpFragment1
 import app.pc_contest.tomato.help_page.HelpFragment3
 import app.pc_contest.tomato.help_page.HelpFragment4
@@ -25,7 +25,7 @@ class HelpPageActivity : FragmentActivity() {
 
         val flagmentList = listOf(
             HelpFragment1(),
-            HelpFlagment2(),
+            HelpFragment2(),
             HelpFragment3(),
             HelpFragment4())
 
