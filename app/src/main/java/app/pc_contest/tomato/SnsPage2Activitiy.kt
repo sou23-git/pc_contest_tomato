@@ -18,7 +18,9 @@ class SnsPage2Activitiy : AppCompatActivity() {
         tempNext.setOnClickListener {
             val intentToPage3 = Intent(this, SnsPageClearActivity::class.java)
             startActivity(intentToPage3)
+
         }
+
 
     }
 }

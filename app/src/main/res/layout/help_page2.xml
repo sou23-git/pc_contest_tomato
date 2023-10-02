@@ -31,12 +31,14 @@
         android:id="@+id/toolbar_help_pagenum"
         android:layout_width="match_parent"
         android:layout_height="64dp"
-        android:background="#00FFFFFF"
+        android:layout_marginBottom="50dp"
 
+        android:background="#00FFFFFF"
         android:theme="?attr/actionBarTheme"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="628dp">
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:ignore="MissingConstraints">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -54,7 +56,7 @@
                 android:layout_weight="1"
                 android:contentDescription="@string/desc_help_page_num1"
                 android:scaleType="fitCenter"
-                android:src="@drawable/image_help_pagestatus_white_true" />
+                android:src="@drawable/image_help_pagestatus_white_false" />
 
             <ImageView
                 android:id="@+id/image_help_page_num2"
@@ -65,7 +67,7 @@
                 android:layout_weight="1"
                 android:contentDescription="@string/desc_help_page_num2"
                 android:scaleType="fitCenter"
-                android:src="@drawable/image_help_pagestatus_white_false" />
+                android:src="@drawable/image_help_pagestatus_white_true" />
 
             <ImageView
                 android:id="@+id/image_help_page_num3"
@@ -120,6 +122,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="150dp"
+        android:lineSpacingExtra="8sp"
         android:text="本アプリでは警告を無視してアプリを見続けた場合、\n アプリが３～5分間ロックされます。 \nしかし、スマホを投げることで \nアプリのロックを解除することができます。\n \n ※スマホを投げる際は周囲の安全に配慮し、\n ベッドやソファなどの柔らかい物に投げてください。\n \n また、アプリのロックとは別にペナルティが発生します。 \n例えば、右下に表示されている髪の毛に見える線や、 \nアプリのロック時間の延長などです。\n\n これらはスマホを投げたときの飛距離によって 変化します。 "
         android:textAlignment="center"
         android:textAllCaps="false"

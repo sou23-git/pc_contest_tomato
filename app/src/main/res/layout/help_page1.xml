@@ -7,12 +7,14 @@
     android:layout_height="match_parent"
     android:background="#FFF6E4">
 
+
     <FrameLayout
         android:id="@+id/frameLayout"
         android:layout_width="411dp"
         android:layout_height="58dp"
         android:background="#F9F9F9"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -27,7 +29,6 @@
             app:srcCompat="@drawable/app_logo" />
 
     </FrameLayout>
-
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar_help_pagenum"
@@ -151,6 +152,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="200dp"
+        android:lineSpacingExtra="8sp"
         android:text="これらは使用目的によって使い分けることができます。 \n \n ポモドーロテクニックモードは\nポモドーロテクニックという時間管理テクニックを\n ベースとして作業のアシストを行います。\n \n SNSは許さんモードは SNSのアプリを使用した場合、\n SNSアプリのロックが行われます。 \n勉強中にほかのアプリを使わないためのモードです。  "
         android:textAlignment="center"
         app:layout_constraintEnd_toEndOf="parent"

@@ -25,7 +25,6 @@ class PomoPage3Activity : AppCompatActivity() {
 
         val buttonHome: ImageButton = findViewById(R.id.imageButton2)
 
-        //update Values!
 
 
 
@@ -40,5 +39,8 @@ class PomoPage3Activity : AppCompatActivity() {
         }
 
 
+
+
     }
+
 }
