@@ -9,8 +9,6 @@ import androidx.appcompat.app.AppCompatActivity
 
 class PomoPage1Activity : AppCompatActivity() {
 
-    private lateinit var coroutineTimerPomo: CoroutineTimerPomo
-
     private lateinit var buttonStart: ImageButton
     private lateinit var buttonHome : ImageButton
 
@@ -34,8 +32,7 @@ class PomoPage1Activity : AppCompatActivity() {
         buttonStart.setOnClickListener {
             times = numPicker.value
 
-            coroutineTimerPomo.startCountDown(times)
-
+            //CountdownTimerService()
             val intentToPage2 = Intent(this, PomoPage2Activity::class.java)
             startActivity(intentToPage2)
         }
