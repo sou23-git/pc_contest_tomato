@@ -58,8 +58,8 @@ class MainActivity : AppCompatActivity() {
                 startActivity(intentHelpPageActivity)
             }
             buttonTemp.setOnClickListener{//ここで一時的にホームにボタンを作ってGetsensorvalueに飛んでる
-                val intentGetSensorValue = Intent(this,GetSensorValue::class.java)
-                startActivity(intentGetSensorValue)
+                val intentSenssorToAnswer = Intent(this,SensorToAnswer::class.java)
+                startActivity(intentSenssorToAnswer)
             }
         }
     }

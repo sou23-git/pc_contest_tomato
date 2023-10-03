@@ -1,121 +1,87 @@
 package app.pc_contest.tomato
 
 import android.annotation.SuppressLint
+import android.hardware.Sensor
+import android.hardware.SensorEvent
+import android.hardware.SensorEventListener
+import android.hardware.SensorManager
 import android.os.Bundle
 import android.widget.Button
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import java.io.File
 
-class GetSensorValue : AppCompatActivity() {
+class GetSensorValue : AppCompatActivity(), SensorEventListener {
+
+    private lateinit var sensorManager: SensorManager
+    private var accSensor: Sensor? = null
+    private var gyrSensor: Sensor? = null
+
+    private lateinit var saveFile: SaveFile
+
+    private var accValueX: Float = 0F
+    private var accValueY: Float = 0F
+    private var accValueZ: Float = 0F
+    private var gyrValueX: Float = 0F
+    private var gyrValueY: Float = 0F
+    private var gyrValueZ: Float = 0F
 
     private lateinit var textTemp: TextView
     private lateinit var buttonTemp: Button
     private lateinit var buttonBack: Button
 
+    @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.temp)
+
+        sensorManager = getSystemService(SENSOR_SERVICE) as SensorManager
+        accSensor = sensorManager.getDefaultSensor(Sensor.TYPE_LINEAR_ACCELERATION)
+        gyrSensor = sensorManager.getDefaultSensor(Sensor.TYPE_GYROSCOPE)
+
+        saveFile = SaveFile(this)
 
         textTemp = findViewById(R.id.text_temp)
         buttonTemp = findViewById(R.id.button_throw)
         buttonBack = findViewById(R.id.buttonBack)
 
-        buttonBack.setOnClickListener {
+        buttonBack.setOnClickListener{
             finish()
         }
+    }
+    @Suppress("DEPRECATED_IDENTITY_EQUALS")
+    override fun onSensorChanged(event: SensorEvent) {
+
+        val timeSensorChanged = System.currentTimeMillis()
+
+        if(event.sensor.type === Sensor.TYPE_LINEAR_ACCELERATION) {
+            accValueX = event.values[0]
+            accValueY = event.values[1]
+            accValueZ = event.values[2]
+        }
+        if(event.sensor.type === Sensor.TYPE_GYROSCOPE) {
+            gyrValueX = event.values[0]
+            gyrValueY = event.values[1]
+            gyrValueZ = event.values[2]
+        }
+        val textCsv = mutableListOf("$timeSensorChanged", "$accValueX", "$accValueY", "$accValueZ", "$gyrValueX", "$gyrValueY", "$gyrValueZ")
+        textTemp.text = textCsv.toString()
+        saveFile.writeList(textCsv)
 
         buttonTemp.setOnClickListener {
-            calculateValuesFromCSV()
+            saveFile.writeCsv()
         }
     }
 
-    @SuppressLint("SetTextI18n")
-    private fun calculateValuesFromCSV() {
-        val csvFilePath = getExternalFilesDir(null)?.absolutePath + "/log.csv"
-        val csvData = readCSVFile(csvFilePath)
+    override fun onAccuracyChanged(p0: Sensor?, p1: Int) {}
 
-        if (csvData.isNotEmpty()) {
-            // ACCvalueX、ACCValueY、ACCvalueZの平均値を計算
-            val averageValueX = calculateAverage(csvData.map { it[1].toFloat() })
-            val averageValueY = calculateAverage(csvData.map { it[2].toFloat() })
-            val averageValueZ = calculateAverage(csvData.map { it[3].toFloat() })
-
-            // 平均値から最大値とそのインデックスを取得
-            val (maxValue, maxIndex) = findMaxValueAndIndex(listOf(averageValueX, averageValueY, averageValueZ))
-
-            // 最大値から離れた場所で2番目に大きい値とそのインデックスを取得
-            val (secondMaxValue, secondMaxIndex) = findSecondMaxValueAndIndex(listOf(averageValueX, averageValueY, averageValueZ), maxIndex)
-
-            // 結果を表示
-            val resultText = """
-                平均値:
-                    X: $averageValueX
-                    Y: $averageValueY
-                    Z: $averageValueZ
-                
-                最大値:
-                    Value: $maxValue
-                    Index: $maxIndex
-                
-                最大値から離れた場所で2番目に大きい値:
-                    Value: $secondMaxValue
-                    Index: $secondMaxIndex
-            """.trimIndent()
-
-            textTemp.text = resultText
-        } else {
-            textTemp.text = "CSVファイルが空です。"
-        }
+    override fun onResume() {
+        super.onResume()
+        sensorManager.registerListener(this, accSensor, SensorManager.SENSOR_DELAY_UI)
+        sensorManager.registerListener(this, gyrSensor, SensorManager.SENSOR_DELAY_UI)
     }
 
-    private fun readCSVFile(filePath: String): List<List<String>> {
-        val csvData = mutableListOf<List<String>>()
-
-        try {
-            val file = File(filePath)
-            if (file.exists()) {
-                val lines = file.readLines()
-                csvData.addAll(lines.map { it.split(",") })
-            }
-        } catch (e: Exception) {
-            e.printStackTrace()
-        }
-
-        return csvData
-    }
-
-    private fun calculateAverage(values: List<Float>): Float {
-        return if (values.isNotEmpty()) values.average().toFloat() else 0F
-    }
-
-    private fun findMaxValueAndIndex(values: List<Float>): Pair<Float, Int> {
-        var maxValue = Float.MIN_VALUE
-        var maxIndex = -1
-
-        for ((index, value) in values.withIndex()) {
-            if (value > maxValue) {
-                maxValue = value
-                maxIndex = index
-            }
-        }
-
-        return Pair(maxValue, maxIndex)
-    }
-
-    private fun findSecondMaxValueAndIndex(values: List<Float>, indexToExclude: Int): Pair<Float, Int> {
-        var secondMaxValue = Float.MIN_VALUE
-        var secondMaxIndex = -1
-
-        for ((index, value) in values.withIndex()) {
-            if (index != indexToExclude && value > secondMaxValue) {
-                secondMaxValue = value
-                secondMaxIndex = index
-            }
-        }
-
-        return Pair(secondMaxValue, secondMaxIndex)
+    override fun onPause() {
+        super.onPause()
+        sensorManager.unregisterListener(this)
     }
 }
-
-

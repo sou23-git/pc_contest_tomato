@@ -18,6 +18,7 @@ class PopupActivity : AppCompatActivity() {
     private lateinit var mPopupWindow: PopupWindow
     private lateinit var mPopupView  : View
     private lateinit var buttonStart : ImageButton
+    private lateinit var buttonHome : ImageButton
 
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -70,7 +71,7 @@ class PopupActivity : AppCompatActivity() {
             mPopupWindow.showAtLocation(mPopupView, Gravity.CENTER, 0, 0)
         }
 
-        buttonStart.setOnClickListener {
+        buttonHome.setOnClickListener {
             displayPopup()
         }
     }

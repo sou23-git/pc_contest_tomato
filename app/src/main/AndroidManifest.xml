@@ -39,7 +39,7 @@
         <activity android:name=".HelpPageActivity" />
         <activity android:name=".GetTime" />
         <activity android:name=".PopupTest.PopupActivity" />
-        <activity android:name=".PopupTest.PoNext" />
+        <activity android:name=".SensorToAnswer" />
     </application>
 
 </manifest>
