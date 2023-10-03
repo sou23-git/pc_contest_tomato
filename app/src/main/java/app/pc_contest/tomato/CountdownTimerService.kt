@@ -1,4 +1,4 @@
-package app.pc_contest.tomato.app.pc_contest.tomato
+package app.pc_contest.tomato
 
 import android.app.PendingIntent
 import android.app.Service
@@ -8,8 +8,6 @@ import android.os.IBinder
 import android.util.Log
 import androidx.core.app.NotificationCompat
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
-import app.pc_contest.tomato.PomoPage2Activity
-import app.pc_contest.tomato.R
 import java.util.concurrent.TimeUnit
 
 

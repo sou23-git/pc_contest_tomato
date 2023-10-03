@@ -31,7 +31,7 @@
         <activity android:name=".HelpPageActivity" />
         <activity android:name=".GetTime" />
 
-        <service android:name=".app.pc_contest.tomato.CountdownTimerService" />
+        <service android:name=".CountdownTimerService" />
     </application>
 
 </manifest>

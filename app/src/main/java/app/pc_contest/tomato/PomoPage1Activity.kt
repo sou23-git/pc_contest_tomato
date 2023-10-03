@@ -26,8 +26,8 @@ class PomoPage1Activity : AppCompatActivity() {
 
         numPicker = findViewById(R.id.numPicker)
 
-        numPicker.maxValue = 23
-        numPicker.minValue = 0
+        numPicker.maxValue = 99
+        numPicker.minValue = 1
 
         buttonStart.setOnClickListener {
             times = numPicker.value
