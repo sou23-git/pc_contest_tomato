@@ -1,4 +1,4 @@
-package app.pc_contest.popuptest
+package app.pc_contest.tomato.PopupTest
 
 import android.annotation.SuppressLint
 import android.content.Intent
@@ -18,6 +18,7 @@ class PopupActivity : AppCompatActivity() {
     private lateinit var mPopupWindow: PopupWindow
     private lateinit var mPopupView  : View
     private lateinit var buttonStart : ImageButton
+    private lateinit var buttonHome : ImageButton
 
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -52,7 +53,8 @@ class PopupActivity : AppCompatActivity() {
         }
 
         //背景設定
-        mPopupWindow.setBackgroundDrawable(ResourcesCompat.getDrawable(resources, R.drawable.popup_background, null))
+        mPopupWindow.setBackgroundDrawable(ResourcesCompat.getDrawable(resources,
+            R.drawable.popup_background, null))
 
         // タップ時に他のViewでキャッチされないための設定
         mPopupWindow.isOutsideTouchable = true
@@ -69,7 +71,7 @@ class PopupActivity : AppCompatActivity() {
             mPopupWindow.showAtLocation(mPopupView, Gravity.CENTER, 0, 0)
         }
 
-        buttonStart.setOnClickListener {
+        buttonHome.setOnClickListener {
             displayPopup()
         }
     }
