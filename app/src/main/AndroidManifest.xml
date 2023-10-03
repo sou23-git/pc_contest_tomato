@@ -13,14 +13,6 @@
         android:theme="@style/Theme.Pc_contest_tomato"
         tools:targetApi="31">
 
-
-        <activity
-            android:name=".SnsPageClearActivity"
-            android:exported="false" />
-        <activity
-            android:name=".SnsPage2Activitiy"
-            android:exported="false" />
-
         <activity
             android:name=".MainActivity"
             android:exported="true">
@@ -38,8 +30,8 @@
         <activity android:name=".SnsPage1Activity" />
         <activity android:name=".HelpPageActivity" />
         <activity android:name=".GetTime" />
-        <activity android:name=".PopupTest.PopupActivity" />
-        <activity android:name=".SensorToAnswer" />
+
+        <service android:name=".app.pc_contest.tomato.CountdownTimerService" />
     </application>
 
 </manifest>
