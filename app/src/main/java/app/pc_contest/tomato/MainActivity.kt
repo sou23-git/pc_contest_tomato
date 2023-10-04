@@ -38,20 +38,19 @@ class MainActivity : AppCompatActivity() {
 
             //ボタンごとの画面遷移先設定
             buttonHome.setOnClickListener {
-                val intentGetTime = Intent(this, GetTime::class.java)
-                startActivity(intentGetTime)
+
             }
             buttonPomo.setOnClickListener {
-                val intentPomoPage1Activity = Intent(this, PomoPage1Activity::class.java)
-                startActivity(intentPomoPage1Activity)
+                val intent = Intent(this, PomoPage1Activity::class.java)
+                startActivity(intent)
             }
             buttonSns.setOnClickListener {
-                val intentSnsPage1Activity = Intent(this, SnsPage1Activity::class.java)
-                startActivity(intentSnsPage1Activity)
+                val intent = Intent(this, SnsPage1Activity::class.java)
+                startActivity(intent)
             }
             buttonHelp.setOnClickListener {
-                val intentHelpPageActivity = Intent(this, HelpPageActivity::class.java)
-                startActivity(intentHelpPageActivity)
+                val intent = Intent(this, HelpPageActivity::class.java)
+                startActivity(intent)
             }
         }
     }

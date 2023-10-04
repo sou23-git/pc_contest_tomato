@@ -3,6 +3,7 @@ package app.pc_contest.tomato
 import android.app.PendingIntent
 import android.app.Service
 import android.content.Intent
+import android.content.Intent.getIntent
 import android.os.CountDownTimer
 import android.os.IBinder
 import android.util.Log
@@ -11,18 +12,21 @@ import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import java.util.concurrent.TimeUnit
 
 
-class CountdownTimerService : Service() {
+class CountdownTimerService(intent: Intent) : Service() {
+
+    private  var time = 0
 
     val CHANNEL_ID = "sample"
     var hms: String = "00:00:00"
 
-    val CD_TIME: Long = 90 * 1000 //ms
+    val CD_TIME: Long = 10 * 1000 //ms
     val CD_INTERVAL: Long = 1000 //ms
 
     private var timer: CounterClass? = null
     override fun onCreate() {
         super.onCreate()
         Log.d("sub", "onCreate")
+        println(CD_TIME)
     }
 
     override fun onBind(intent: Intent): IBinder? {
@@ -45,7 +49,8 @@ class CountdownTimerService : Service() {
         Log.d("sub", "createNotification")
     }
 
-        override fun onStartCommand(intent: Intent, flags: Int, startId: Int): Int {
+    override fun onStartCommand(intent: Intent, flags: Int, startId: Int): Int {
+        time = intent.getIntExtra("TIME", 0)
         timer = CounterClass(CD_TIME, CD_INTERVAL)
         timer!!.start()
         createNotification()
@@ -82,10 +87,10 @@ class CountdownTimerService : Service() {
                 )
             )
             println(hms)
-            val timerInfoIntent = Intent(TIME_INFO)
+            /*val timerInfoIntent = Intent(TIME_INFO)
             timerInfoIntent.putExtra("VALUE", hms)
             LocalBroadcastManager.getInstance(this@CountdownTimerService)
-                .sendBroadcast(timerInfoIntent)
+                .sendBroadcast(timerInfoIntent)*/
             createNotification()
             Log.d("sub", "onTick")
         }

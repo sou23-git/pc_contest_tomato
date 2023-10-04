@@ -69,7 +69,7 @@
             android:layout_weight="1"
             android:background="#00FFFFFF"
             android:scaleType="fitCenter"
-            app:srcCompat="@drawable/top_warnig_button_top"
+            app:srcCompat="@drawable/top_warnig_button_canxel"
             tools:ignore="ContentDescription,TouchTargetSizeCheck,SpeakableTextPresentCheck" />
 
         <ImageButton
@@ -79,7 +79,7 @@
             android:layout_weight="1"
             android:background="#00FFFFFF"
             android:scaleType="fitCenter"
-            app:srcCompat="@drawable/top_warnig_button_canxel"
+            app:srcCompat="@drawable/top_warnig_button_top"
             tools:ignore="ContentDescription,SpeakableTextPresentCheck,TouchTargetSizeCheck" />
     </LinearLayout>
 

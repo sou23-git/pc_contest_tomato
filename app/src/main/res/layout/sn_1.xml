@@ -116,7 +116,7 @@
                 android:orientation="horizontal">
 
                 <NumberPicker
-                    android:id="@+id/numPicker"
+                    android:id="@+id/hourPicker"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center" />
@@ -126,7 +126,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:text=" : "
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="24dp"
+                    android:text="時間"
                     android:textSize="24sp" />
 
                 <NumberPicker
@@ -140,14 +142,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:text=" : "
+                    android:layout_marginLeft="16dp"
+                    android:text="分"
                     android:textSize="24sp" />
-
-                <NumberPicker
-                    android:id="@+id/secondPicker"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center" />
 
             </LinearLayout>
         </LinearLayout>

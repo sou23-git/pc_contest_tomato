@@ -23,7 +23,7 @@ class GetTime : AppCompatActivity() {
         buttonStart = findViewById(R.id.imageButton)
         buttonHome  = findViewById(R.id.imageButton2)
 
-        hourPicker   = findViewById(R.id.numPicker)
+        hourPicker   = findViewById(R.id.hourPicker)
 
         hourPicker.maxValue = 23
         hourPicker.minValue = 0
