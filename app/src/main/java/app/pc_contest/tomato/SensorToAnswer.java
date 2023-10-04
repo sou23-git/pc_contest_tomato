@@ -27,7 +27,7 @@ public class SensorToAnswer extends Activity implements SensorEventListener {
         // SensorManagerのインスタンスを取得する
         sma = (SensorManager)getSystemService(Context.SENSOR_SERVICE);
         sma.registerListener(this, sma.getDefaultSensor(Sensor.TYPE_ACCELEROMETER),
-                SensorManager.SENSOR_DELAY_FASTEST);
+                SensorManager.SENSOR_DELAY_UI);
     }
 
 

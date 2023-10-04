@@ -36,6 +36,8 @@
         <activity android:name=".HelpPageActivity" />
         <activity android:name=".GetTime" />
 
+        <activity android:name=".SensorToAnswer" />
+
         <service android:name=".CountdownTimerService" />
     </application>
 
