@@ -78,8 +78,8 @@
         android:id="@+id/textView22"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="80dp"
-        android:layout_marginEnd="80dp"
+        android:layout_marginTop="60dp"
+        android:layout_marginEnd="68dp"
         android:text="アプリのロックと\n ペナルティについて"
         android:textAlignment="center"
         android:textSize="22sp"
@@ -93,18 +93,18 @@
         android:layout_height="80dp"
         android:layout_marginStart="29dp"
         android:layout_marginEnd="20dp"
+        android:src="@drawable/help_icon_ex"
         app:layout_constraintBottom_toBottomOf="@+id/textView22"
         app:layout_constraintEnd_toStartOf="@+id/textView22"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/textView22"
-        android:src="@drawable/help_icon_ex" />
+        app:layout_constraintTop_toTopOf="@+id/textView22" />
 
     <TextView
         android:id="@+id/textView23"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="48dp"
-        android:layout_marginBottom="40dp"
+        android:layout_marginBottom="20dp"
         android:lineSpacingExtra="8sp"
         android:text="本アプリでは警告を無視してアプリを見続けた場合、\n アプリが３～5分間ロックされます。 \nしかし、スマホを投げることで \nアプリのロックを解除することができます。\n \n ※スマホを投げる際は周囲の安全に配慮し、\n ベッドやソファなどの柔らかい物に投げてください。\n \n また、アプリのロックとは別にペナルティが発生します。 \n例えば、右下に表示されている髪の毛に見える線や、 \nアプリのロック時間の延長などです。\n\n これらはスマホを投げたときの飛距離によって 変化します。 "
         android:textAlignment="center"
@@ -112,9 +112,7 @@
         app:layout_constraintBottom_toTopOf="@+id/toolbar_help_pagenum"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.478"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView12"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintStart_toStartOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
