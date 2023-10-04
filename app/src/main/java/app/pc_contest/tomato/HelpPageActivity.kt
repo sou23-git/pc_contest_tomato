@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.View
 import android.widget.ImageButton
+import android.widget.ImageView
 import androidx.fragment.app.FragmentActivity
 import androidx.viewpager.widget.ViewPager
 import app.pc_contest.tomato.help_page.HelpFragment2
@@ -15,6 +16,7 @@ import app.pc_contest.tomato.help_page.HelpPagerAdapter
 class HelpPageActivity : FragmentActivity() {
 
     private lateinit var viewPager : ViewPager
+    private lateinit var ImageView : ImageView
     private lateinit var buttonHome: ImageButton
 
     @SuppressLint("MissingInflatedId")

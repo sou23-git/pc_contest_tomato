@@ -76,9 +76,10 @@
         android:background="#00FFFFFF"
         android:scaleType="fitXY"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:srcCompat="@drawable/po_1_button_start_"
-        tools:ignore="MissingConstraints,SpeakableTextPresentCheck"
-        tools:layout_editor_absoluteX="155dp" />
+        tools:ignore="MissingConstraints,SpeakableTextPresentCheck" />
 
     <ImageView
         android:id="@+id/imageView"

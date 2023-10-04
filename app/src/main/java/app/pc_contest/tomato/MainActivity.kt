@@ -7,6 +7,7 @@ import android.net.Uri
 import android.os.Bundle
 import android.os.PowerManager
 import android.provider.Settings.ACTION_REQUEST_IGNORE_BATTERY_OPTIMIZATIONS
+import android.widget.Button
 import android.widget.ImageButton
 import androidx.appcompat.app.AppCompatActivity
 
@@ -16,6 +17,8 @@ class MainActivity : AppCompatActivity() {
     private lateinit var buttonPomo: ImageButton
     private lateinit var buttonSns: ImageButton
     private lateinit var buttonHelp: ImageButton
+    private lateinit var buttonTemp: Button
+
 
     @SuppressLint("ServiceCast", "BatteryLife")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -28,6 +31,7 @@ class MainActivity : AppCompatActivity() {
         buttonPomo = findViewById(R.id.imageButton7)
         buttonSns = findViewById(R.id.imageButton8)
         buttonHelp = findViewById(R.id.imageButton9)
+        buttonTemp = findViewById(R.id.tempButton)
 
         val powerManager =
             applicationContext!!.getSystemService(Context.POWER_SERVICE) as PowerManager
@@ -51,6 +55,10 @@ class MainActivity : AppCompatActivity() {
             buttonHelp.setOnClickListener {
                 val intent = Intent(this, HelpPageActivity::class.java)
                 startActivity(intent)
+            }
+            buttonTemp.setOnClickListener{//ここで一時的にホームにボタンを作ってGetsensorvalueに飛んでる
+                val intentSenssorToAnswer = Intent(this,SensorToAnswer::class.java)
+                startActivity(intentSenssorToAnswer)
             }
         }
     }
