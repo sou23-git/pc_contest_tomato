@@ -16,7 +16,6 @@ import app.pc_contest.tomato.help_page.HelpPagerAdapter
 class HelpPageActivity : FragmentActivity() {
 
     private lateinit var viewPager : ViewPager
-    private lateinit var ImageView : ImageView
     private lateinit var buttonHome: ImageButton
 
     @SuppressLint("MissingInflatedId")
@@ -33,6 +32,7 @@ class HelpPageActivity : FragmentActivity() {
 
         viewPager  = findViewById<View>(R.id.pager) as ViewPager
         buttonHome = findViewById(R.id.imageButton2)
+        buttonHome.setImageResource(R.drawable.app_logo)
 
         val adapter = HelpPagerAdapter(supportFragmentManager, flagmentList)
         viewPager.adapter = adapter

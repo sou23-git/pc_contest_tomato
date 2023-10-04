@@ -105,18 +105,5 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/time_text_view" />
 
-    <ImageButton
-        android:id="@+id/imageButton5"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_marginTop="101dp"
-        android:background="#00FFFFFF"
-        android:scaleType="fitXY"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/textView4"
-        app:srcCompat="@drawable/button_start_sns" />
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

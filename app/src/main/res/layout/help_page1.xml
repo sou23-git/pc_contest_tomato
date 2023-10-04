@@ -8,32 +8,10 @@
     android:background="#FFF6E4">
 
 
-    <FrameLayout
-        android:id="@+id/frameLayout"
-        android:layout_width="411dp"
-        android:layout_height="58dp"
-        android:background="#F9F9F9"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <ImageButton
-            android:id="@+id/imageButton2"
-            android:layout_width="98dp"
-            android:layout_height="match_parent"
-            android:layout_gravity="center"
-            android:background="#00FFFFFF"
-            android:contentDescription="情報アイコン"
-            android:scaleType="fitXY"
-            app:srcCompat="@drawable/app_logo" />
-
-    </FrameLayout>
-
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar_help_pagenum"
         android:layout_width="match_parent"
-        android:layout_height="64dp"
+        android:layout_height="56dp"
         android:layout_marginBottom="50dp"
         android:background="#00FFFFFF"
         android:minHeight="?attr/actionBarSize"
@@ -101,13 +79,13 @@
         android:id="@+id/textView18"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="97dp"
         android:text="本アプリは二つのモードが\n 搭載されています。"
         android:textAlignment="center"
         android:textSize="22sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/frameLayout" />
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteY="97dp" />
 
     <ImageView
         android:id="@+id/imageView10"
@@ -117,7 +95,7 @@
         android:layout_marginTop="50dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView18"
-        app:srcCompat="@drawable/help_icon_sn" />
+        android:src="@drawable/help_icon_sn" />
 
     <ImageView
         android:id="@+id/imageView11"
@@ -125,25 +103,26 @@
         android:layout_height="80dp"
         android:layout_marginTop="50dp"
         android:layout_marginEnd="80dp"
+        android:src="@drawable/help_icon_po"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView18"
-        app:srcCompat="@drawable/help_icon_po" />
+        app:layout_constraintTop_toBottomOf="@+id/textView18" />
 
     <TextView
         android:id="@+id/textView19"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="-100dp"
         android:text="SNSは許さんモード"
-        app:layout_constraintEnd_toStartOf="@+id/imageView10"
+        app:layout_constraintEnd_toEndOf="@+id/imageView10"
+        app:layout_constraintStart_toStartOf="@+id/imageView10"
         app:layout_constraintTop_toBottomOf="@+id/imageView10" />
 
     <TextView
         android:id="@+id/textView20"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="-45dp"
-        android:text="ポモドーロテクニックモード"
+        android:gravity="center"
+        android:text="ポモドーロ\nテクニックモード"
+        app:layout_constraintEnd_toEndOf="@+id/imageView11"
         app:layout_constraintStart_toStartOf="@+id/imageView11"
         app:layout_constraintTop_toBottomOf="@+id/imageView11" />
 

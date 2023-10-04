@@ -6,27 +6,6 @@
     android:layout_height="match_parent"
     android:background="#FFF6E4">
 
-    <FrameLayout
-        android:id="@+id/frameLayout"
-        android:layout_width="411dp"
-        android:layout_height="58dp"
-        android:background="#F9F9F9F9"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <ImageButton
-            android:id="@+id/imageButton2"
-            android:layout_width="98dp"
-            android:layout_height="match_parent"
-            android:layout_gravity="center"
-            android:background="#00FFFFFF"
-            android:contentDescription="情報アイコン"
-            android:scaleType="fitXY"
-            app:srcCompat="@drawable/app_logo" />
-
-    </FrameLayout>
-
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar_help_pagenum"
         android:layout_width="match_parent"
@@ -99,36 +78,43 @@
         android:id="@+id/textView22"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="80dp"
         android:layout_marginEnd="80dp"
         android:text="アプリのロックと\n ペナルティについて"
         android:textAlignment="center"
         android:textSize="22sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/frameLayout" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="MissingConstraints" />
 
     <ImageView
         android:id="@+id/imageView12"
         android:layout_width="80dp"
         android:layout_height="80dp"
-        android:layout_marginTop="25dp"
+        android:layout_marginStart="29dp"
         android:layout_marginEnd="20dp"
+        app:layout_constraintBottom_toBottomOf="@+id/textView22"
         app:layout_constraintEnd_toStartOf="@+id/textView22"
-        app:layout_constraintTop_toBottomOf="@+id/frameLayout"
-        app:srcCompat="@drawable/help_icon_ex" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/textView22"
+        android:src="@drawable/help_icon_ex" />
 
     <TextView
         android:id="@+id/textView23"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="150dp"
+        android:layout_marginTop="48dp"
+        android:layout_marginBottom="40dp"
         android:lineSpacingExtra="8sp"
         android:text="本アプリでは警告を無視してアプリを見続けた場合、\n アプリが３～5分間ロックされます。 \nしかし、スマホを投げることで \nアプリのロックを解除することができます。\n \n ※スマホを投げる際は周囲の安全に配慮し、\n ベッドやソファなどの柔らかい物に投げてください。\n \n また、アプリのロックとは別にペナルティが発生します。 \n例えば、右下に表示されている髪の毛に見える線や、 \nアプリのロック時間の延長などです。\n\n これらはスマホを投げたときの飛距離によって 変化します。 "
         android:textAlignment="center"
         android:textAllCaps="false"
+        app:layout_constraintBottom_toTopOf="@+id/toolbar_help_pagenum"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.478"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/frameLayout" />
+        app:layout_constraintTop_toBottomOf="@+id/imageView12"
+        app:layout_constraintVertical_bias="1.0" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

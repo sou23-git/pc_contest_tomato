@@ -6,27 +6,6 @@
     android:layout_height="match_parent"
     android:background="#FFF6E4">
 
-    <FrameLayout
-        android:id="@+id/frameLayout"
-        android:layout_width="411dp"
-        android:layout_height="58dp"
-        android:background="#F9F9F9F9"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <ImageButton
-            android:id="@+id/imageButton2"
-            android:layout_width="98dp"
-            android:layout_height="match_parent"
-            android:layout_gravity="center"
-            android:background="#00FFFFFF"
-            android:contentDescription="情報アイコン"
-            android:scaleType="fitXY"
-            app:srcCompat="@drawable/app_logo" />
-
-    </FrameLayout>
-
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar_help_pagenum"
         android:layout_width="match_parent"
@@ -99,34 +78,38 @@
         android:id="@+id/imageView13"
         android:layout_width="80dp"
         android:layout_height="80dp"
-        android:layout_marginStart="25dp"
-        android:layout_marginTop="100dp"
+        android:layout_marginStart="48dp"
+        android:src="@drawable/help_icon_po"
+        app:layout_constraintBottom_toBottomOf="@+id/textView24"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/help_icon_po" />
+        app:layout_constraintTop_toTopOf="@+id/textView24" />
 
     <TextView
         android:id="@+id/textView24"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="120dp"
+        android:layout_marginTop="60dp"
         android:layout_marginEnd="10dp"
-        android:text="ポモドーロテクニックモード"
+        android:text="ポモドーロ\nテクニックモード"
         android:textSize="22sp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/imageView13"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/textView25"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="150dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginBottom="22dp"
         android:lineSpacingExtra="8sp"
         android:text="このモードでは \nポモドーロテクニックと呼ばれる\n 時間管理テクニックを使います。\n\n ポモドーロテクニックとは \n25分の作業時間と5分の休憩時間を繰り返すものです。 \n 本アプリでは最初に何セット行うかを指定します。 \nその後、25分の作業時間が始まります。\n作業中はすべてのアプリがロックされます。 \n作業時間終了後は5分間の休憩時間が入ります。\n 休憩時間ではすべてのアプリが使用できますが、\n 終了30秒前になると警告が表示され、 \n投げることで作業時間に入ります。　　\n 事前に入力しておいたセット回数を満たせばクリアです。 　"
         android:textAlignment="center"
+        app:layout_constraintBottom_toTopOf="@+id/toolbar_help_pagenum"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/frameLayout" />
+        app:layout_constraintTop_toBottomOf="@+id/imageView13"
+        tools:ignore="MissingConstraints" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

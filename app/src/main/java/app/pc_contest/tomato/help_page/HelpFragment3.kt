@@ -16,4 +16,8 @@ class HelpFragment3 : Fragment() {
     ): View? {
         return inflater.inflate(R.layout.help_page3, container, false)
     }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+    }
 }
