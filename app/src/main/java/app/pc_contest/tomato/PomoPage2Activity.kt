@@ -1,8 +1,9 @@
 package app.pc_contest.tomato
 
+import android.content.BroadcastReceiver
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.os.CountDownTimer
 import android.util.Log
 import android.util.TypedValue
 import android.view.Gravity
@@ -14,8 +15,7 @@ import android.widget.PopupWindow
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.res.ResourcesCompat
-import java.util.Timer
-import java.util.concurrent.TimeUnit
+
 
 class PomoPage2Activity : AppCompatActivity() {
 
@@ -92,6 +92,16 @@ class PomoPage2Activity : AppCompatActivity() {
                 intent.putExtra("TIME", repeatNum)
                 Log.d("Pomo2", "createdIntent")
                 startActivity(intent)
+            }
+        }
+    }
+
+    private inner class UpdateReceiver : BroadcastReceiver() {
+        override fun onReceive(context: Context, intent: Intent) {
+            if(intent.action == CountdownTimerService.TIME_LEFT) {
+                if(intent.hasExtra("VALUE")) {
+                    textTimer.text = intent.getStringExtra("VALUE")
+                }
             }
         }
     }

@@ -3,6 +3,7 @@ package app.pc_contest.tomato
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.util.TypedValue
 import android.view.Gravity
 import android.view.View
@@ -37,27 +38,16 @@ class PomoPage1Activity : AppCompatActivity() {
         numPicker.maxValue = 99
         numPicker.minValue = 1
 
-        /*val transaction = supportFragmentManager.beginTransaction()
-            .setCustomAnimations(
-                R.anim.enter_anim,
-                R.anim.enter_anim
-            )
-            .add(R.id.fragment_container_view, PopupFragment())
-            .addToBackStack(null)*/
-
-        /*buttonStart.setOnClickListener {
+        buttonStart.setOnClickListener {
             times = numPicker.value
 
             val intent = Intent(this, CountdownTimerService::class.java)
-            intent.putExtra("TIME", times)
+            intent.putExtra("TIMES", times)
             Log.d("Pomo1", "startService")
             startService(intent)
             val intentToPage2 = Intent(this, PomoPage2Activity::class.java)
             startActivity(intentToPage2)
         }
-        buttonHome.setOnClickListener {
-            transaction.commit()
-        }*/
     }
 
     override fun onResume() {

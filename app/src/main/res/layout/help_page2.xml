@@ -105,7 +105,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="20dp"
-        android:lineSpacingExtra="8sp"
+        android:lineSpacingExtra="6sp"
         android:text="本アプリでは警告を無視してアプリを見続けた場合、\n アプリが３～5分間ロックされます。 \nしかし、スマホを投げることで \nアプリのロックを解除することができます。\n \n ※スマホを投げる際は周囲の安全に配慮し、\n ベッドやソファなどの柔らかい物に投げてください。\n \n また、アプリのロックとは別にペナルティが発生します。 \n例えば、右下に表示されている髪の毛に見える線や、 \nアプリのロック時間の延長などです。\n\n これらはスマホを投げたときの飛距離によって 変化します。 "
         android:textAlignment="center"
         android:textAllCaps="false"

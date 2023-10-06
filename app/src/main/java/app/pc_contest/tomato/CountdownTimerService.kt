@@ -7,6 +7,7 @@ import android.content.Intent.getIntent
 import android.os.CountDownTimer
 import android.os.IBinder
 import android.util.Log
+import android.view.View
 import androidx.core.app.NotificationCompat
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import java.util.concurrent.TimeUnit
@@ -14,7 +15,7 @@ import java.util.concurrent.TimeUnit
 
 class CountdownTimerService(intent: Intent) : Service() {
 
-    private  var time = 0
+    private  var times = 0
 
     val CHANNEL_ID = "sample"
     var hms: String = "00:00:00"
@@ -35,6 +36,18 @@ class CountdownTimerService(intent: Intent) : Service() {
 
     }
 
+    fun startService(view: View?) {
+        val intent = Intent(this, CountdownTimerService::class.java)
+        startService(intent)
+        Log.d("main", "startService")
+    }
+
+    fun stopService(view: View?) {
+        val intent = Intent(this, CountdownTimerService::class.java)
+        stopService(intent)
+        Log.d("main", "stopService")
+    }
+
     fun createNotification() {
         val notificationIntent = Intent(this, PomoPage2Activity::class.java)
         val pendingIntent = PendingIntent.getActivity(
@@ -50,7 +63,7 @@ class CountdownTimerService(intent: Intent) : Service() {
     }
 
     override fun onStartCommand(intent: Intent, flags: Int, startId: Int): Int {
-        time = intent.getIntExtra("TIME", 0)
+        times = intent.getIntExtra("TIMES", 0)
         timer = CounterClass(CD_TIME, CD_INTERVAL)
         timer!!.start()
         createNotification()
@@ -61,7 +74,7 @@ class CountdownTimerService(intent: Intent) : Service() {
     override fun onDestroy() {
         timer!!.cancel()
         super.onDestroy()
-        val timerInfoIntent = Intent(TIME_INFO)
+        val timerInfoIntent = Intent(TIME_LEFT)
         timerInfoIntent.putExtra("VALUE", "Stopped")
         LocalBroadcastManager.getInstance(this@CountdownTimerService).sendBroadcast(timerInfoIntent)
         Log.d("sub", "onDestroy")
@@ -87,16 +100,16 @@ class CountdownTimerService(intent: Intent) : Service() {
                 )
             )
             println(hms)
-            /*val timerInfoIntent = Intent(TIME_INFO)
+            val timerInfoIntent = Intent(TIME_LEFT)
             timerInfoIntent.putExtra("VALUE", hms)
             LocalBroadcastManager.getInstance(this@CountdownTimerService)
-                .sendBroadcast(timerInfoIntent)*/
+                .sendBroadcast(timerInfoIntent)
             createNotification()
             Log.d("sub", "onTick")
         }
 
         override fun onFinish() {
-            val timerInfoIntent = Intent(TIME_INFO)
+            val timerInfoIntent = Intent(TIME_LEFT)
             timerInfoIntent.putExtra("VALUE", "Completed")
             LocalBroadcastManager.getInstance(this@CountdownTimerService)
                 .sendBroadcast(timerInfoIntent)
@@ -105,6 +118,6 @@ class CountdownTimerService(intent: Intent) : Service() {
     }
 
     companion object {
-        const val TIME_INFO = "time_info"
+        const val TIME_LEFT = "time_left"
     }
 }
