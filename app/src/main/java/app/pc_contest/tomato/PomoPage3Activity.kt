@@ -3,7 +3,6 @@ package app.pc_contest.tomato
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.util.TypedValue
 import android.view.Gravity
 import android.view.View
@@ -30,10 +29,15 @@ class PomoPage3Activity : AppCompatActivity() {
     //temp
     private lateinit var imageTomato: ImageView
 
+    private var constrainValues = ConstrainValues()
+
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.po_3)
+
+        val intentStop = Intent(this, CountdownTimerService::class.java)
+        stopService(intentStop)
 
         textTimer = findViewById(R.id.time_text_view)
         textTimes = findViewById(R.id.textView10)
@@ -41,16 +45,22 @@ class PomoPage3Activity : AppCompatActivity() {
         //temp
         imageTomato = findViewById(R.id.imageView3)
 
-        timesLeft = intent.getIntExtra("TIME", 0)
+        timesLeft = constrainValues.getPomoTime()
 
         textTimer.text = timerRest.toString()
         textTimes.text = timesLeft.toString()
+
+        var valueTemp = constrainValues.getPomoTime()
+        constrainValues.setPomoTime(valueTemp--)
+
+        //timerスタート
+        val intent = Intent(this, CountdownTimerService::class.java)
+        intent.putExtra("TYPE", "POMO_REST_TIMER")
+        startService(intent)
     }
 
     override fun onResume() {
         super.onResume()
-
-        //update Values!
 
         //timer.timesLeftが0になれば次Activityへ
 

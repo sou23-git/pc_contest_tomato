@@ -3,7 +3,6 @@ package app.pc_contest.tomato
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.util.TypedValue
 import android.view.Gravity
 import android.view.View
@@ -25,6 +24,8 @@ class PomoPage1Activity : AppCompatActivity() {
 
     private var times = 0
 
+    val containValue = ConstrainValues()
+
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,16 +39,6 @@ class PomoPage1Activity : AppCompatActivity() {
         numPicker.maxValue = 99
         numPicker.minValue = 1
 
-        buttonStart.setOnClickListener {
-            times = numPicker.value
-
-            val intent = Intent(this, CountdownTimerService::class.java)
-            intent.putExtra("TIMES", times)
-            Log.d("Pomo1", "startService")
-            startService(intent)
-            val intentToPage2 = Intent(this, PomoPage2Activity::class.java)
-            startActivity(intentToPage2)
-        }
     }
 
     override fun onResume() {
@@ -97,15 +88,14 @@ class PomoPage1Activity : AppCompatActivity() {
         buttonStart.setOnClickListener {
             //numPicker
             times = numPicker.value
-
-            //タイマー実行
+            containValue.setPomoTime(times)
 
             //次ページへ
             val intent = Intent(this, PomoPage2Activity::class.java)
-            intent.putExtra("TIME", times)
             startActivity(intent)
         }
     }
+
 
     //戻るボタン・ジェスチャー検出
     /*override fun onBackPressed() {

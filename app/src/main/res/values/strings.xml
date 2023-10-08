@@ -42,4 +42,8 @@
     <string name="start">Start</string>
     <string name="stop">Stop</string>
 
+    //Service_NotificationChannel
+    <string name="channel_name">TimerServiceChannel</string>
+    <string name="channel_description">This channel is used by "Tomato".</string>
+
 </resources>

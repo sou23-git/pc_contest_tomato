@@ -1,8 +1,10 @@
 package app.pc_contest.tomato
 
+import android.annotation.SuppressLint
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
+import android.content.IntentFilter
 import android.os.Bundle
 import android.util.Log
 import android.util.TypedValue
@@ -15,6 +17,7 @@ import android.widget.PopupWindow
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.res.ResourcesCompat
+import androidx.localbroadcastmanager.content.LocalBroadcastManager
 
 
 class PomoPage2Activity : AppCompatActivity() {
@@ -24,10 +27,13 @@ class PomoPage2Activity : AppCompatActivity() {
     private lateinit var textTimer: TextView
     private lateinit var buttonHome: ImageButton
     private lateinit var imageTomato: ImageView
-    //タイマー替わり
-    private var time = 10
-    private var repeatNum: Int = 0
 
+    private var receiver: TimeReceiver? = null
+
+    private var constrainValues = ConstrainValues()
+
+
+    @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.po_2)
@@ -36,13 +42,27 @@ class PomoPage2Activity : AppCompatActivity() {
         buttonHome = findViewById(R.id.imageButton2)
         //一時的にタイマー替わり
         imageTomato = findViewById(R.id.imageView3)
-        textTimer.text = time.toString()
+        textTimer.text = "00:00:00"
 
-        repeatNum = intent.getIntExtra("TIME", 0)
+        receiver = TimeReceiver()
+
+        //タイマー時間決定
+        constrainValues.setTimerTime(25 * 60) //Timer : 25分
+        constrainValues.setTimerDelay(1)      //Delay : 1秒
+
+        //タイマー実行
+        val intent = Intent(this, CountdownTimerService::class.java)
+        intent.putExtra("TYPE", "POMO_TIMER")
+        startService(intent)
+        Log.d("Pomo1", "startService")
     }
 
     override fun onResume() {
         super.onResume()
+
+        LocalBroadcastManager.getInstance(this)
+            .registerReceiver(receiver!!, IntentFilter(CountdownTimerService.TIME_INFO))
+
 
         mPopupWindow = PopupWindow(this)
 
@@ -84,25 +104,21 @@ class PomoPage2Activity : AppCompatActivity() {
         buttonHome.setOnClickListener {
             displayPopup()
         }
-        imageTomato.setOnClickListener {
-            time--
-            textTimer.text = time.toString()
-            if(time <= 0) {
-                val intent = Intent(this, PomoPage3Activity::class.java)
-                intent.putExtra("TIME", repeatNum)
-                Log.d("Pomo2", "createdIntent")
-                startActivity(intent)
-            }
-        }
     }
 
-    private inner class UpdateReceiver : BroadcastReceiver() {
-        override fun onReceive(context: Context, intent: Intent) {
-            if(intent.action == CountdownTimerService.TIME_LEFT) {
+    override fun onPause() {
+        super.onPause()
+        LocalBroadcastManager.getInstance(this).unregisterReceiver(receiver!!)
+    }
+
+    inner class TimeReceiver: BroadcastReceiver() {
+        override fun onReceive(context: Context?, intent: Intent?) {
+            if(intent != null && intent.action == CountdownTimerService.TIME_INFO) {
                 if(intent.hasExtra("VALUE")) {
-                    textTimer.text = intent.getStringExtra("VALUE")
+                    textTimer.text = intent.getStringExtra("VALUE").toString()
                 }
             }
         }
     }
+
 }
