@@ -24,9 +24,9 @@ class SnsPage1Activity : AppCompatActivity() {
     private lateinit var hourPicker: NumberPicker
     private lateinit var minutePicker: NumberPicker
 
-    private val TIME_PICKER_INTERVAL = 5
+    /*private val TIME_PICKER_INTERVAL = 5
     private val TIME_PICKER_THRESHOLD_HOUR_ADD = 55
-    private val TIME_PICKER_THRESHOLD_HOUR_REMOVE = -55
+    private val TIME_PICKER_THRESHOLD_HOUR_REMOVE = -55*/
 
     private var hour = 0
     private var minute = 0
@@ -45,7 +45,7 @@ class SnsPage1Activity : AppCompatActivity() {
         hourPicker.maxValue = 23
         hourPicker.minValue = 0
         minutePicker.maxValue = 59
-        minutePicker.minValue = 0
+        minutePicker.minValue = 1
 
         //5分刻みに変更
         /*minutePicker.setOnValueChangedListener(OnValueChangeListener { _, oldVal, newVal ->

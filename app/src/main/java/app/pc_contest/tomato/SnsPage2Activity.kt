@@ -1,7 +1,10 @@
 package app.pc_contest.tomato
 
 import android.annotation.SuppressLint
+import android.content.BroadcastReceiver
+import android.content.Context
 import android.content.Intent
+import android.content.IntentFilter
 import android.os.Bundle
 import android.util.TypedValue
 import android.view.Gravity
@@ -13,11 +16,9 @@ import android.widget.PopupWindow
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.res.ResourcesCompat
+import androidx.localbroadcastmanager.content.LocalBroadcastManager
 
 class SnsPage2Activity : AppCompatActivity() {
-
-    //temp
-    private lateinit var imageTomato: ImageView
 
     private val DEFAULT_MINUTE = 10
 
@@ -27,26 +28,40 @@ class SnsPage2Activity : AppCompatActivity() {
     private lateinit var textTimer: TextView
     private var hour = 0
     private var minute = 0
-    private var time = "00 : 00"
+    private var time = "00:00:00"
+
+    private var receiver: TimeReceiver? = null
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.sn_2)
 
-        //temp
-        imageTomato = findViewById(R.id.imageView2)
+        receiver = TimeReceiver()
 
         buttonHome = findViewById(R.id.imageButton2)
         textTimer = findViewById(R.id.time_text_view)
+
         hour = intent.getIntExtra("HOUR", 0)
         minute = intent.getIntExtra("MINUTE", 0)
-        time = hour.toString().padStart(2, '0').plus(" : ").plus(minute.toString().padStart(2, '0'))
+
+        time = hour.toString().padStart(2, '0').plus(":")
+            .plus(minute.toString().padStart(2, '0')).plus(":")
+            .plus(("00").padStart(2, '0'))
         textTimer.text = time
+
+        //timer
+        val intent = Intent(this, CountdownTimerService::class.java)
+        intent.putExtra("TIME", (hour * 60 * 60) + (minute * 60))
+        startService(intent)
     }
 
     @SuppressLint("InflateParams")
     override fun onResume() {
         super.onResume()
+
+        LocalBroadcastManager.getInstance(this)
+            .registerReceiver(receiver!!, IntentFilter(CountdownTimerService.TIME_INFO))
 
         mPopupWindow = PopupWindow(this)
 
@@ -86,22 +101,23 @@ class SnsPage2Activity : AppCompatActivity() {
         buttonHome.setOnClickListener {
             displayPopup()
         }
+    }
 
-        imageTomato.setOnClickListener {
-            if(hour >= 0 && minute > 0) {
-                minute--
-                time = hour.toString().padStart(2, '0').plus(" : ").plus(minute.toString().padStart(2, '0'))
-                textTimer.text = time
-            }
-            if(hour > 0 && minute == 0) {
-                hour--
-                minute = DEFAULT_MINUTE
-                time = hour.toString().padStart(2, '0').plus(" : ").plus(minute.toString().padStart(2, '0'))
-                textTimer.text = time
-            }
-            if(hour == 0 && minute == 0) {
-                val intent = Intent(this, SnsPageClearActivity::class.java)
-                startActivity(intent)
+    override fun onPause() {
+        super.onPause()
+        LocalBroadcastManager.getInstance(this).unregisterReceiver(receiver!!)
+    }
+
+    inner class TimeReceiver: BroadcastReceiver() {
+        override fun onReceive(context: Context?, intent: Intent?) {
+            if(intent != null && intent.action == CountdownTimerService.TIME_INFO) {
+                if(intent.hasExtra("VALUE")) {
+                    textTimer.text = intent.getStringExtra("VALUE").toString()
+                    if(intent.getStringExtra("VALUE") == "End!") {
+                        val intentTemp = Intent(this@SnsPage2Activity, SnsPageClearActivity::class.java)
+                        startActivity(intentTemp)
+                    }
+                }
             }
         }
     }
