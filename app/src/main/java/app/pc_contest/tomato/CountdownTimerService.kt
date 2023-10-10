@@ -20,20 +20,15 @@ class CountdownTimerService : Service() {
     private val CHANNEL_ID = "test"
     var hms: String = "00:00:00"
 
-    private var constrainValues = ConstrainValues()
-
     private var CD_TIME: Long = 0      //Change every mode
     private var CD_INTERVAL: Long = 0  //Default : 1 sec
-
-    private lateinit var timerType: String
-
+    private var CD_TYPE: String? = null
 
     private var timer: CounterClass? = null
     override fun onCreate() {
         super.onCreate()
         createNotificationChannel()
         Log.d("sub", "onCreate")
-        println(CD_TIME)
     }
 
     override fun onBind(intent: Intent): IBinder? {
@@ -48,7 +43,6 @@ class CountdownTimerService : Service() {
         val pendingIntent = PendingIntent.getActivity(this, 0, notificationIntent,
             PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE)
         val notification = NotificationCompat.Builder(this, CHANNEL_ID)
-
             .setSmallIcon(R.drawable.main_icon)
             .setContentTitle("Timer in Foreground !")
             .setAutoCancel(true)
@@ -64,9 +58,13 @@ class CountdownTimerService : Service() {
 
         createNotification()
 
-        timerType = intent.getStringExtra("TYPE").toString()
-        CD_TIME = constrainValues.getTimerTime().toLong()
-        CD_INTERVAL = constrainValues.getTimerDelay().toLong()
+        CD_TYPE = intent.getStringExtra("TYPE")
+        Log.d("sub", CD_TYPE.toString())
+
+        if(intent.hasExtra("TIME")) {
+            CD_TIME = (intent.getIntExtra("TIME", 10) * 1000).toLong()
+        }
+        CD_INTERVAL = 1 * 1000
 
         timer = CounterClass(CD_TIME, CD_INTERVAL)
         timer!!.start()
@@ -78,8 +76,9 @@ class CountdownTimerService : Service() {
         timer!!.cancel()
         super.onDestroy()
         val timerInfoIntent = Intent(TIME_INFO)
-        timerInfoIntent.putExtra("VALUE", "Stopped")
+        timerInfoIntent.putExtra("VALUE", "End!")
         LocalBroadcastManager.getInstance(this@CountdownTimerService).sendBroadcast(timerInfoIntent)
+
         Log.d("sub", "onDestroy")
     }
 
@@ -112,33 +111,27 @@ class CountdownTimerService : Service() {
         }
 
         override fun onFinish() {
-            changeActivity()
             Log.d("sub", "onFinish")
+            /*if(CD_TYPE == "POMO_TIMER") {
+                Log.d("sub", "Called Pomo3")
+                val intent = Intent(application, PomoPage3Activity::class.java)
+                intent.putExtra("TIMES", CD_TIMES)
+                intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+                startActivity(intent)
+            }
+            if(CD_TYPE == "POMO_REST") {
+                Log.d("sub", "ReCalled Pomo2")
+                val intent = Intent(application, PomoPage2Activity::class.java)
+                intent.putExtra("TIMES", CD_TIMES)
+                intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+                startActivity(intent)
+            }*/
             stopSelf()
         }
 
 
     }
 
-    private fun changeActivity() {
-        Log.d("sub", "changeActivity")
-        val value = constrainValues.getPomoTime()
-        if(timerType == "POMO_TIMER" && value >= 1) {
-            val intent = Intent(application.applicationContext, PomoPage3Activity::class.java)
-            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
-            startActivity(intent)
-        }
-        else if(timerType == "POMO_REST_TIMER" && value >= 1) {
-            val intent = Intent(application.applicationContext, PomoPage2Activity::class.java)
-            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
-            startActivity(intent)
-        }
-        else{
-            val intent = Intent(application.applicationContext, PomoPage3Activity::class.java)
-            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
-            startActivity(intent)
-        }
-    }
 
     private fun createNotificationChannel() {
         // the NotificationChannel class is new and not in the support library

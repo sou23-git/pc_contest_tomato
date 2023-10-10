@@ -26,11 +26,9 @@ class PomoPage2Activity : AppCompatActivity() {
     private lateinit var mPopupView  : View
     private lateinit var textTimer: TextView
     private lateinit var buttonHome: ImageButton
-    private lateinit var imageTomato: ImageView
 
     private var receiver: TimeReceiver? = null
-
-    private var constrainValues = ConstrainValues()
+    private var times = 0
 
 
     @SuppressLint("SetTextI18n")
@@ -40,18 +38,18 @@ class PomoPage2Activity : AppCompatActivity() {
 
         textTimer = findViewById(R.id.time_text_view)
         buttonHome = findViewById(R.id.imageButton2)
-        //一時的にタイマー替わり
-        imageTomato = findViewById(R.id.imageView3)
         textTimer.text = "00:00:00"
 
         receiver = TimeReceiver()
 
-        //タイマー時間決定
-        constrainValues.setTimerTime(25 * 60) //Timer : 25分
-        constrainValues.setTimerDelay(1)      //Delay : 1秒
+        if(intent.hasExtra("TIMES")) {
+            times = intent.getIntExtra("TIMES", 0)
+            times--
+        }
 
         //タイマー実行
         val intent = Intent(this, CountdownTimerService::class.java)
+        intent.putExtra("TIME", (25 * 60)) //25min
         intent.putExtra("TYPE", "POMO_TIMER")
         startService(intent)
         Log.d("Pomo1", "startService")
@@ -116,6 +114,11 @@ class PomoPage2Activity : AppCompatActivity() {
             if(intent != null && intent.action == CountdownTimerService.TIME_INFO) {
                 if(intent.hasExtra("VALUE")) {
                     textTimer.text = intent.getStringExtra("VALUE").toString()
+                    if(intent.getStringExtra("VALUE") == "End!") {
+                        val intentTemp = Intent(this@PomoPage2Activity, PomoPage3Activity::class.java)
+                        intentTemp.putExtra("TIMES", times)
+                        startActivity(intentTemp)
+                    }
                 }
             }
         }

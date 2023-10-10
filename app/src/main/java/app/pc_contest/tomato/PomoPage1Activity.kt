@@ -24,8 +24,6 @@ class PomoPage1Activity : AppCompatActivity() {
 
     private var times = 0
 
-    val containValue = ConstrainValues()
-
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -88,10 +86,10 @@ class PomoPage1Activity : AppCompatActivity() {
         buttonStart.setOnClickListener {
             //numPicker
             times = numPicker.value
-            containValue.setPomoTime(times)
 
             //次ページへ
             val intent = Intent(this, PomoPage2Activity::class.java)
+            intent.putExtra("TIMES", times)
             startActivity(intent)
         }
     }

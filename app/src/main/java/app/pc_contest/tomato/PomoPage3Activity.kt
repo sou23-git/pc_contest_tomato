@@ -1,8 +1,12 @@
 package app.pc_contest.tomato
 
 import android.annotation.SuppressLint
+import android.content.BroadcastReceiver
+import android.content.Context
 import android.content.Intent
+import android.content.IntentFilter
 import android.os.Bundle
+import android.util.Log
 import android.util.TypedValue
 import android.view.Gravity
 import android.view.View
@@ -13,73 +17,56 @@ import android.widget.PopupWindow
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.res.ResourcesCompat
+import androidx.localbroadcastmanager.content.LocalBroadcastManager
 
 class PomoPage3Activity : AppCompatActivity() {
-
-    private val DEFAULT_TIMER_TIME = 10
-    private var timerRest = DEFAULT_TIMER_TIME   //5分タイマーに接続
-    // 繰り返す回数残り、前ActivityのIntentから
-    private var timesLeft: Int = 0
 
     private lateinit var mPopupWindow: PopupWindow
     private lateinit var mPopupView  : View
     private lateinit var textTimes: TextView
     private lateinit var textTimer: TextView
     private lateinit var buttonHome: ImageButton
-    //temp
-    private lateinit var imageTomato: ImageView
 
-    private var constrainValues = ConstrainValues()
+    private var leftTime: Int = 0
 
-    @SuppressLint("MissingInflatedId")
+    private var receiver: TimeReceiver? = null
+    @SuppressLint("MissingInflatedId", "SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.po_3)
 
-        val intentStop = Intent(this, CountdownTimerService::class.java)
-        stopService(intentStop)
-
         textTimer = findViewById(R.id.time_text_view)
         textTimes = findViewById(R.id.textView10)
         buttonHome = findViewById(R.id.imageButton2)
-        //temp
-        imageTomato = findViewById(R.id.imageView3)
 
-        timesLeft = constrainValues.getPomoTime()
+        receiver = TimeReceiver()
 
-        textTimer.text = timerRest.toString()
-        textTimes.text = timesLeft.toString()
+        if (intent.hasExtra("TIMES")) {
+            leftTime = intent.getIntExtra("TIMES", 0)
+        }
 
-        var valueTemp = constrainValues.getPomoTime()
-        constrainValues.setPomoTime(valueTemp--)
+        textTimer.text = "00:00:00"
+        textTimes.text = leftTime.toString()
 
-        //timerスタート
-        val intent = Intent(this, CountdownTimerService::class.java)
-        intent.putExtra("TYPE", "POMO_REST_TIMER")
-        startService(intent)
+        if(leftTime <= 0) {
+            Log.d("Pomo3", "End pomo timer")
+            val intent = Intent(this, PomoPageClearActivity::class.java)
+            startActivity(intent)
+        }
+        if(leftTime >= 1) {
+            Log.d("Pomo3", "Restart pomo timer")
+            val intent = Intent(this, CountdownTimerService::class.java)
+            intent.putExtra("TIME", 5 * 60) //5 min
+            startService(intent)
+        }
+
     }
 
     override fun onResume() {
         super.onResume()
 
-        //timer.timesLeftが0になれば次Activityへ
-
-        imageTomato.setOnClickListener {
-            if(timesLeft >= 0 && timerRest != 0) {
-                timerRest--
-                textTimer.text = timerRest.toString()
-                if(timesLeft != 0 && timerRest == 0) {
-                    timesLeft--
-                    val intent = Intent(this, PomoPage2Activity::class.java)
-                    intent.putExtra("TIME", timesLeft)
-                    startActivity(intent)
-                }
-            }
-            else {
-                val intent = Intent(this, PomoPageClearActivity::class.java)
-                startActivity(intent)
-            }
-        }
+        LocalBroadcastManager.getInstance(this)
+            .registerReceiver(receiver!!, IntentFilter(CountdownTimerService.TIME_INFO))
 
         mPopupWindow = PopupWindow(this)
 
@@ -122,4 +109,25 @@ class PomoPage3Activity : AppCompatActivity() {
             displayPopup()
         }
     }
+
+    override fun onPause() {
+        super.onPause()
+        LocalBroadcastManager.getInstance(this).unregisterReceiver(receiver!!)
+    }
+
+    inner class TimeReceiver: BroadcastReceiver() {
+        override fun onReceive(context: Context?, intent: Intent?) {
+            if(intent != null && intent.action == CountdownTimerService.TIME_INFO) {
+                if(intent.hasExtra("VALUE")) {
+                    textTimer.text = intent.getStringExtra("VALUE").toString()
+                    if(intent.getStringExtra("VALUE") == "End!") {
+                        val intentTemp = Intent(this@PomoPage3Activity, PomoPage2Activity::class.java)
+                        intentTemp.putExtra("TIMES", leftTime)
+                        startActivity(intentTemp)
+                    }
+                }
+            }
+        }
+    }
+
 }
