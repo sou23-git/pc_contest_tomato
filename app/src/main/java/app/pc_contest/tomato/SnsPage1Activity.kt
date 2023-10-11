@@ -9,7 +9,6 @@ import android.view.View
 import android.view.WindowManager
 import android.widget.ImageButton
 import android.widget.NumberPicker
-import android.widget.NumberPicker.OnValueChangeListener
 import android.widget.PopupWindow
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.res.ResourcesCompat
@@ -59,6 +58,8 @@ class SnsPage1Activity : AppCompatActivity() {
 
     }
 
+    @Suppress("DEPRECATION")
+    @SuppressLint("InflateParams")
     override fun onResume() {
         super.onResume()
 

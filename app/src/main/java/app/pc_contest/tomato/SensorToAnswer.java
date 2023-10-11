@@ -1,7 +1,6 @@
 package app.pc_contest.tomato;
 
 
-
 import android.app.Activity;
 import android.content.Context;
 import android.hardware.Sensor;
@@ -10,13 +9,10 @@ import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.widget.TextView;
-import android.view.View;
 
 public class SensorToAnswer extends Activity implements SensorEventListener {
 
     private TextView myText;
-    // SensorManagerインスタンス
-    private SensorManager sma;
 
 
     @Override
@@ -25,7 +21,8 @@ public class SensorToAnswer extends Activity implements SensorEventListener {
         setContentView(R.layout.temp);
         myText = findViewById(R.id.text_temp);
         // SensorManagerのインスタンスを取得する
-        sma = (SensorManager)getSystemService(Context.SENSOR_SERVICE);
+        // SensorManagerインスタンス
+        SensorManager sma = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
         sma.registerListener(this, sma.getDefaultSensor(Sensor.TYPE_ACCELEROMETER),
                 SensorManager.SENSOR_DELAY_UI);
     }

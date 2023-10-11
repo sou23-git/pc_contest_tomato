@@ -12,9 +12,9 @@ import android.view.Gravity
 import android.view.View
 import android.view.WindowManager
 import android.widget.ImageButton
-import android.widget.ImageView
 import android.widget.PopupWindow
 import android.widget.TextView
+import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.res.ResourcesCompat
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
@@ -53,14 +53,30 @@ class PomoPage2Activity : AppCompatActivity() {
         intent.putExtra("TYPE", "POMO_TIMER")
         startService(intent)
         Log.d("Pomo1", "startService")
+
+        //戻るボタン無効化設定
+        onBackPressedDispatcher.addCallback(callback)
     }
 
+    //もし戻るボタン/ジェスチャー押されたらservice停止&Homeへ
+    private val callback = object : OnBackPressedCallback(true) {
+        override fun handleOnBackPressed() {
+            val intentStopService = Intent(this@PomoPage2Activity, CountdownTimerService::class.java)
+            stopService(intentStopService)
+            val intentStartMainActivity = Intent(this@PomoPage2Activity, MainActivity::class.java)
+            startActivity(intentStartMainActivity)
+        }
+    }
+
+
+
+    @Suppress("DEPRECATION")
+    @SuppressLint("InflateParams")
     override fun onResume() {
         super.onResume()
 
         LocalBroadcastManager.getInstance(this)
             .registerReceiver(receiver!!, IntentFilter(CountdownTimerService.TIME_INFO))
-
 
         mPopupWindow = PopupWindow(this)
 
@@ -72,6 +88,9 @@ class PomoPage2Activity : AppCompatActivity() {
             //ページ移動:終了ボタン(IB6)が押されたらMainActivityへ
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
+            //kill service
+            val intentStopService = Intent(this@PomoPage2Activity, CountdownTimerService::class.java)
+            stopService(intentStopService)
             //ポップアップ削除
             if (mPopupWindow.isShowing) {
                 mPopupWindow.dismiss()

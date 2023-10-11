@@ -12,9 +12,9 @@ import android.view.Gravity
 import android.view.View
 import android.view.WindowManager
 import android.widget.ImageButton
-import android.widget.ImageView
 import android.widget.PopupWindow
 import android.widget.TextView
+import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.res.ResourcesCompat
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
@@ -41,6 +41,8 @@ class PomoPage3Activity : AppCompatActivity() {
 
         receiver = TimeReceiver()
 
+        onBackPressedDispatcher.addCallback(callback)
+
         if (intent.hasExtra("TIMES")) {
             leftTime = intent.getIntExtra("TIMES", 0)
         }
@@ -62,6 +64,17 @@ class PomoPage3Activity : AppCompatActivity() {
 
     }
 
+    private val callback = object : OnBackPressedCallback(true) {
+        override fun handleOnBackPressed() {
+            val intentStopService = Intent(this@PomoPage3Activity, CountdownTimerService::class.java)
+            stopService(intentStopService)
+            val intentStartMainActivity = Intent(this@PomoPage3Activity, MainActivity::class.java)
+            startActivity(intentStartMainActivity)
+        }
+    }
+
+    @Suppress("DEPRECATION")
+    @SuppressLint("InflateParams")
     override fun onResume() {
         super.onResume()
 
@@ -78,6 +91,9 @@ class PomoPage3Activity : AppCompatActivity() {
             //ページ移動:終了ボタン(IB6)が押されたらMainActivityへ
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
+            //kill service
+            val intentStopService = Intent(this@PomoPage3Activity, CountdownTimerService::class.java)
+            stopService(intentStopService)
             //ポップアップ削除
             if (mPopupWindow.isShowing) {
                 mPopupWindow.dismiss()

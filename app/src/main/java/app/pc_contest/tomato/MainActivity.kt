@@ -9,6 +9,7 @@ import android.os.PowerManager
 import android.provider.Settings.ACTION_REQUEST_IGNORE_BATTERY_OPTIMIZATIONS
 import android.widget.Button
 import android.widget.ImageButton
+import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
 
 class MainActivity : AppCompatActivity() {
@@ -33,6 +34,9 @@ class MainActivity : AppCompatActivity() {
         buttonHelp = findViewById(R.id.imageButton9)
         buttonTemp = findViewById(R.id.tempButton)
 
+        //戻るボタン無効化設定
+        onBackPressedDispatcher.addCallback(callback)
+
         val powerManager =
             applicationContext!!.getSystemService(Context.POWER_SERVICE) as PowerManager
         if (!powerManager.isIgnoringBatteryOptimizations(packageName)) {
@@ -45,21 +49,25 @@ class MainActivity : AppCompatActivity() {
 
             }
             buttonPomo.setOnClickListener {
-                val intent = Intent(this, PomoPage1Activity::class.java)
-                startActivity(intent)
+                val intentPomo1 = Intent(this, PomoPage1Activity::class.java)
+                startActivity(intentPomo1)
             }
             buttonSns.setOnClickListener {
-                val intent = Intent(this, SnsPage1Activity::class.java)
-                startActivity(intent)
+                val intentSns1 = Intent(this, SnsPage1Activity::class.java)
+                startActivity(intentSns1)
             }
             buttonHelp.setOnClickListener {
-                val intent = Intent(this, HelpPageActivity::class.java)
-                startActivity(intent)
+                val intentHelp = Intent(this, HelpPageActivity::class.java)
+                startActivity(intentHelp)
             }
-            buttonTemp.setOnClickListener{//ここで一時的にホームにボタンを作ってGetsensorvalueに飛んでる
-                val intentSenssorToAnswer = Intent(this,GetSensorValue::class.java)
-                startActivity(intentSenssorToAnswer)
+            buttonTemp.setOnClickListener{//ここで一時的にホームにボタンを作ってGetSensorValueに飛んでる
+                val intentSensorToAnswer = Intent(this,GetSensorValue::class.java)
+                startActivity(intentSensorToAnswer)
             }
         }
+    }
+
+    private val callback = object : OnBackPressedCallback(true) {
+        override fun handleOnBackPressed() {}
     }
 }

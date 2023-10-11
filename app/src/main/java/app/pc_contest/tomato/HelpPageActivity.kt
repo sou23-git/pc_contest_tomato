@@ -4,11 +4,10 @@ import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.View
 import android.widget.ImageButton
-import android.widget.ImageView
 import androidx.fragment.app.FragmentActivity
 import androidx.viewpager.widget.ViewPager
-import app.pc_contest.tomato.help_page.HelpFragment2
 import app.pc_contest.tomato.help_page.HelpFragment1
+import app.pc_contest.tomato.help_page.HelpFragment2
 import app.pc_contest.tomato.help_page.HelpFragment3
 import app.pc_contest.tomato.help_page.HelpFragment4
 import app.pc_contest.tomato.help_page.HelpPagerAdapter
@@ -24,7 +23,7 @@ class HelpPageActivity : FragmentActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.help_page)
 
-        val flagmentList = listOf(
+        val fragmentList = listOf(
             HelpFragment1(),
             HelpFragment2(),
             HelpFragment3(),
@@ -34,7 +33,7 @@ class HelpPageActivity : FragmentActivity() {
         buttonHome = findViewById(R.id.imageButton2)
         buttonHome.setImageResource(R.drawable.app_logo)
 
-        val adapter = HelpPagerAdapter(supportFragmentManager, flagmentList)
+        val adapter = HelpPagerAdapter(supportFragmentManager, fragmentList)
         viewPager.adapter = adapter
 
         buttonHome.setOnClickListener {

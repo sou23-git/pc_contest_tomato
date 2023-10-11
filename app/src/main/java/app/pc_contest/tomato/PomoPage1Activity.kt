@@ -39,6 +39,8 @@ class PomoPage1Activity : AppCompatActivity() {
 
     }
 
+    @Suppress("DEPRECATION")
+    @SuppressLint("InflateParams")
     override fun onResume() {
         super.onResume()
 

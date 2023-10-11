@@ -11,16 +11,14 @@ import android.view.Gravity
 import android.view.View
 import android.view.WindowManager
 import android.widget.ImageButton
-import android.widget.ImageView
 import android.widget.PopupWindow
 import android.widget.TextView
+import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.res.ResourcesCompat
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
 
 class SnsPage2Activity : AppCompatActivity() {
-
-    private val DEFAULT_MINUTE = 10
 
     private lateinit var mPopupWindow: PopupWindow
     private lateinit var mPopupView: View
@@ -50,12 +48,26 @@ class SnsPage2Activity : AppCompatActivity() {
             .plus(("00").padStart(2, '0'))
         textTimer.text = time
 
+        //service killer
+        onBackPressedDispatcher.addCallback(callback)
+
         //timer
         val intent = Intent(this, CountdownTimerService::class.java)
         intent.putExtra("TIME", (hour * 60 * 60) + (minute * 60))
         startService(intent)
     }
 
+    //kill service & back to home
+    private val callback = object : OnBackPressedCallback(true) {
+        override fun handleOnBackPressed() {
+            val intentStopService = Intent(this@SnsPage2Activity, CountdownTimerService::class.java)
+            stopService(intentStopService)
+            val intentStartMainActivity = Intent(this@SnsPage2Activity, MainActivity::class.java)
+            startActivity(intentStartMainActivity)
+        }
+    }
+
+    @Suppress("DEPRECATION")
     @SuppressLint("InflateParams")
     override fun onResume() {
         super.onResume()
@@ -73,6 +85,9 @@ class SnsPage2Activity : AppCompatActivity() {
             //ページ移動:終了ボタン(IB6)が押されたらMainActivityへ
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
+            //kill service
+            val intentStopService = Intent(this@SnsPage2Activity, CountdownTimerService::class.java)
+            stopService(intentStopService)
             //ポップアップ削除
             if (mPopupWindow.isShowing) {
                 mPopupWindow.dismiss()
