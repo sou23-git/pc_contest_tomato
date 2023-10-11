@@ -112,20 +112,6 @@ class CountdownTimerService : Service() {
 
         override fun onFinish() {
             Log.d("sub", "onFinish")
-            /*if(CD_TYPE == "POMO_TIMER") {
-                Log.d("sub", "Called Pomo3")
-                val intent = Intent(application, PomoPage3Activity::class.java)
-                intent.putExtra("TIMES", CD_TIMES)
-                intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
-                startActivity(intent)
-            }
-            if(CD_TYPE == "POMO_REST") {
-                Log.d("sub", "ReCalled Pomo2")
-                val intent = Intent(application, PomoPage2Activity::class.java)
-                intent.putExtra("TIMES", CD_TIMES)
-                intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
-                startActivity(intent)
-            }*/
             stopSelf()
         }
 

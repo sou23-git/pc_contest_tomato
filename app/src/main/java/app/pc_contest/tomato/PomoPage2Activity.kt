@@ -5,6 +5,7 @@ import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.util.TypedValue
@@ -51,7 +52,11 @@ class PomoPage2Activity : AppCompatActivity() {
         val intent = Intent(this, CountdownTimerService::class.java)
         intent.putExtra("TIME", (25 * 60)) //25min
         intent.putExtra("TYPE", "POMO_TIMER")
-        startService(intent)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            startForegroundService(intent)
+        }else {
+            startService(intent)
+        }
         Log.d("Pomo1", "startService")
 
         //戻るボタン無効化設定

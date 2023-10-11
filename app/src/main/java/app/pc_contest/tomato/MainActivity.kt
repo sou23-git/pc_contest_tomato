@@ -60,13 +60,14 @@ class MainActivity : AppCompatActivity() {
                 val intentHelp = Intent(this, HelpPageActivity::class.java)
                 startActivity(intentHelp)
             }
-            buttonTemp.setOnClickListener{//ここで一時的にホームにボタンを作ってGetSensorValueに飛んでる
+            buttonTemp.setOnClickListener{
                 val intentSensorToAnswer = Intent(this,GetSensorValue::class.java)
                 startActivity(intentSensorToAnswer)
             }
         }
     }
 
+    //戻るボタン無効化
     private val callback = object : OnBackPressedCallback(true) {
         override fun handleOnBackPressed() {}
     }

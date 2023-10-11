@@ -5,6 +5,7 @@ import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
+import android.os.Build
 import android.os.Bundle
 import android.util.TypedValue
 import android.view.Gravity
@@ -54,7 +55,11 @@ class SnsPage2Activity : AppCompatActivity() {
         //timer
         val intent = Intent(this, CountdownTimerService::class.java)
         intent.putExtra("TIME", (hour * 60 * 60) + (minute * 60))
-        startService(intent)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            startForegroundService(intent)
+        }else {
+            startService(intent)
+        }
     }
 
     //kill service & back to home
