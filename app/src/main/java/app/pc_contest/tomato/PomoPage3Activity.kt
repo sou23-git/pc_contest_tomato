@@ -13,6 +13,7 @@ import android.view.Gravity
 import android.view.View
 import android.view.WindowManager
 import android.widget.ImageButton
+import android.widget.ImageView
 import android.widget.PopupWindow
 import android.widget.TextView
 import androidx.activity.OnBackPressedCallback
@@ -28,7 +29,11 @@ class PomoPage3Activity : AppCompatActivity() {
     private lateinit var textTimer: TextView
     private lateinit var buttonHome: ImageButton
 
+    //For debug
+    private lateinit var imageTomato: ImageView
+
     private var leftTime: Int = 0
+    private var timesDefault = 0
 
     private var receiver: TimeReceiver? = null
     @SuppressLint("MissingInflatedId", "SetTextI18n")
@@ -40,12 +45,19 @@ class PomoPage3Activity : AppCompatActivity() {
         textTimes = findViewById(R.id.textView10)
         buttonHome = findViewById(R.id.imageButton2)
 
+        //For debug
+        imageTomato = findViewById(R.id.imageView3)
+
         receiver = TimeReceiver()
 
         onBackPressedDispatcher.addCallback(callback)
 
         if (intent.hasExtra("TIMES")) {
             leftTime = intent.getIntExtra("TIMES", 0)
+        }
+        if(intent.hasExtra("TIMES_DEFAULT")) {
+            Log.d("Pomo3", "received")
+            timesDefault = intent.getIntExtra("TIMES_DEFAULT", 0)
         }
 
         textTimer.text = "00:00:00"
@@ -54,6 +66,7 @@ class PomoPage3Activity : AppCompatActivity() {
         if(leftTime <= 0) {
             Log.d("Pomo3", "End pomo timer")
             val intent = Intent(this, PomoPageClearActivity::class.java)
+            intent.putExtra("TIMES_DEFAULT", timesDefault)
             startActivity(intent)
         }
         if(leftTime >= 1) {
@@ -111,6 +124,18 @@ class PomoPage3Activity : AppCompatActivity() {
             }
         }
 
+        //For debug
+        imageTomato.setOnClickListener {
+            val intentStopService = Intent(this, CountdownTimerService::class.java)
+            stopService(intentStopService)
+            val intentSkipRest = Intent(this, PomoPage2Activity::class.java)
+            intentSkipRest.putExtra("TIMES", leftTime)
+            intentSkipRest.putExtra("TIMES_DEFAULT", timesDefault)
+            Log.d("Pomo3", timesDefault.toString())
+            startActivity(intentSkipRest)
+            Log.d("Pomo3", "Stopped & Skipped")
+        }
+
         //背景設定
         mPopupWindow.setBackgroundDrawable(ResourcesCompat.getDrawable(resources, R.drawable.popup_background, null))
         // タップ時に他のViewでキャッチされないための設定
@@ -144,11 +169,11 @@ class PomoPage3Activity : AppCompatActivity() {
                     if(intent.getStringExtra("VALUE") == "End!") {
                         val intentTemp = Intent(this@PomoPage3Activity, PomoPage2Activity::class.java)
                         intentTemp.putExtra("TIMES", leftTime)
+                        intentTemp.putExtra("TIMES_DEFAULT", timesDefault)
                         startActivity(intentTemp)
                     }
                 }
             }
         }
     }
-
 }

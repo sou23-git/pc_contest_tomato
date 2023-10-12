@@ -14,7 +14,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Pc_contest_tomato"
-        tools:targetApi="31">
+        android:enableOnBackInvokedCallback="true"
+        tools:targetApi="31"
+        tools:ignore="UnusedAttribute">
 
         <activity
             android:name=".MainActivity"
@@ -36,11 +38,11 @@
         <activity android:name=".SnsPage2Activity" />
         <activity android:name=".SnsPageClearActivity" />
         <activity android:name=".HelpPageActivity" />
-        <activity android:name=".GetTime" />
 
         <activity android:name=".SensorToAnswer" />
 
         <service android:name=".CountdownTimerService" />
+        <service android:name=".GetSensorService" />
     </application>
 
 </manifest>

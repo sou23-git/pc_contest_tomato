@@ -76,7 +76,7 @@ class CountdownTimerService : Service() {
         timer!!.cancel()
         super.onDestroy()
         val timerInfoIntent = Intent(TIME_INFO)
-        timerInfoIntent.putExtra("VALUE", "End!")
+        timerInfoIntent.putExtra("VALUE", "TimerEnd")
         LocalBroadcastManager.getInstance(this@CountdownTimerService).sendBroadcast(timerInfoIntent)
 
         Log.d("sub", "onDestroy")
@@ -108,10 +108,17 @@ class CountdownTimerService : Service() {
                 .sendBroadcast(timerInfoIntent)
             createNotification()
             Log.d("sub", "onTick")
+            if(hms.substring(6, 8) == "10") {
+                val intentSensor = Intent(this@CountdownTimerService, GetSensorService::class.java)
+                startService(intentSensor)
+                Log.d("sub", "sensorService started!")
+            }
         }
 
         override fun onFinish() {
             Log.d("sub", "onFinish")
+            val intent = Intent(this@CountdownTimerService, GetSensorService::class.java)
+            stopService(intent)
             stopSelf()
         }
 

@@ -92,6 +92,7 @@ class PomoPage1Activity : AppCompatActivity() {
             //次ページへ
             val intent = Intent(this, PomoPage2Activity::class.java)
             intent.putExtra("TIMES", times)
+            intent.putExtra("TIMES_DEFAULT", times)
             startActivity(intent)
         }
     }

@@ -5,6 +5,7 @@ import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
+import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
@@ -13,6 +14,7 @@ import android.view.Gravity
 import android.view.View
 import android.view.WindowManager
 import android.widget.ImageButton
+import android.widget.ImageView
 import android.widget.PopupWindow
 import android.widget.TextView
 import androidx.activity.OnBackPressedCallback
@@ -28,8 +30,12 @@ class PomoPage2Activity : AppCompatActivity() {
     private lateinit var textTimer: TextView
     private lateinit var buttonHome: ImageButton
 
+    //For debug
+    private lateinit var imageTomato: ImageView
+
     private var receiver: TimeReceiver? = null
     private var times = 0
+    private var timesDefault = 0
 
 
     @SuppressLint("SetTextI18n")
@@ -41,17 +47,23 @@ class PomoPage2Activity : AppCompatActivity() {
         buttonHome = findViewById(R.id.imageButton2)
         textTimer.text = "00:00:00"
 
+        //For debug
+        imageTomato = findViewById(R.id.imageView3)
+
         receiver = TimeReceiver()
 
         if(intent.hasExtra("TIMES")) {
             times = intent.getIntExtra("TIMES", 0)
             times--
         }
+        if(intent.hasExtra("TIMES_DEFAULT")) {
+            Log.d("Pomo2", "received")
+            timesDefault = intent.getIntExtra("TIMES_DEFAULT", 0)
+        }
 
         //タイマー実行
         val intent = Intent(this, CountdownTimerService::class.java)
         intent.putExtra("TIME", (25 * 60)) //25min
-        intent.putExtra("TYPE", "POMO_TIMER")
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             startForegroundService(intent)
         }else {
@@ -108,6 +120,18 @@ class PomoPage2Activity : AppCompatActivity() {
             }
         }
 
+        //For debug
+        imageTomato.setOnClickListener {
+            val intentStopService = Intent(this, CountdownTimerService::class.java)
+            stopService(intentStopService)
+            val intentSkip = Intent(this, PomoPage3Activity::class.java)
+            intentSkip.putExtra("TIMES", times)
+            intentSkip.putExtra("TIMES_DEFAULT", timesDefault)
+            Log.d("Pomo2", timesDefault.toString())
+            startActivity(intentSkip)
+            Log.d("Pomo2", "Stopped & Skipped")
+        }
+
         //背景設定
         mPopupWindow.setBackgroundDrawable(ResourcesCompat.getDrawable(resources, R.drawable.popup_background, null))
         // タップ時に他のViewでキャッチされないための設定
@@ -137,10 +161,17 @@ class PomoPage2Activity : AppCompatActivity() {
         override fun onReceive(context: Context?, intent: Intent?) {
             if(intent != null && intent.action == CountdownTimerService.TIME_INFO) {
                 if(intent.hasExtra("VALUE")) {
-                    textTimer.text = intent.getStringExtra("VALUE").toString()
-                    if(intent.getStringExtra("VALUE") == "End!") {
+                    val time = intent.getStringExtra("VALUE").toString()
+                    textTimer.text = time
+                    //10秒以下は赤字
+                    if(time.substring(0, 2) == "00" && time.substring(3, 5) == "00" && time.substring(6, 8) == "10") {
+                        textTimer.setTextColor(Color.RED)
+                        Log.d("pomo2", "color changed")
+                    }
+                    if(intent.getStringExtra("VALUE") == "TimerEnd") {
                         val intentTemp = Intent(this@PomoPage2Activity, PomoPage3Activity::class.java)
                         intentTemp.putExtra("TIMES", times)
+                        intentTemp.putExtra("TIMES_DEFAULT", timesDefault)
                         startActivity(intentTemp)
                     }
                 }
