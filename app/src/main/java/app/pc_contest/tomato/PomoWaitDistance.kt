@@ -7,7 +7,8 @@ import android.util.Log
 import android.widget.Button
 import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
-import app.pc_contest.tomato.Services.StackService
+import app.pc_contest.tomato.services.CountdownTimerService
+import app.pc_contest.tomato.services.StackService
 
 class PomoWaitDistance : AppCompatActivity() {
 
@@ -34,8 +35,11 @@ class PomoWaitDistance : AppCompatActivity() {
             startActivity(intentClear)
         }
         buttonWarn.setOnClickListener {
-            val intent = Intent(this@PomoWaitDistance, StackService::class.java)
-            startService(intent)
+            val intentDistance = Intent(this@PomoWaitDistance, StackService::class.java)
+            startService(intentDistance)
+            val intentTimer = Intent(this@PomoWaitDistance, CountdownTimerService::class.java)
+            intentTimer.putExtra("TIMES_DEFAULT", TIMES_DEFAULT)
+            startActivity(intentTimer)
         }
 
         //戻るボタン無効化設定

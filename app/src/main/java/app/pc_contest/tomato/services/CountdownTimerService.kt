@@ -1,4 +1,4 @@
-package app.pc_contest.tomato.Services
+package app.pc_contest.tomato.services
 
 import android.app.NotificationChannel
 import android.app.NotificationManager

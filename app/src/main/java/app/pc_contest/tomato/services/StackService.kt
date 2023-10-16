@@ -1,4 +1,4 @@
-package app.pc_contest.tomato.Services
+package app.pc_contest.tomato.services
 
 import android.app.Notification
 import android.app.NotificationChannel
@@ -15,7 +15,6 @@ import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
-import android.view.Window
 import android.view.WindowManager
 import androidx.annotation.RequiresApi
 import app.pc_contest.tomato.R
@@ -31,12 +30,10 @@ class StackService : Service() {
         windowManager = applicationContext
             .getSystemService(WINDOW_SERVICE) as WindowManager
 
-        //generate inflater
-        val layoutInflater = LayoutInflater.from(this)
-
+        val inflater = LayoutInflater.from(this)
         //generate view for inflate from layout file
         val nullParent: ViewGroup? = null
-        newView = layoutInflater.inflate(R.layout.wa_1, nullParent)
+        newView = inflater.inflate(R.layout.wa_1, nullParent)
     }
 
     @RequiresApi(Build.VERSION_CODES.O)

@@ -21,7 +21,7 @@ import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.res.ResourcesCompat
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
-import app.pc_contest.tomato.Services.CountdownTimerService
+import app.pc_contest.tomato.services.CountdownTimerService
 
 
 class PomoPage2Activity : AppCompatActivity() {
