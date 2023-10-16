@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -19,30 +19,9 @@
         app:srcCompat="@drawable/wa_frame"
         tools:ignore="ContentDescription" />
 
-    <FrameLayout
-        android:id="@+id/frameLayout"
-        android:layout_width="411dp"
-        android:layout_height="58dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <ImageButton
-            android:id="@+id/imageButton2"
-            android:layout_width="98dp"
-            android:layout_height="match_parent"
-            android:layout_gravity="center"
-            android:background="#00FFFFFF"
-            android:contentDescription="情報アイコン"
-            android:scaleType="fitXY"
-            app:srcCompat="@drawable/app_logo"
-            tools:ignore="HardcodedText" />
-
-    </FrameLayout>
-
     <TextView
         android:id="@+id/textView12"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="150dp"
         android:text="このアプリはロックされています。"
@@ -50,31 +29,34 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/imageView2"
-        tools:ignore="HardcodedText" />
+        tools:ignore="HardcodedText"
+        android:gravity="center"/>
 
     <TextView
         android:id="@+id/textView13"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="300dp"
         android:text="ロック解除まで"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView12"
-        tools:ignore="HardcodedText" />
+        tools:ignore="HardcodedText"
+        android:gravity="center"/>
 
     <TextView
         android:id="@+id/textView14"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="500dp"
         android:text="00"
         android:textSize="60sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView13"
-        tools:ignore="HardcodedText" />
+        tools:ignore="HardcodedText"
+        android:gravity="center"/>
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</RelativeLayout>

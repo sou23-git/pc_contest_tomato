@@ -1,4 +1,4 @@
-package app.pc_contest.tomato
+package app.pc_contest.tomato.Services
 
 import android.app.NotificationChannel
 import android.app.NotificationManager
@@ -12,6 +12,8 @@ import android.os.IBinder
 import android.util.Log
 import androidx.core.app.NotificationCompat
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
+import app.pc_contest.tomato.MainActivity
+import app.pc_contest.tomato.R
 import java.util.concurrent.TimeUnit
 
 

@@ -46,4 +46,6 @@
     <string name="channel_name">TimerServiceChannel</string>
     <string name="channel_description">This channel is used by "Tomato".</string>
 
+    <string name="message_overlay">設定で「他のアプリに重ねて表示」機能を有効にしてください。</string>
+
 </resources>

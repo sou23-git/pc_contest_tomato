@@ -21,6 +21,7 @@ import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.res.ResourcesCompat
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
+import app.pc_contest.tomato.Services.CountdownTimerService
 
 class SnsPage2Activity : AppCompatActivity() {
 
@@ -99,7 +100,7 @@ class SnsPage2Activity : AppCompatActivity() {
         imageTimer.setOnClickListener {
             val intentStopService = Intent(this, CountdownTimerService::class.java)
             stopService(intentStopService)
-            val intentSkip = Intent(this@SnsPage2Activity, SnsPageClearActivity::class.java)
+            val intentSkip = Intent(this@SnsPage2Activity, SnsWaitDistance::class.java)
             intentSkip.putExtra("TIME_ALL",
                 (hour.toString().padStart(2, '0').plus(":")
                     .plus(minute.toString().padStart(2, '0')).plus(":")
@@ -164,7 +165,7 @@ class SnsPage2Activity : AppCompatActivity() {
                         Log.d("pomo2", "color changed")
                     }
                     if(time == "TimerEnd") {
-                        val intentTemp = Intent(this@SnsPage2Activity, SnsPageClearActivity::class.java)
+                        val intentTemp = Intent(this@SnsPage2Activity, SnsWaitDistance::class.java)
                         intentTemp.putExtra("TIME_ALL",
                             (hour.toString().padStart(2, '0').plus(":")
                             .plus(minute.toString().padStart(2, '0')).plus(":")

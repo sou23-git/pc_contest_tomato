@@ -4,6 +4,7 @@
 
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
 
     <application
         android:allowBackup="true"
@@ -33,16 +34,19 @@
         <activity android:name=".PomoPage1Activity" />
         <activity android:name=".PomoPage2Activity" />
         <activity android:name=".PomoPage3Activity" />
+        <activity android:name=".PomoWaitDistance" />
         <activity android:name=".PomoPageClearActivity" />
         <activity android:name=".SnsPage1Activity" />
         <activity android:name=".SnsPage2Activity" />
+        <activity android:name=".SnsWaitDistance" />
         <activity android:name=".SnsPageClearActivity" />
         <activity android:name=".HelpPageActivity" />
 
         <activity android:name=".SensorToAnswer" />
 
-        <service android:name=".CountdownTimerService" />
-        <service android:name=".GetSensorService" />
+        <service android:name=".Services.CountdownTimerService" />
+        <service android:name=".Services.GetSensorService" />
+        <service android:name=".Services.StackService" />
     </application>
 
 </manifest>

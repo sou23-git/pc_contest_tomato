@@ -6,10 +6,14 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.os.PowerManager
+import android.provider.Settings
 import android.provider.Settings.ACTION_REQUEST_IGNORE_BATTERY_OPTIMIZATIONS
 import android.widget.Button
 import android.widget.ImageButton
+import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 
 class MainActivity : AppCompatActivity() {
@@ -19,6 +23,16 @@ class MainActivity : AppCompatActivity() {
     private lateinit var buttonSns: ImageButton
     private lateinit var buttonHelp: ImageButton
     private lateinit var buttonTemp: Button
+
+    private var launcher: ActivityResultLauncher<Intent> =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
+            if (Settings.canDrawOverlays(this)) {
+            } else {
+                Toast.makeText(
+                    applicationContext, R.string.message_overlay,
+                    Toast.LENGTH_LONG).show()
+            }
+        }
 
 
     @SuppressLint("ServiceCast", "BatteryLife")
@@ -64,6 +78,17 @@ class MainActivity : AppCompatActivity() {
                 val intentSensorToAnswer = Intent(this,GetSensorValue::class.java)
                 startActivity(intentSensorToAnswer)
             }
+        }
+
+        //overlay permission check
+        if (Settings.canDrawOverlays(this)){}
+        else{
+            val intent = Intent(
+                Settings.ACTION_MANAGE_OVERLAY_PERMISSION,
+                Uri.parse("package:$packageName")
+            )
+            startActivity(intent)
+            launcher.launch(intent)
         }
     }
 

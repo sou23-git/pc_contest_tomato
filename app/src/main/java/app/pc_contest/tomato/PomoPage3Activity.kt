@@ -20,6 +20,7 @@ import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.res.ResourcesCompat
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
+import app.pc_contest.tomato.Services.CountdownTimerService
 
 class PomoPage3Activity : AppCompatActivity() {
 
@@ -65,7 +66,7 @@ class PomoPage3Activity : AppCompatActivity() {
 
         if(leftTime <= 0) {
             Log.d("Pomo3", "End pomo timer")
-            val intent = Intent(this, PomoPageClearActivity::class.java)
+            val intent = Intent(this, PomoWaitDistance::class.java)
             intent.putExtra("TIMES_DEFAULT", timesDefault)
             startActivity(intent)
         }

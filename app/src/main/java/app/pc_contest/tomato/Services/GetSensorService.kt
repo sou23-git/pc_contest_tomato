@@ -1,4 +1,4 @@
-package app.pc_contest.tomato
+package app.pc_contest.tomato.Services
 
 import android.content.Intent
 import android.hardware.Sensor
