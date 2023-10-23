@@ -21,7 +21,6 @@ import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.res.ResourcesCompat
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
-import app.pc_contest.tomato.services.CountdownTimerService
 
 class SnsPage2Activity : AppCompatActivity() {
 
@@ -65,6 +64,7 @@ class SnsPage2Activity : AppCompatActivity() {
 
         //timer
         val intent = Intent(this, CountdownTimerService::class.java)
+        intent.putExtra("TYPE", "SNS_TIMER")
         intent.putExtra("TIME", (hour * 60 * 60) + (minute * 60))
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             startForegroundService(intent)

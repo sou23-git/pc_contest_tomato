@@ -96,4 +96,17 @@ class MainActivity : AppCompatActivity() {
     private val callback = object : OnBackPressedCallback(true) {
         override fun handleOnBackPressed() {}
     }
+
+    //通知許可の確認
+    /*private val requestPermissionLauncher =
+        registerForActivityResult(ActivityResultContracts.RequestPermission()) {
+            isGranted: Boolean ->
+            if(isGranted) {
+                //通知　許可する選択時
+                viewModel.startTimer()
+            } else {
+                //通知　許可しない選択時
+
+            }
+        }*/
 }

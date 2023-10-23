@@ -20,7 +20,6 @@ import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.res.ResourcesCompat
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
-import app.pc_contest.tomato.services.CountdownTimerService
 
 class PomoPage3Activity : AppCompatActivity() {
 
@@ -66,14 +65,15 @@ class PomoPage3Activity : AppCompatActivity() {
 
         if(leftTime <= 0) {
             Log.d("Pomo3", "End pomo timer")
-            val intent = Intent(this, PomoWaitDistance::class.java)
+            val intent = Intent(this, PomoPageClearActivity::class.java)
             intent.putExtra("TIMES_DEFAULT", timesDefault)
             startActivity(intent)
         }
         if(leftTime >= 1) {
             Log.d("Pomo3", "Restart pomo timer")
             val intent = Intent(this, CountdownTimerService::class.java)
-            intent.putExtra("TIME", 5 * 60) //5 min
+            intent.putExtra("TYPE", "POMO_REST")
+            intent.putExtra("TIME", 20) //5 min
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                 startForegroundService(intent)
             }else {
@@ -129,7 +129,7 @@ class PomoPage3Activity : AppCompatActivity() {
         imageTomato.setOnClickListener {
             val intentStopService = Intent(this, CountdownTimerService::class.java)
             stopService(intentStopService)
-            val intentSkipRest = Intent(this, PomoPage2Activity::class.java)
+            val intentSkipRest = Intent(this, PomoWaitDistance::class.java)
             intentSkipRest.putExtra("TIMES", leftTime)
             intentSkipRest.putExtra("TIMES_DEFAULT", timesDefault)
             Log.d("Pomo3", timesDefault.toString())
@@ -167,8 +167,8 @@ class PomoPage3Activity : AppCompatActivity() {
             if(intent != null && intent.action == CountdownTimerService.TIME_INFO) {
                 if(intent.hasExtra("VALUE")) {
                     textTimer.text = intent.getStringExtra("VALUE").toString()
-                    if(intent.getStringExtra("VALUE") == "End!") {
-                        val intentTemp = Intent(this@PomoPage3Activity, PomoPage2Activity::class.java)
+                    if(intent.getStringExtra("VALUE") == "TimerEnd") {
+                        val intentTemp = Intent(this@PomoPage3Activity, PomoWaitDistance::class.java)
                         intentTemp.putExtra("TIMES", leftTime)
                         intentTemp.putExtra("TIMES_DEFAULT", timesDefault)
                         startActivity(intentTemp)

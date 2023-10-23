@@ -21,7 +21,6 @@ import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.res.ResourcesCompat
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
-import app.pc_contest.tomato.services.CountdownTimerService
 
 
 class PomoPage2Activity : AppCompatActivity() {
@@ -65,6 +64,7 @@ class PomoPage2Activity : AppCompatActivity() {
         //タイマー実行
         val intent = Intent(this, CountdownTimerService::class.java)
         intent.putExtra("TIME", (25 * 60)) //25min
+        intent.putExtra("TYPE", "POMO_TIMER")
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             startForegroundService(intent)
         }else {

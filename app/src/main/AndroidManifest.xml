@@ -26,7 +26,6 @@
             android:excludeFromRecents="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -36,6 +35,8 @@
         <activity android:name=".PomoPage3Activity" />
         <activity android:name=".PomoWaitDistance" />
         <activity android:name=".PomoPageClearActivity" />
+        <activity android:name=".LockActivity" />
+        <activity android:name=".LockClearActivity" />
         <activity android:name=".SnsPage1Activity" />
         <activity android:name=".SnsPage2Activity" />
         <activity android:name=".SnsWaitDistance" />
@@ -44,9 +45,10 @@
 
         <activity android:name=".SensorToAnswer" />
 
-        <service android:name=".services.CountdownTimerService" />
-        <service android:name=".services.GetSensorService" />
-        <service android:name=".services.StackService" />
+        <service android:name=".CountdownTimerService" />
+        <service android:name=".GetSensorService" />
+        <service android:name=".StackService" />
+        <service android:name=".StackHairService" />
     </application>
 
 </manifest>

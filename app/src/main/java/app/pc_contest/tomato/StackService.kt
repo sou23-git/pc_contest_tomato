@@ -1,4 +1,4 @@
-package app.pc_contest.tomato.services
+package app.pc_contest.tomato
 
 import android.app.Notification
 import android.app.NotificationChannel
@@ -16,6 +16,7 @@ import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
+import android.widget.TextView
 import androidx.annotation.RequiresApi
 import app.pc_contest.tomato.R
 
@@ -41,7 +42,7 @@ class StackService : Service() {
 
         val context = applicationContext
         val channelId = "default"
-        val title: String = "StackView"
+        val title = "StackView"
 
         val notificationManager =
             context.getSystemService(Context.NOTIFICATION_SERVICE)
@@ -84,8 +85,8 @@ class StackService : Service() {
             Log.d("StackService", "onTouch")
             if(event.action == MotionEvent.ACTION_DOWN) {
                 newView.performClick()
-                /*//stop Service
-                stopSelf()*/
+                //stop Service
+                stopSelf()
             }
             false
         }
