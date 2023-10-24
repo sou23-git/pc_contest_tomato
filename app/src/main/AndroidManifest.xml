@@ -37,10 +37,6 @@
         <activity android:name=".PomoPageClearActivity" />
         <activity android:name=".LockActivity" />
         <activity android:name=".LockClearActivity" />
-        <activity android:name=".SnsPage1Activity" />
-        <activity android:name=".SnsPage2Activity" />
-        <activity android:name=".SnsWaitDistance" />
-        <activity android:name=".SnsPageClearActivity" />
         <activity android:name=".HelpPageActivity" />
 
         <activity android:name=".SensorToAnswer" />

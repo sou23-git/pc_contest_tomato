@@ -73,7 +73,7 @@ class PomoPage3Activity : AppCompatActivity() {
             Log.d("Pomo3", "Restart pomo timer")
             val intent = Intent(this, CountdownTimerService::class.java)
             intent.putExtra("TYPE", "POMO_REST")
-            intent.putExtra("TIME", 20) //5 min
+            intent.putExtra("TIME", 15) //5 min
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                 startForegroundService(intent)
             }else {

@@ -20,7 +20,6 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var buttonHome: ImageButton
     private lateinit var buttonPomo: ImageButton
-    private lateinit var buttonSns: ImageButton
     private lateinit var buttonHelp: ImageButton
     private lateinit var buttonTemp: Button
 
@@ -44,7 +43,6 @@ class MainActivity : AppCompatActivity() {
         //contentViewのid紐づけ
         buttonHome = findViewById(R.id.imageButton2)
         buttonPomo = findViewById(R.id.imageButton7)
-        buttonSns = findViewById(R.id.imageButton8)
         buttonHelp = findViewById(R.id.imageButton9)
         buttonTemp = findViewById(R.id.tempButton)
 
@@ -65,10 +63,6 @@ class MainActivity : AppCompatActivity() {
             buttonPomo.setOnClickListener {
                 val intentPomo1 = Intent(this, PomoPage1Activity::class.java)
                 startActivity(intentPomo1)
-            }
-            buttonSns.setOnClickListener {
-                val intentSns1 = Intent(this, SnsPage1Activity::class.java)
-                startActivity(intentSns1)
             }
             buttonHelp.setOnClickListener {
                 val intentHelp = Intent(this, HelpPageActivity::class.java)

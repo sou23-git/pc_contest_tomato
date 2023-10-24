@@ -81,6 +81,7 @@ class CountdownTimerService : Service() {
             .setContentIntent(pendingIntent)
             .setDeleteIntent(pendingIntent)
             .build()
+        notification.flags = Notification.FLAG_ONGOING_EVENT
         startForeground(1, notification)
         Log.d("sub", "updateNotification")
     }
@@ -165,6 +166,3 @@ class CountdownTimerService : Service() {
         const val TIME_INFO = "time_info"
     }
 }
-
-
-//通知タップ時の画面遷移設定する！
