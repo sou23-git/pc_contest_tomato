@@ -8,7 +8,6 @@ import android.os.Bundle
 import android.os.PowerManager
 import android.provider.Settings
 import android.provider.Settings.ACTION_REQUEST_IGNORE_BATTERY_OPTIMIZATIONS
-import android.widget.Button
 import android.widget.ImageButton
 import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
@@ -16,12 +15,12 @@ import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 
+@Suppress("ControlFlowWithEmptyBody")
 class MainActivity : AppCompatActivity() {
 
     private lateinit var buttonHome: ImageButton
     private lateinit var buttonPomo: ImageButton
     private lateinit var buttonHelp: ImageButton
-    private lateinit var buttonTemp: Button
 
     private var launcher: ActivityResultLauncher<Intent> =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
@@ -44,7 +43,6 @@ class MainActivity : AppCompatActivity() {
         buttonHome = findViewById(R.id.imageButton2)
         buttonPomo = findViewById(R.id.imageButton7)
         buttonHelp = findViewById(R.id.imageButton9)
-        buttonTemp = findViewById(R.id.tempButton)
 
         //戻るボタン無効化設定
         onBackPressedDispatcher.addCallback(callback)
@@ -67,10 +65,6 @@ class MainActivity : AppCompatActivity() {
             buttonHelp.setOnClickListener {
                 val intentHelp = Intent(this, HelpPageActivity::class.java)
                 startActivity(intentHelp)
-            }
-            buttonTemp.setOnClickListener{
-                val intentSensorToAnswer = Intent(this,GetSensorValue::class.java)
-                startActivity(intentSensorToAnswer)
             }
         }
 

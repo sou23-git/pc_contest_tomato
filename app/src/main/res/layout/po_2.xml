@@ -27,7 +27,8 @@
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/po_frame" />
+        app:srcCompat="@drawable/po_frame"
+        android:contentDescription="@string/pomo_frame" />
 
     <FrameLayout
         android:id="@+id/frameLayout"
@@ -43,7 +44,7 @@
             android:layout_height="match_parent"
             android:layout_gravity="center"
             android:background="#00FFFFFF"
-            android:contentDescription="情報アイコン"
+            android:contentDescription="@string/icon_tomato"
             android:scaleType="fitXY"
             app:srcCompat="@drawable/app_logo" />
 
@@ -53,9 +54,9 @@
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
         android:layout_marginTop="80dp"
-        android:text="ポモドーロテクニックモード"
+        android:text="@string/pomo_title"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -68,7 +69,8 @@
         android:scaleType="fitXY"
         app:layout_constraintStart_toStartOf="@+id/imageView2"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/tomato" />
+        app:srcCompat="@drawable/tomato"
+        android:contentDescription="@string/image_tomato" />
 
     <TextView
         android:id="@+id/textView3"
@@ -76,7 +78,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="25dp"
         android:layout_marginTop="50dp"
-        android:text="作業中…"
+        android:text="@string/text_pomo_working"
         android:textSize="48sp"
         app:layout_constraintStart_toEndOf="@+id/imageView3"
         app:layout_constraintTop_toTopOf="@+id/imageView3" />
@@ -91,7 +93,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.51"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/imageView2" />
+        app:layout_constraintTop_toTopOf="@+id/imageView2"
+        tools:ignore="HardcodedText" />
 
 
 

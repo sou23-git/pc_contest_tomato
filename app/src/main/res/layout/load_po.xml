@@ -5,13 +5,17 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#FFF6E4">
+
     <ImageView
         android:id="@+id/imageView15"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/po_frame"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="0dp" />
+        tools:layout_marginEnd="0dp"
+        tools:layout_marginStart="0dp"
+        android:contentDescription="@string/pomo_frame" />
 
     <FrameLayout
         android:id="@+id/frameLayout"
@@ -28,7 +32,7 @@
             android:layout_height="match_parent"
             android:layout_gravity="center"
             android:background="#00FFFFFF"
-            android:contentDescription="情報アイコン"
+            android:contentDescription="@string/icon_tomato"
             android:scaleType="fitXY"
             app:srcCompat="@drawable/app_logo" />
 
@@ -39,7 +43,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="166dp"
-        android:text="計測中…"
+        android:text="@string/text_pomo_loading"
         android:textSize="60sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

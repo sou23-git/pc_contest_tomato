@@ -2,6 +2,7 @@ package app.pc_contest.tomato
 
 import android.annotation.SuppressLint
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import android.util.TypedValue
 import android.view.Gravity
@@ -10,6 +11,7 @@ import android.view.WindowManager
 import android.widget.ImageButton
 import android.widget.NumberPicker
 import android.widget.PopupWindow
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.res.ResourcesCompat
 
@@ -24,6 +26,7 @@ class PomoPage1Activity : AppCompatActivity() {
 
     private var times = 0
 
+    @RequiresApi(Build.VERSION_CODES.Q)
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,6 +37,7 @@ class PomoPage1Activity : AppCompatActivity() {
 
         numPicker = findViewById(R.id.hourPicker)
 
+        numPicker.textSize = 40F
         numPicker.maxValue = 99
         numPicker.minValue = 1
 

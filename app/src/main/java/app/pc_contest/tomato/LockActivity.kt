@@ -26,11 +26,6 @@ class LockActivity : AppCompatActivity() {
 
         textTimer = findViewById(R.id.textView13)
 
-        //start cd timer
-        val intent = Intent(this@LockActivity, CountdownTimerService::class.java)
-        intent.putExtra("TIME",  20)
-        startService(intent)
-
         onBackPressedDispatcher.addCallback(callback)
     }
 

@@ -16,7 +16,8 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/top_frame" />
+        app:srcCompat="@drawable/top_frame"
+        android:contentDescription="@string/button_pomo" />
 
     <FrameLayout
         android:id="@+id/frameLayout"
@@ -43,50 +44,29 @@
         android:id="@+id/imageButton7"
         android:layout_width="300dp"
         android:layout_height="150dp"
-        android:layout_marginTop="150dp"
         android:background="#00FFFFFF"
+        android:importantForAccessibility="no"
         android:scaleType="fitXY"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/imageView5"
         app:srcCompat="@drawable/button_pomo"
-        tools:ignore="SpeakableTextPresentCheck"
-        android:importantForAccessibility="no" />
-
-    <ImageButton
-        android:id="@+id/imageButton8"
-        android:layout_width="300dp"
-        android:layout_height="150dp"
-        android:layout_marginTop="50dp"
-        android:background="#00FFFFFF"
-        android:scaleType="fitXY"
-        app:layout_constraintEnd_toEndOf="@+id/imageView5"
-        app:layout_constraintStart_toStartOf="@+id/imageView5"
-        app:layout_constraintTop_toBottomOf="@+id/imageButton7"
-        app:srcCompat="@drawable/button_sns"
-        android:importantForAccessibility="no" />
+        tools:ignore="SpeakableTextPresentCheck" />
 
     <ImageButton
         android:id="@+id/imageButton9"
         android:layout_width="80dp"
         android:layout_height="80dp"
-        android:layout_marginTop="100dp"
         android:background="#00FFFFFF"
         android:scaleType="fitXY"
+        app:layout_constraintBottom_toBottomOf="@+id/imageView5"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageButton8"
-        app:srcCompat="@drawable/help" />
-
-    <Button
-        android:id="@+id/tempButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="80dp"
-        android:text="Button"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/imageButton7"
+        app:srcCompat="@drawable/help"
+        android:contentDescription="@string/button_help" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

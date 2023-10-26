@@ -23,9 +23,10 @@ class PomoWaitDistance : AppCompatActivity() {
 
     private lateinit var textView: TextView
 
-    private var TIMES_DEFAULT = 0
-    private var TIMES = 0
+    private var timesDefault = 0
+    private var times = 0
 
+    @Suppress("DEPRECATION")
     @RequiresApi(Build.VERSION_CODES.O)
     @SuppressLint("MissingInflatedId", "SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -34,32 +35,32 @@ class PomoWaitDistance : AppCompatActivity() {
 
         textView = findViewById(R.id.textView28)
         if(intent.hasExtra("TIMES_DEFAULT")) {
-            TIMES_DEFAULT = intent.getIntExtra("TIMES_DEFAULT", 0)
+            timesDefault= intent.getIntExtra("TIMES_DEFAULT", 0)
         }
         if(intent.hasExtra("TIMES")) {
-            TIMES = intent.getIntExtra("TIMES", 0)
+            times = intent.getIntExtra("TIMES", 0)
         }
 
         val distance = calcDistance(this@PomoWaitDistance)
         textView.text = distance.toString()
         val handler = Handler()
 
-        if(125 <= distance && distance < 225) {
+        if(125 <= distance && distance < 325) {
             if(175 <= distance) {
                 textView.text = "ナイスピッチ！いい調子！"
             } else {
                 textView.text = "目標まであと少し！"
             }
             handler.postDelayed({
-                if(TIMES == 0) {
+                if(times == 0) {
                     val intentClear = Intent(this@PomoWaitDistance, PomoPageClearActivity::class.java)
-                    intentClear.putExtra("TIMES_DEFAULT", TIMES_DEFAULT)
+                    intentClear.putExtra("TIMES_DEFAULT", timesDefault)
                     Log.d("PomoWait", "Clear!")
                     startActivity(intentClear)
                 } else {
                     val intentRetry = Intent(this@PomoWaitDistance, PomoPage2Activity::class.java)
-                    intentRetry.putExtra("TIMES", TIMES)
-                    intentRetry.putExtra("TIMES_DEFAULT", TIMES_DEFAULT)
+                    intentRetry.putExtra("TIMES", times)
+                    intentRetry.putExtra("TIMES_DEFAULT", timesDefault)
                     Log.d("PomoWait", "Retry")
                     startActivity(intentRetry) }
             }, 2000)
@@ -69,27 +70,36 @@ class PomoWaitDistance : AppCompatActivity() {
             handler.postDelayed( {
                 val intentHair = Intent(this@PomoWaitDistance, StackHairService::class.java)
                 startService(intentHair)
+                handler.postDelayed( {
+                    val intentHome = Intent(this@PomoWaitDistance, MainActivity::class.java)
+                    intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+                    startActivity(intentHome)
+                }, 1000)
             }, 1000)
 
         }
-        if(0 <= distance && distance < 75) {
-            textView.text = "ちゃんと投げて！！！"
+        if(distance < 75) {
+            if(distance <= 0) {
+                textView.text = "あんた無視したね！シバくわよ！"
+            } else {
+                textView.text = "ちゃんと投げて！！！"
+            }
             handler.postDelayed({
                 val intentActivity = Intent(this@PomoWaitDistance, LockActivity::class.java)
-                intent.putExtra("TIMES_DEFAULT", TIMES_DEFAULT)
+                intent.putExtra("TIMES_DEFAULT", timesDefault)
                 startActivity(intentActivity)
                 val intentDistance = Intent(this@PomoWaitDistance, StackService::class.java)
                 startService(intentDistance)
-            }, 1000)
+            }, 2000)
         }
-        if(225 <= distance) {
+        if(325 <= distance) {
             textView.text = "投げすぎを検知しました。スマホに破損がないか確認してください。"
             handler.postDelayed({
                 val intentHome = Intent(this@PomoWaitDistance, MainActivity::class.java)
                 startActivity(intentHome)
             }, 5000)
-
         }
+
 
         //戻るボタン無効化設定
         onBackPressedDispatcher.addCallback(callback)
@@ -107,8 +117,8 @@ class PomoWaitDistance : AppCompatActivity() {
         val dataList: MutableList<List<String>> = csvReader().readAll(csvFile).toMutableList()
         dataList.removeAt(0)
 
-        var timeList: MutableList<Float> = mutableListOf()
-        var accList: MutableList<Float> = mutableListOf()
+        val timeList: MutableList<Float> = mutableListOf()
+        val accList: MutableList<Float> = mutableListOf()
         Log.d("calcDis", "created list")
         for(i in dataList.indices) {
             timeList += dataList[i][0].toFloat()
@@ -119,7 +129,7 @@ class PomoWaitDistance : AppCompatActivity() {
         val maxIndex = accList.indexOf(max)
         Log.d("calcDis", "got max value")
         println("max = $max")
-        for (i in 0..10) {
+        for (i in 0..20) {
             val deleteIndex = maxIndex - 5
             accList.removeAt(deleteIndex)
         }

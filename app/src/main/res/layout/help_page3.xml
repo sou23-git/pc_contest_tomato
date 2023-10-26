@@ -79,10 +79,11 @@
         android:layout_width="80dp"
         android:layout_height="80dp"
         android:layout_marginStart="48dp"
-        android:src="@drawable/help_icon_po"
+        android:src="@drawable/pomo_tomato"
         app:layout_constraintBottom_toBottomOf="@+id/textView24"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/textView24" />
+        app:layout_constraintTop_toTopOf="@+id/textView24"
+        android:importantForAccessibility="no" />
 
     <TextView
         android:id="@+id/textView24"
@@ -90,7 +91,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="60dp"
         android:layout_marginEnd="10dp"
-        android:text="ポモドーロ\nテクニックモード"
+        android:text="@string/help_pomo3_title"
         android:textSize="22sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/imageView13"
@@ -103,7 +104,7 @@
         android:layout_marginTop="32dp"
         android:layout_marginBottom="22dp"
         android:lineSpacingExtra="8sp"
-        android:text="このモードでは \nポモドーロテクニックと呼ばれる\n 時間管理テクニックを使います。\n\n ポモドーロテクニックとは \n25分の作業時間と5分の休憩時間を繰り返すものです。 \n 本アプリでは最初に何セット行うかを指定します。 \nその後、25分の作業時間が始まります。\n作業中はすべてのアプリがロックされます。 \n作業時間終了後は5分間の休憩時間が入ります。\n 休憩時間ではすべてのアプリが使用できますが、\n 終了30秒前になると警告が表示され、 \n投げることで作業時間に入ります。　　\n 事前に入力しておいたセット回数を満たせばクリアです。 　"
+        android:text="@string/help_pomo3_desc"
         android:textAlignment="center"
         app:layout_constraintBottom_toTopOf="@+id/toolbar_help_pagenum"
         app:layout_constraintEnd_toEndOf="parent"

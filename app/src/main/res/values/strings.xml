@@ -47,5 +47,30 @@
     <string name="channel_description">This channel is used by "Tomato".</string>
 
     <string name="message_overlay">設定で「他のアプリに重ねて表示」機能を有効にしてください。</string>
+    <string name="help_pomo3_title">ポモドーロ\nテクニックモードの\nつかいかた</string>
+    <string name="help_pomo3_desc">まず、はじめに何セット行うかを入力します。 \nその後すぐに、25分間の作業フェーズに移ります。\n\n作業中はすべてのアプリがロックされます。 \n\n作業時間終了後は5分間の休憩時間に移ります。\n\n 休憩時間ではすべてのアプリが使用できますが、\n 終了10秒前になると警告が表示され、\nスマホを投げて距離をとることで\n作業フェーズ再度移行します。\n\n 事前に入力しておいた回数をくりかえすと\nクリアとなります。</string>
+    <string name="help_pomo1_title">本アプリには\nポモドーロテクニックを\n活用したタイマー機能が\n搭載されています。</string>
+    <string name="help_image_desc">image_pomo</string>
+    <string name="help_pomo1_modeName">ポモドーロテクニックモード</string>
+    <string name="help_pomo1_desc">ポモドーロテクニックモードは\nポモドーロテクニックという時間管理テクニックを\n 利用して、作業のアシストを行います。</string>
+    <string name="help_pomo2_title">ポモドーロテクニック\nについて</string>
+    <string name="help_pomo2_desc">ポモドーロテクニックとは、1980年代に\nイタリアで生まれた時間管理テクニックのひとつです。\n\n他のページでも触れている通り、25分の作業フェーズと\n5分の休憩フェーズからなる30分を1サイクルと考えます。\nもしどこかで中断された場合、もう一度初めから\nやり直す必要があります。\n\n僕たちは「スマホ」という当たり前から、少しだけでも\n距離をとる習慣が必要だと考えました。\n\nこれを実現するために、考え出されてから50年になる\nこのテクニックと「投げる」という物理現象を利用し、\nスマホ依存からの脱却を応援します！</string>
+    <string name="help_pomo4_title">アプリのロックと\n ペナルティについて</string>
+    <string name="help_imageWarning_desc">image_warning</string>
+    <string name="help_pomo4_desc">本アプリでは、タイマーを停止するために\n ”投げる” ことを必要とします。\n\n制限時間を無視してアプリの使用を続けた場合、\n アプリが5分間ロックされます。 \nしかし、スマホを時間内にしっかり投げることで \nアプリのロックを防ぐことができます。\n \n また、投げた距離によってはロック以外にペナルティが \n課せられることがあります。 \n\n画面上に邪魔なテキスト・画像が表示されたり、\nロックの時間が増えたりします。\n\n ※※※※スマホを投げる際は周囲の安全に配慮し※※※※\n ベッドやソファなどの柔らかい物に投げてください。\n</string>
+    <string name="button_help">button_help</string>
+    <string name="pomo_frame">pomo_frame</string>
+    <string name="icon_tomato">情報アイコン</string>
+    <string name="text_pomo_loading">計測中…</string>
+    <string name="pomo_title">ポモドーロテクニックモード</string>
+    <string name="button_pomo_start">button_pomo_start</string>
+    <string name="line_pomo">line_pomo</string>
+    <string name="text_pomo_numPicker">目標回数を入力してください</string>
+    <string name="text_times">回</string>
+    <string name="image_tomato">image_tomato</string>
+    <string name="text_pomo_working">作業中…</string>
+    <string name="text_pomo_rest">text_pomo_rest</string>
+    <string name="text_pomo_lastTimes">残り…</string>
+    <string name="text_default">TextView</string>
 
 </resources>

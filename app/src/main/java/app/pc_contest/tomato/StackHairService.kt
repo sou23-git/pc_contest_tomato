@@ -78,7 +78,7 @@ class StackHairService : Service() {
             if(event.action == MotionEvent.ACTION_DOWN) {
                 newView.performClick()
                 //stop Service
-                stopSelf()
+                //stopSelf()
             }
             false
         }

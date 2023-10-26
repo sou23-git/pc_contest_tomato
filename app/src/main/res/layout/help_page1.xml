@@ -79,49 +79,32 @@
         android:id="@+id/textView18"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="本アプリは二つのモードが\n 搭載されています。"
+        android:layout_marginTop="60dp"
+        android:text="@string/help_pomo1_title"
         android:textAlignment="center"
         android:textSize="22sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteY="97dp" />
-
-    <ImageView
-        android:id="@+id/imageView10"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
-        android:layout_marginStart="80dp"
-        android:layout_marginTop="50dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView18"
-        android:src="@drawable/help_icon_sn" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="MissingConstraints" />
 
     <ImageView
         android:id="@+id/imageView11"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
         android:layout_marginTop="50dp"
-        android:layout_marginEnd="80dp"
-        android:src="@drawable/help_icon_po"
+        android:src="@drawable/pomo_tomato"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView18" />
-
-    <TextView
-        android:id="@+id/textView19"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="SNSは許さんモード"
-        app:layout_constraintEnd_toEndOf="@+id/imageView10"
-        app:layout_constraintStart_toStartOf="@+id/imageView10"
-        app:layout_constraintTop_toBottomOf="@+id/imageView10" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView18"
+        android:contentDescription="@string/help_image_desc" />
 
     <TextView
         android:id="@+id/textView20"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:text="ポモドーロ\nテクニックモード"
+        android:text="@string/help_pomo1_modeName"
         app:layout_constraintEnd_toEndOf="@+id/imageView11"
         app:layout_constraintStart_toStartOf="@+id/imageView11"
         app:layout_constraintTop_toBottomOf="@+id/imageView11" />
@@ -130,9 +113,9 @@
         android:id="@+id/textView21"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="200dp"
+        android:layout_marginTop="250dp"
         android:lineSpacingExtra="8sp"
-        android:text="これらは使用目的によって使い分けることができます。 \n \n ポモドーロテクニックモードは\nポモドーロテクニックという時間管理テクニックを\n ベースとして作業のアシストを行います。\n \n SNSは許さんモードは SNSのアプリを使用した場合、\n SNSアプリのロックが行われます。 \n勉強中にほかのアプリを使わないためのモードです。  "
+        android:text="@string/help_pomo1_desc"
         android:textAlignment="center"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

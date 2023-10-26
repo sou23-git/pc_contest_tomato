@@ -19,12 +19,13 @@ import java.util.concurrent.TimeUnit
 
 class CountdownTimerService : Service() {
 
-    val CHANNEL_ID = "notification_timer"
+    private val channelIdNormal = "notification_timer"
+    private val channelIdImportant = "notification_timer_for_warning"
     var hms: String = "00:00:00"
 
-    private var CD_TIME: Long = 0      //Change every mode
-    private var CD_INTERVAL: Long = 0  //Default : 1 sec
-    private var CD_TYPE: String? = null
+    private var cdTime: Long = 0      //Change every mode
+    private var cdInterval: Long = 0  //Default : 1 sec
+    private var cdType: String? = null
 
     private lateinit var notification: Notification
     private lateinit var notificationManager: NotificationManager
@@ -49,30 +50,37 @@ class CountdownTimerService : Service() {
 
     @RequiresApi(Build.VERSION_CODES.O)
     fun createNotificationChannel() {
-        //Channel設定
-        val name = "Timer"
-        val descriptionText = "Timer service notification"
-        val importance = NotificationManager.IMPORTANCE_HIGH
-        val channel = NotificationChannel(CHANNEL_ID, name, importance).apply {
-            description = descriptionText
+        //ポップアップ無しChannel設定
+        val nameNormal = "Timer"
+        val descriptionTextNormal = "Timer service notification"
+        val importanceNormal = NotificationManager.IMPORTANCE_DEFAULT //NORMAL
+        val channelNormal = NotificationChannel(channelIdNormal, nameNormal, importanceNormal).apply {
+            description = descriptionTextNormal
+        }
+        val nameImportant = "Last Timer"
+        val descriptionTextImportant = "Timer service notification with popup"
+        val importanceImportant = NotificationManager.IMPORTANCE_HIGH //HIGH
+        val channelImportant = NotificationChannel(channelIdImportant, nameImportant, importanceImportant).apply {
+            description = descriptionTextImportant
         }
         //SystemにChannelを登録
         notificationManager =
             getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
-        notificationManager.createNotificationChannel(channel)
+        notificationManager.createNotificationChannel(channelNormal)
+        notificationManager.createNotificationChannel(channelImportant)
         Log.d("sub", "Channel registered")
     }
 
     fun updateNotification() {
 
         val title = "Timer"
-        intentNotification = Intent(this@CountdownTimerService, PomoPage3Activity::class.java)
+        intentNotification = Intent(this@CountdownTimerService, PomoPage2Activity::class.java)
         intentNotification!!.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK
         pendingIntent = PendingIntent
             .getActivity(this@CountdownTimerService, 0,
                 intentNotification, PendingIntent.FLAG_MUTABLE)
 
-        notification = NotificationCompat.Builder(applicationContext, CHANNEL_ID)
+        notification = NotificationCompat.Builder(applicationContext, channelIdNormal)
             .setSmallIcon(R.drawable.main_icon)
             .setContentTitle(title)
             .setAutoCancel(true)
@@ -86,22 +94,44 @@ class CountdownTimerService : Service() {
         Log.d("sub", "updateNotification")
     }
 
+    fun warningNotification() {
+        val title = "Warning!"
+        intentNotification = Intent(this@CountdownTimerService, PomoPage2Activity::class.java)
+        intentNotification!!.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+        pendingIntent = PendingIntent
+            .getActivity(this@CountdownTimerService, 0,
+                intentNotification, PendingIntent.FLAG_MUTABLE)
+
+        notification = NotificationCompat.Builder(applicationContext, channelIdImportant)
+            .setSmallIcon(R.drawable.main_icon)
+            .setContentTitle(title)
+            .setAutoCancel(true)
+            .setContentText("$hms　　　スマホ投げて！！！！！")
+            .setWhen(System.currentTimeMillis())
+            .setContentIntent(pendingIntent)
+            .setDeleteIntent(pendingIntent)
+            .build()
+        notification.flags = Notification.FLAG_ONGOING_EVENT
+        startForeground(1, notification)
+        Log.d("sub", "warningNotification")
+    }
+
     override fun onStartCommand(intent: Intent, flags: Int, startId: Int): Int {
 
         if(intent.hasExtra("TYPE")) {
-            CD_TYPE = intent.getStringExtra("TYPE")
-            Log.d("sub", CD_TYPE.toString())
-            if(CD_TYPE == "POMO_TIMER") {
-                //activityへのリンク
+            cdType = intent.getStringExtra("TYPE")
+            Log.d("sub", cdType.toString())
+            if(cdType == "POMO_TIMER") {
+                Log.d("sub", "pomo timer")
             }
         }
 
         if(intent.hasExtra("TIME")) {
-            CD_TIME = (intent.getIntExtra("TIME", 10) * 1000).toLong()
+            cdTime = (intent.getIntExtra("TIME", 10) * 1000).toLong()
         }
-        CD_INTERVAL = 1 * 1000
+        cdInterval = 1 * 1000
 
-        timer = CounterClass(CD_TIME, CD_INTERVAL)
+        timer = CounterClass(cdTime, cdInterval)
         timer!!.start()
         Log.d("sub", "onStartCommand")
         return START_NOT_STICKY
@@ -143,13 +173,19 @@ class CountdownTimerService : Service() {
             timerInfoIntent.putExtra("VALUE", hms)
             LocalBroadcastManager.getInstance(this@CountdownTimerService)
                 .sendBroadcast(timerInfoIntent)
-            updateNotification()
             Log.d("sub", "onTick")
-            if(hms.substring(0, 2) == "00" && hms.substring(3,5) == "00" && hms.substring(6, 8) == "10") {
-                val intentSensor = Intent(this@CountdownTimerService, GetSensorService::class.java)
-                startService(intentSensor)
-                notificationManager.notify(0, notification)
-                Log.d("sub", "sensorService started!")
+
+            if(hms.substring(0,2) == "00" && hms.substring(3,5) == "00" && hms.substring(6,8).toInt() <= 10) {
+                if(hms.substring(6,8).toInt() == 10) {
+                    val intentSensor = Intent(this@CountdownTimerService, GetSensorService::class.java)
+                    startService(intentSensor)
+                    Log.d("sub", "sensorService started!")
+                }
+                warningNotification()
+                Log.d("sub", "warning notification!")
+            } else {
+                //通常の通知
+                updateNotification()
             }
         }
 

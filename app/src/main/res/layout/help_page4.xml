@@ -74,41 +74,44 @@
 
     </androidx.appcompat.widget.Toolbar>
 
-    <ImageView
-        android:id="@+id/imageView14"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
-        android:layout_marginStart="25dp"
-        app:layout_constraintBottom_toBottomOf="@+id/textView26"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/textView26"
-        android:src="@drawable/help_icon_sn" />
-
     <TextView
-        android:id="@+id/textView26"
+        android:id="@+id/textView22"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="80dp"
-        android:layout_marginEnd="56dp"
-        android:text="SNSは許さんモード"
+        android:layout_marginTop="60dp"
+        android:layout_marginEnd="10dp"
+        android:text="@string/help_pomo4_title"
+        android:textAlignment="center"
         android:textSize="22sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintStart_toEndOf="@+id/imageView12"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="MissingConstraints" />
+
+    <ImageView
+        android:id="@+id/imageView12"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginStart="48dp"
+        android:src="@drawable/help_icon_ex"
+        app:layout_constraintBottom_toBottomOf="@+id/textView22"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/textView22"
+        android:contentDescription="@string/help_imageWarning_desc" />
 
     <TextView
-        android:id="@+id/textView27"
+        android:id="@+id/textView23"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
-        android:layout_marginBottom="216dp"
-        android:lineSpacingExtra="8sp"
-        android:text="このモードでは\n あらかじめ時間を設定しておき、\n 決められた時間の間はSNSなどのアプリを \nロックします。\n \nなお、勉強に使いたいアプリがSNSとして\n 登録されている場合は設定画面から、\n 変更できます。 "
+        android:layout_marginBottom="20dp"
+        android:lineSpacingExtra="6sp"
+        android:text="@string/help_pomo4_desc"
         android:textAlignment="center"
+        android:textAllCaps="false"
         app:layout_constraintBottom_toTopOf="@+id/toolbar_help_pagenum"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView14"
-        tools:ignore="MissingConstraints" />
+        app:layout_constraintHorizontal_bias="0.478"
+        app:layout_constraintStart_toStartOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

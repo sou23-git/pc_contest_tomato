@@ -36,7 +36,8 @@
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/po_frame" />
+        app:srcCompat="@drawable/po_frame"
+        android:contentDescription="@string/pomo_frame" />
 
     <FrameLayout
         android:id="@+id/frameLayout"
@@ -52,7 +53,7 @@
             android:layout_height="match_parent"
             android:layout_gravity="center"
             android:background="#00FFFFFF"
-            android:contentDescription="情報アイコン"
+            android:contentDescription="@string/icon_tomato"
             android:scaleType="fitXY"
             app:srcCompat="@drawable/app_logo" />
 
@@ -62,9 +63,10 @@
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
         android:layout_marginTop="80dp"
-        android:text="ポモドーロテクニックモード"
+        android:text="@string/pomo_title"
+        app:layout_constraintBottom_toTopOf="@+id/textView2"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -79,7 +81,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:srcCompat="@drawable/po_1_button_start_"
-        tools:ignore="MissingConstraints,SpeakableTextPresentCheck" />
+        tools:ignore="MissingConstraints,SpeakableTextPresentCheck"
+        android:contentDescription="@string/button_pomo_start" />
 
     <ImageView
         android:id="@+id/imageView"
@@ -90,15 +93,15 @@
         android:foregroundGravity="center_vertical|center"
         app:layout_constraintStart_toStartOf="@+id/textView2"
         app:layout_constraintTop_toTopOf="@+id/imageView2"
-        app:srcCompat="@drawable/po_1_decolation_text" />
+        app:srcCompat="@drawable/po_1_decolation_text"
+        android:contentDescription="@string/line_pomo" />
 
     <TextView
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="1dp"
-        android:autoText="true"
-        android:text="目標回数を入力してください"
+        android:text="@string/text_pomo_numPicker"
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="@+id/imageView"
         app:layout_constraintEnd_toEndOf="parent"
@@ -118,7 +121,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_gravity="center_horizontal"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            tools:ignore="UselessParent">
 
 
 
@@ -130,16 +134,17 @@
 
                 <NumberPicker
                     android:id="@+id/hourPicker"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center" />
+                    android:layout_width="80dp"
+                    android:layout_height="296dp"
+                    android:layout_gravity="center"
+                    tools:scrollbarSize="50dp" />
 
                 <TextView
                     android:id="@+id/textUnitName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:text="回"
+                    android:text="@string/text_times"
                     android:textSize="24sp" />
 
             </LinearLayout>

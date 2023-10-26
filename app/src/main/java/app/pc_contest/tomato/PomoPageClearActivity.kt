@@ -30,8 +30,13 @@ class PomoPageClearActivity : AppCompatActivity() {
 
         val time = 30 * timesDefault
         println(time)
-        textTimeAll.text = ((time / 60).toString().padStart(2, '0').plus(":").plus((time % 60).toString()).padStart(2, '0').plus(":").plus("00"))
-
+        if(time % 60 == 0) {
+            textTimeAll.text = (time / 60).toString().padStart(2, '0').plus(":").plus("00").plus(":").plus("00")
+        } else {
+            textTimeAll.text =
+                ((time / 60).toString().padStart(2, '0').plus(":").plus((time % 60).toString())
+                    .padStart(2, '0').plus(":").plus("00"))
+        }
         buttonToTop.setOnClickListener {
             val intentToHome = Intent(this, MainActivity::class.java)
             startActivity(intentToHome)
