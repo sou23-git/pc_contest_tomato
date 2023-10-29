@@ -114,7 +114,7 @@ class StackService : Service() {
 
     fun updateNotification() {
         val title = "Timer"
-        val intentNotification = Intent(this@StackService, MainActivity::class.java)
+        val intentNotification = Intent(this@StackService, PomoPage1Activity::class.java)
         intentNotification.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK
         val pendingIntent = PendingIntent.getActivity(
             this@StackService, 0, intentNotification, PendingIntent.FLAG_IMMUTABLE)
@@ -168,7 +168,7 @@ class StackService : Service() {
         }
 
         override fun onFinish() {
-            val intent = Intent(this@StackService, MainActivity::class.java)
+            val intent = Intent(this@StackService, PomoPage1Activity::class.java)
             intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
             startActivity(intent)
             Log.d("stackService", "timer finished")

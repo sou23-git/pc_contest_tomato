@@ -11,9 +11,19 @@ import android.util.Log
 import android.widget.TextView
 import androidx.activity.OnBackPressedCallback
 import androidx.annotation.RequiresApi
+import androidx.annotation.UiThread
+import androidx.annotation.WorkerThread
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.lifecycleScope
 import com.github.doyaaaaaken.kotlincsv.dsl.csvReader
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import java.io.File
+import java.io.PrintStream
+import java.net.HttpURLConnection
+import java.net.URL
+
 
 class PomoWaitDistance : AppCompatActivity() {
 
@@ -26,12 +36,17 @@ class PomoWaitDistance : AppCompatActivity() {
     private var timesDefault = 0
     private var times = 0
 
-    @Suppress("DEPRECATION")
+
     @RequiresApi(Build.VERSION_CODES.O)
     @SuppressLint("MissingInflatedId", "SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.load_po)
+
+        lifecycleScope.launch {
+            val result = processBackground(applicationContext)
+            postBackground(result)
+        }
 
         textView = findViewById(R.id.textView28)
         if(intent.hasExtra("TIMES_DEFAULT")) {
@@ -41,12 +56,26 @@ class PomoWaitDistance : AppCompatActivity() {
             times = intent.getIntExtra("TIMES", 0)
         }
 
-        val distance = calcDistance(this@PomoWaitDistance)
-        textView.text = distance.toString()
+        //val distance = calcDistance(this@PomoWaitDistance)
+        //textView.text = distance.toString()
+
+        //戻るボタン無効化設定
+        onBackPressedDispatcher.addCallback(callback)
+    }
+
+    //戻るボタン無効化
+    private val callback = object : OnBackPressedCallback(true) {
+        override fun handleOnBackPressed() {}
+    }
+
+
+    @Suppress("DEPRECATION")
+    @SuppressLint("SetTextI18n")
+    private fun jumpActivity(distance: Float) {
         val handler = Handler()
 
-        if(125 <= distance && distance < 325) {
-            if(175 <= distance) {
+        if(125 <= distance && distance < 200) {
+            if(150 <= distance) {
                 textView.text = "ナイスピッチ！いい調子！"
             } else {
                 textView.text = "目標まであと少し！"
@@ -71,7 +100,7 @@ class PomoWaitDistance : AppCompatActivity() {
                 val intentHair = Intent(this@PomoWaitDistance, StackHairService::class.java)
                 startService(intentHair)
                 handler.postDelayed( {
-                    val intentHome = Intent(this@PomoWaitDistance, MainActivity::class.java)
+                    val intentHome = Intent(this@PomoWaitDistance, PomoPage1Activity::class.java)
                     intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
                     startActivity(intentHome)
                 }, 1000)
@@ -92,25 +121,78 @@ class PomoWaitDistance : AppCompatActivity() {
                 startService(intentDistance)
             }, 2000)
         }
-        if(325 <= distance) {
+        if(200 <= distance) {
             textView.text = "投げすぎを検知しました。スマホに破損がないか確認してください。"
             handler.postDelayed({
-                val intentHome = Intent(this@PomoWaitDistance, MainActivity::class.java)
+                val intentHome = Intent(this@PomoWaitDistance, PomoPage1Activity::class.java)
                 startActivity(intentHome)
             }, 5000)
         }
-
-
-        //戻るボタン無効化設定
-        onBackPressedDispatcher.addCallback(callback)
     }
 
-    //戻るボタン無効化
-    private val callback = object : OnBackPressedCallback(true) {
-        override fun handleOnBackPressed() {}
+
+
+    //API connection
+    @WorkerThread
+    private suspend fun processBackground(context: Context): String {
+        return withContext(Dispatchers.IO) {
+            val result = StringBuilder()
+            val url = URL("https://httpbin.org/post")
+            val csvFilePath = context.applicationContext.getExternalFilesDir(Environment.DIRECTORY_DOCUMENTS)
+                .toString().plus("/").plus("log.csv")
+            Log.d("debug", "path : $csvFilePath")
+            val file = File(csvFilePath)
+
+            try {
+                val data: List<List<String>> = csvReader().readAll(file)
+                val con = (url.openConnection() as HttpURLConnection).apply {
+                    requestMethod = "POST"
+                    setRequestProperty("Content-Type", "text/plain; charset=utf-8")
+                    doInput = true
+                    doOutput = true
+                    connectTimeout = 5000
+                    readTimeout = 5000
+                }
+                Log.d("debug" ,"connection created")
+
+                val ps = PrintStream(con.outputStream)
+                ps.print(data)
+                Log.d("debug", "string printed")
+
+                val reader = con.inputStream.bufferedReader()
+                if(reader.toString() == "{\"error\":\"No file part\"}") {
+                    result.append(calcDistance(context))
+                }
+                else {
+                    reader.forEachLine {
+                        result.append(it)
+                    }
+                }
+                reader.close()
+            } catch (e: Exception) {
+                e.printStackTrace()
+                result.append(calcDistance(context))
+                Log.d("debug", "error")
+            }
+
+            Log.d("debug", "return")
+            result.toString()
+        }
     }
 
-    private fun calcDistance(context: Context): Double {
+    @UiThread
+    private fun postBackground(result: String) {
+        textView.text = result
+        if (result.toFloatOrNull() == null) {
+            val temp = calcDistance(context = applicationContext)
+            jumpActivity(temp)
+        }
+        Log.d("debug", "text update")
+    }
+
+
+    //重回帰
+    private fun calcDistance(context: Context): Float {
         //var distance = 0
         val csvFileDir = context.applicationContext.getExternalFilesDir(Environment.DIRECTORY_DOCUMENTS).toString().plus("/").plus("log.csv")
         val csvFile = File(csvFileDir)
@@ -143,7 +225,6 @@ class PomoWaitDistance : AppCompatActivity() {
         println("time = $time")
         val dis = (-61.6574+9.17438*max2) + (1.282906*max) + (0.101236*time)
         println("distance = $dis")
-        return dis
+        return dis.toFloat()
     }
-
 }

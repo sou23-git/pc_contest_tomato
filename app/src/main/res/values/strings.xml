@@ -69,7 +69,7 @@
     <string name="text_times">回</string>
     <string name="image_tomato">image_tomato</string>
     <string name="text_pomo_working">作業中…</string>
-    <string name="text_pomo_rest">text_pomo_rest</string>
+    <string name="text_pomo_rest">休憩中…</string>
     <string name="text_pomo_lastTimes">残り…</string>
     <string name="text_default">TextView</string>
 

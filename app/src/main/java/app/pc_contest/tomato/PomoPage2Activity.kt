@@ -81,7 +81,7 @@ class PomoPage2Activity : AppCompatActivity() {
         override fun handleOnBackPressed() {
             val intentStopService = Intent(this@PomoPage2Activity, CountdownTimerService::class.java)
             stopService(intentStopService)
-            val intentStartMainActivity = Intent(this@PomoPage2Activity, MainActivity::class.java)
+            val intentStartMainActivity = Intent(this@PomoPage2Activity, PomoPage1Activity::class.java)
             startActivity(intentStartMainActivity)
         }
     }
@@ -104,7 +104,7 @@ class PomoPage2Activity : AppCompatActivity() {
         //レイアウト設定
         mPopupView.findViewById<View>(R.id.imageButton6).setOnClickListener{
             //ページ移動:終了ボタン(IB6)が押されたらMainActivityへ
-            val intent = Intent(this, MainActivity::class.java)
+            val intent = Intent(this, PomoPage1Activity::class.java)
             startActivity(intent)
             //kill service
             val intentStopService = Intent(this@PomoPage2Activity, CountdownTimerService::class.java)

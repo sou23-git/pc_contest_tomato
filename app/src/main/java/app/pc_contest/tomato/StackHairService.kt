@@ -117,7 +117,7 @@ class StackHairService : Service() {
 
     fun updateNotification() {
         val title = "Timer"
-        val intentNotification = Intent(this@StackHairService, MainActivity::class.java)
+        val intentNotification = Intent(this@StackHairService, PomoPage1Activity::class.java)
         intentNotification.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK
         val pendingIntent = PendingIntent.getActivity(
             this@StackHairService, 0, intentNotification, PendingIntent.FLAG_IMMUTABLE)
@@ -171,7 +171,7 @@ class StackHairService : Service() {
         }
 
         override fun onFinish() {
-            val intent = Intent(this@StackHairService, MainActivity::class.java)
+            val intent = Intent(this@StackHairService, PomoPage1Activity::class.java)
             intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
             startActivity(intent)
             Log.d("stackService", "timer finished")

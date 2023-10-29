@@ -35,7 +35,7 @@ class LockClearActivity : AppCompatActivity() {
         //レイアウト設定
         mPopupView.findViewById<View>(R.id.imageButton6).setOnClickListener{
             //ページ移動:終了ボタン(IB6)が押されたらMainActivityへ
-            val intent = Intent(this@LockClearActivity, MainActivity::class.java)
+            val intent = Intent(this@LockClearActivity, PomoPage1Activity::class.java)
             startActivity(intent)
             //ポップアップ削除
             if (mPopupWindow.isShowing) {

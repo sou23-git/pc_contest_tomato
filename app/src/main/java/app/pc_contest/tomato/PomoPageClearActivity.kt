@@ -38,11 +38,11 @@ class PomoPageClearActivity : AppCompatActivity() {
                     .padStart(2, '0').plus(":").plus("00"))
         }
         buttonToTop.setOnClickListener {
-            val intentToHome = Intent(this, MainActivity::class.java)
+            val intentToHome = Intent(this, PomoPage1Activity::class.java)
             startActivity(intentToHome)
         }
         buttonHome.setOnClickListener {
-            val intentToHome = Intent(this, MainActivity::class.java)
+            val intentToHome = Intent(this, PomoPage1Activity::class.java)
             startActivity(intentToHome)
         }
     }

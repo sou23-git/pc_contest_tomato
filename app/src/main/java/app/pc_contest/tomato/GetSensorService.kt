@@ -78,12 +78,10 @@ class GetSensorService : Service(), SensorEventListener {
     override fun onAccuracyChanged(sensor: Sensor?, accuracy: Int) {}
 
     inner class SaveListToFile(context: Context) {
-        //private val maxDataRows = 200
         private val header = listOf("time", "acc")
         private val fileName = "log.csv"
-        private val csvFilePath: String =
-            context.applicationContext.getExternalFilesDir(Environment.DIRECTORY_DOCUMENTS)
-                ?.toString().plus("/").plus(fileName)
+        private val csvFilePath = context.applicationContext.getExternalFilesDir(Environment.DIRECTORY_DOCUMENTS)
+            .toString().plus("/").plus(fileName)
         private val listText = mutableListOf(header)
 
         fun writeRow(csvText: List<String>) {

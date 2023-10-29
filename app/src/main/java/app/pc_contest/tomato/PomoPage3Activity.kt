@@ -5,6 +5,7 @@ import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
+import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
@@ -87,7 +88,7 @@ class PomoPage3Activity : AppCompatActivity() {
         override fun handleOnBackPressed() {
             val intentStopService = Intent(this@PomoPage3Activity, CountdownTimerService::class.java)
             stopService(intentStopService)
-            val intentStartMainActivity = Intent(this@PomoPage3Activity, MainActivity::class.java)
+            val intentStartMainActivity = Intent(this@PomoPage3Activity, PomoPage1Activity::class.java)
             startActivity(intentStartMainActivity)
         }
     }
@@ -108,7 +109,7 @@ class PomoPage3Activity : AppCompatActivity() {
         //レイアウト設定
         mPopupView.findViewById<View>(R.id.imageButton6).setOnClickListener{
             //ページ移動:終了ボタン(IB6)が押されたらMainActivityへ
-            val intent = Intent(this, MainActivity::class.java)
+            val intent = Intent(this, PomoPage1Activity::class.java)
             startActivity(intent)
             //kill service
             val intentStopService = Intent(this@PomoPage3Activity, CountdownTimerService::class.java)
@@ -166,6 +167,9 @@ class PomoPage3Activity : AppCompatActivity() {
         override fun onReceive(context: Context?, intent: Intent?) {
             if(intent != null && intent.action == CountdownTimerService.TIME_INFO) {
                 if(intent.hasExtra("VALUE")) {
+                    if(intent.getStringExtra("VALUE") == "00:00:10"){
+                        textTimer.setTextColor(Color.RED)
+                    }
                     textTimer.text = intent.getStringExtra("VALUE").toString()
                     if(intent.getStringExtra("VALUE") == "TimerEnd") {
                         val intentTemp = Intent(this@PomoPage3Activity, PomoWaitDistance::class.java)
