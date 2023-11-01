@@ -176,7 +176,7 @@ class CountdownTimerService : Service() {
             Log.d("sub", "onTick")
 
             if(hms.substring(0,2) == "00" && hms.substring(3,5) == "00" && hms.substring(6,8).toInt() <= 10) {
-                if(hms.substring(6,8).toInt() == 10) {
+                if(hms.substring(6,8).toInt() == 9) {
                     val intentSensor = Intent(this@CountdownTimerService, GetSensorService::class.java)
                     startService(intentSensor)
                     Log.d("sub", "sensorService started!")

@@ -32,6 +32,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".GetSensorValue" />
+        <activity android:name=".PomoThrowFirst" />
         <activity android:name=".PomoPage2Activity" />
         <activity android:name=".PomoPage3Activity" />
         <activity android:name=".PomoWaitDistance" />

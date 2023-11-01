@@ -72,5 +72,6 @@
     <string name="text_pomo_rest">休憩中…</string>
     <string name="text_pomo_lastTimes">残り…</string>
     <string name="text_default">TextView</string>
+    <string name="text_pomo_throw">投げろ！！！</string>
 
 </resources>

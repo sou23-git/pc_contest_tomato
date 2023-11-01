@@ -21,18 +21,18 @@
 
     <ImageView
         android:id="@+id/imageView7"
-        android:layout_width="120dp"
-        android:layout_height="30dp"
+        android:layout_width="175dp"
+        android:layout_height="38dp"
         android:scaleType="fitXY"
         app:srcCompat="@drawable/po_warnig_top_button_top"
         tools:ignore="ContentDescription,ImageContrastCheck,MissingConstraints"
-        tools:layout_editor_absoluteX="73dp"
-        tools:layout_editor_absoluteY="16dp" />
+        tools:layout_editor_absoluteX="40dp"
+        tools:layout_editor_absoluteY="13dp" />
 
     <ImageView
         android:id="@+id/imageView8"
-        android:layout_width="128dp"
-        android:layout_height="3dp"
+        android:layout_width="169dp"
+        android:layout_height="5dp"
         android:layout_marginTop="25dp"
         android:scaleType="fitXY"
         app:layout_constraintEnd_toEndOf="parent"
@@ -46,15 +46,15 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="現在のタイマーはリセットされます。"
-        android:textSize="8sp"
+        android:textSize="10sp"
         app:layout_constraintBottom_toBottomOf="@+id/imageView8"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         tools:ignore="HardcodedText,SmallSp" />
 
     <LinearLayout
-        android:layout_width="258dp"
-        android:layout_height="38dp"
+        android:layout_width="256dp"
+        android:layout_height="53dp"
         android:layout_marginTop="100dp"
         android:gravity="center"
         android:orientation="horizontal"

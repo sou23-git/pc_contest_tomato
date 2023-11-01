@@ -19,7 +19,13 @@ import com.github.doyaaaaaken.kotlincsv.dsl.csvReader
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import kotlinx.serialization.ExperimentalSerializationApi
+import kotlinx.serialization.encodeToString
+import kotlinx.serialization.json.Json
+import java.io.BufferedReader
 import java.io.File
+import java.io.InputStreamReader
+import java.io.OutputStreamWriter
 import java.io.PrintStream
 import java.net.HttpURLConnection
 import java.net.URL
@@ -74,9 +80,10 @@ class PomoWaitDistance : AppCompatActivity() {
     private fun jumpActivity(distance: Float) {
         val handler = Handler()
 
+        textView.textSize = 25F
         if(125 <= distance && distance < 200) {
             if(150 <= distance) {
-                textView.text = "ナイスピッチ！いい調子！"
+                textView.text = "ナイスピッチ！\nいい調子！"
             } else {
                 textView.text = "目標まであと少し！"
             }
@@ -109,7 +116,7 @@ class PomoWaitDistance : AppCompatActivity() {
         }
         if(distance < 75) {
             if(distance <= 0) {
-                textView.text = "あんた無視したね！シバくわよ！"
+                textView.text = "無視したね！\nロックします！"
             } else {
                 textView.text = "ちゃんと投げて！！！"
             }
@@ -122,7 +129,7 @@ class PomoWaitDistance : AppCompatActivity() {
             }, 2000)
         }
         if(200 <= distance) {
-            textView.text = "投げすぎを検知しました。スマホに破損がないか確認してください。"
+            textView.text = "投げすぎを検知しました。\nスマホに破損がないか確認してください。"
             handler.postDelayed({
                 val intentHome = Intent(this@PomoWaitDistance, PomoPage1Activity::class.java)
                 startActivity(intentHome)
@@ -133,11 +140,12 @@ class PomoWaitDistance : AppCompatActivity() {
 
 
     //API connection
+    @OptIn(ExperimentalSerializationApi::class)
     @WorkerThread
     private suspend fun processBackground(context: Context): String {
         return withContext(Dispatchers.IO) {
             val result = StringBuilder()
-            val url = URL("https://httpbin.org/post")
+            val url = URL("https://ezaki-lab.cloud/~san-tomato/upload")
             val csvFilePath = context.applicationContext.getExternalFilesDir(Environment.DIRECTORY_DOCUMENTS)
                 .toString().plus("/").plus("log.csv")
             Log.d("debug", "path : $csvFilePath")
@@ -145,9 +153,13 @@ class PomoWaitDistance : AppCompatActivity() {
 
             try {
                 val data: List<List<String>> = csvReader().readAll(file)
+                val dataToJson = JsonMaker(data)
+                val json = Json.encodeToString(dataToJson)
+                println(json)
                 val con = (url.openConnection() as HttpURLConnection).apply {
                     requestMethod = "POST"
-                    setRequestProperty("Content-Type", "text/plain; charset=utf-8")
+                    setRequestProperty("Accept", "application/json")
+                    setRequestProperty("Content-Type", "application/json; charset=utf-8")
                     doInput = true
                     doOutput = true
                     connectTimeout = 5000
@@ -155,11 +167,27 @@ class PomoWaitDistance : AppCompatActivity() {
                 }
                 Log.d("debug" ,"connection created")
 
-                val ps = PrintStream(con.outputStream)
-                ps.print(data)
+                val os = OutputStreamWriter(con.outputStream)
+                os.write(json)
+                os.flush()
                 Log.d("debug", "string printed")
 
-                val reader = con.inputStream.bufferedReader()
+                //正常なら200が返ってくる
+                if(con.responseCode != 200) {
+                    println("connection error!")
+                }
+
+                //HttpURLConnectionからInputStreamを取得し、読み出す
+                val br = BufferedReader(InputStreamReader(con.inputStream, "UTF-8"))
+                var line: String?
+                while (br.readLine().also { line = it } != null) {
+                    result.append(line)
+                }
+                br.close()
+                Log.d("debug", "getFromInputStream")
+                println(result)
+
+                /*val reader = con.inputStream.bufferedReader()
                 if(reader.toString() == "{\"error\":\"No file part\"}") {
                     result.append(calcDistance(context))
                 }
@@ -168,7 +196,7 @@ class PomoWaitDistance : AppCompatActivity() {
                         result.append(it)
                     }
                 }
-                reader.close()
+                reader.close()*/
             } catch (e: Exception) {
                 e.printStackTrace()
                 result.append(calcDistance(context))
@@ -186,6 +214,10 @@ class PomoWaitDistance : AppCompatActivity() {
         if (result.toFloatOrNull() == null) {
             val temp = calcDistance(context = applicationContext)
             jumpActivity(temp)
+        }
+        else {
+            val distance = result.toFloat()
+            jumpActivity(distance)
         }
         Log.d("debug", "text update")
     }

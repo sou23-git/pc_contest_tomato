@@ -72,17 +72,6 @@
 
     </FrameLayout>
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="80dp"
-        android:text="@string/pomo_title"
-        app:layout_constraintBottom_toTopOf="@+id/textView2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <ImageButton
         android:id="@+id/imageButton"
         android:layout_width="100dp"
@@ -147,10 +136,10 @@
 
                 <NumberPicker
                     android:id="@+id/hourPicker"
-                    android:layout_width="80dp"
-                    android:layout_height="296dp"
+                    android:layout_width="85dp"
+                    android:layout_height="374dp"
                     android:layout_gravity="center"
-                    tools:scrollbarSize="50dp" />
+                    tools:scrollbarSize="70dp" />
 
                 <TextView
                     android:id="@+id/textUnitName"

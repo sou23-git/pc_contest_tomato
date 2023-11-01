@@ -1,14 +1,18 @@
 package app.pc_contest.tomato
 
 import android.annotation.SuppressLint
+import android.app.ActivityManager
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.widget.ImageButton
 import android.widget.NumberPicker
 import androidx.activity.OnBackPressedCallback
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.size
+
 
 class PomoPage1Activity : AppCompatActivity() {
 
@@ -32,9 +36,11 @@ class PomoPage1Activity : AppCompatActivity() {
 
         numPicker = findViewById(R.id.hourPicker)
 
-        numPicker.textSize = 40F
+        numPicker.textSize = 100F
         numPicker.maxValue = 99
         numPicker.minValue = 1
+
+
 
         onBackPressedDispatcher.addCallback(callback)
     }
@@ -52,9 +58,10 @@ class PomoPage1Activity : AppCompatActivity() {
             times = numPicker.value
 
             //次ページへ
-            val intent = Intent(this, PomoPage2Activity::class.java)
+            val intent = Intent(this, PomoThrowFirst::class.java)
             intent.putExtra("TIMES", times)
             intent.putExtra("TIMES_DEFAULT", times)
+            Log.d("pomo1", "toPomoThrow")
             startActivity(intent)
         }
 

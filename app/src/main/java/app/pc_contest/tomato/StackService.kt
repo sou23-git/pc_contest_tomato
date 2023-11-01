@@ -70,7 +70,7 @@ class StackService : Service() {
         //more position settings
 
         //set TouchListener on View
-        newView.setOnTouchListener { _, event ->
+        /*newView.setOnTouchListener { _, event ->
             Log.d("StackService", "onTouch")
             if(event.action == MotionEvent.ACTION_DOWN) {
                 newView.performClick()
@@ -78,7 +78,7 @@ class StackService : Service() {
                 stopSelf()
             }
             false
-        }
+        }*/
 
         //add view on display
         windowManager.addView(newView, params)
