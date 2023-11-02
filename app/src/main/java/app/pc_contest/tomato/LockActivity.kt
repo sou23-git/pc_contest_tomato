@@ -31,7 +31,7 @@ class LockActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
-        LocalBroadcastManager.getInstance(this).registerReceiver(receiver!!, IntentFilter(CountdownTimerService.TIME_INFO))
+        LocalBroadcastManager.getInstance(this).registerReceiver(receiver!!, IntentFilter(StackService.LOCK_INFO))
     }
 
     override fun onPause() {
@@ -46,7 +46,7 @@ class LockActivity : AppCompatActivity() {
 
     inner class TimeReceiver: BroadcastReceiver() {
         override fun onReceive(context: Context?, intent: Intent?) {
-            if(intent != null && intent.action == CountdownTimerService.TIME_INFO) {
+            if(intent != null && intent.action == StackService.LOCK_INFO) {
                 if(intent.hasExtra("VALUE")) {
                     val time = intent.getStringExtra("VALUE")
                     if(time!!.substring(0, 2) == "00" && time.substring(3, 5) == "00" && time.substring(6, 8) == "10") {

@@ -104,7 +104,7 @@ class StackHairService : Service() {
     fun createNotificationChannel() {
         val name = "Stack"
         val descriptionText = "Stack service notification"
-        val importance = NotificationManager.IMPORTANCE_DEFAULT
+        val importance = NotificationManager.IMPORTANCE_LOW
         val channel = NotificationChannel(channelId, name, importance).apply {
             description = descriptionText
         }
@@ -156,7 +156,7 @@ class StackHairService : Service() {
                 )
             )
             println(hms)
-            val timerInfoIntent = Intent(CountdownTimerService.TIME_INFO)
+            val timerInfoIntent = Intent(OVERLAY_INFO)
             timerInfoIntent.putExtra("VALUE", hms)
             LocalBroadcastManager.getInstance(this@StackHairService)
                 .sendBroadcast(timerInfoIntent)
@@ -171,11 +171,12 @@ class StackHairService : Service() {
         }
 
         override fun onFinish() {
-            val intent = Intent(this@StackHairService, PomoPage1Activity::class.java)
-            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
-            startActivity(intent)
             Log.d("stackService", "timer finished")
             stopSelf()
         }
+    }
+
+    companion object {
+        const val OVERLAY_INFO = "overlay info"
     }
 }

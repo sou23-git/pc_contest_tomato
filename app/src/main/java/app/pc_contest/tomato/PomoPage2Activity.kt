@@ -163,17 +163,18 @@ class PomoPage2Activity : AppCompatActivity() {
             if(intent != null && intent.action == CountdownTimerService.TIME_INFO) {
                 if(intent.hasExtra("VALUE")) {
                     val time = intent.getStringExtra("VALUE").toString()
-                    textTimer.text = time
-                    //10秒以下は赤字
-                    if(time.substring(0, 2) == "00" && time.substring(3, 5) == "00" && time.substring(6, 8) == "10") {
-                        textTimer.setTextColor(Color.RED)
-                        Log.d("pomo2", "color changed")
-                    }
                     if(intent.getStringExtra("VALUE") == "TimerEnd") {
                         val intentTemp = Intent(this@PomoPage2Activity, PomoPage3Activity::class.java)
                         intentTemp.putExtra("TIMES", times)
                         intentTemp.putExtra("TIMES_DEFAULT", timesDefault)
                         startActivity(intentTemp)
+                    } else {
+                        textTimer.text = time
+                    }
+                    //10秒以下は赤字
+                    if(time.substring(0, 2) == "00" && time.substring(3, 5) == "00" && time.substring(6, 8) == "10") {
+                        textTimer.setTextColor(Color.RED)
+                        Log.d("pomo2", "color changed")
                     }
                 }
             }

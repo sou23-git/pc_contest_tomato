@@ -47,6 +47,7 @@ class PomoThrowFirst: AppCompatActivity() {
         val intentTimer = Intent(this@PomoThrowFirst, CountdownTimerService::class.java)
         intentTimer.putExtra("TIME", 10)
         intentTimer.putExtra("TYPE", "POMO_INITIAL_THROW")
+        stopService(intentTimer)
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             startForegroundService(intentTimer)
             Log.d("pomoThrow", "startServiceForeground")
@@ -88,12 +89,13 @@ class PomoThrowFirst: AppCompatActivity() {
             if(intent != null && intent.action == CountdownTimerService.TIME_INFO) {
                 if(intent.hasExtra("VALUE")) {
                     val time = intent.getStringExtra("VALUE")!!.substring(7,8).plus(" 秒")
-                    textTimer.text = time
                     if(intent.getStringExtra("VALUE") == "TimerEnd") {
                         val intentTemp = Intent(this@PomoThrowFirst, PomoWaitDistance::class.java)
                         intentTemp.putExtra("TIMES", times)
                         intentTemp.putExtra("TIMES_DEFAULT", timesDefault)
                         startActivity(intentTemp)
+                    } else {
+                        textTimer.text = time
                     }
                 }
             }

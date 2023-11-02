@@ -187,16 +187,6 @@ class PomoWaitDistance : AppCompatActivity() {
                 Log.d("debug", "getFromInputStream")
                 println(result)
 
-                /*val reader = con.inputStream.bufferedReader()
-                if(reader.toString() == "{\"error\":\"No file part\"}") {
-                    result.append(calcDistance(context))
-                }
-                else {
-                    reader.forEachLine {
-                        result.append(it)
-                    }
-                }
-                reader.close()*/
             } catch (e: Exception) {
                 e.printStackTrace()
                 result.append(calcDistance(context))

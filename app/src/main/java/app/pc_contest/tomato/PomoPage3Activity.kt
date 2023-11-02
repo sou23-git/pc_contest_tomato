@@ -170,12 +170,13 @@ class PomoPage3Activity : AppCompatActivity() {
                     if(intent.getStringExtra("VALUE") == "00:00:10"){
                         textTimer.setTextColor(Color.RED)
                     }
-                    textTimer.text = intent.getStringExtra("VALUE").toString()
                     if(intent.getStringExtra("VALUE") == "TimerEnd") {
                         val intentTemp = Intent(this@PomoPage3Activity, PomoWaitDistance::class.java)
                         intentTemp.putExtra("TIMES", leftTime)
                         intentTemp.putExtra("TIMES_DEFAULT", timesDefault)
                         startActivity(intentTemp)
+                    } else {
+                        textTimer.text = intent.getStringExtra("VALUE").toString()
                     }
                 }
             }

@@ -101,7 +101,7 @@ class StackService : Service() {
     fun createNotificationChannel() {
         val name = "Stack"
         val descriptionText = "Stack service notification"
-        val importance = NotificationManager.IMPORTANCE_DEFAULT
+        val importance = NotificationManager.IMPORTANCE_LOW
         val channel = NotificationChannel(channelId, name, importance).apply {
             description = descriptionText
         }
@@ -113,7 +113,7 @@ class StackService : Service() {
     }
 
     fun updateNotification() {
-        val title = "Timer"
+        val title = "Lock"
         val intentNotification = Intent(this@StackService, PomoPage1Activity::class.java)
         intentNotification.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK
         val pendingIntent = PendingIntent.getActivity(
@@ -153,7 +153,7 @@ class StackService : Service() {
                 )
             )
             println(hms)
-            val timerInfoIntent = Intent(CountdownTimerService.TIME_INFO)
+            val timerInfoIntent = Intent(LOCK_INFO)
             timerInfoIntent.putExtra("VALUE", hms)
             LocalBroadcastManager.getInstance(this@StackService)
                 .sendBroadcast(timerInfoIntent)
@@ -175,4 +175,8 @@ class StackService : Service() {
             stopSelf()
         }
         }
+
+    companion object {
+        const val LOCK_INFO = "lock_info"
+    }
 }
