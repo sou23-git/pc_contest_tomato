@@ -22,13 +22,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="12dp"
+        android:contentDescription="@string/pomo_frame"
         android:scaleType="fitXY"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/po_frame"
-        android:contentDescription="@string/pomo_frame" />
+        app:srcCompat="@drawable/po_frame" />
 
     <FrameLayout
         android:id="@+id/frameLayout"
@@ -56,11 +56,11 @@
         android:layout_height="150dp"
         android:layout_marginStart="25dp"
         android:layout_marginTop="150dp"
+        android:contentDescription="@string/image_tomato"
         android:scaleType="fitXY"
         app:layout_constraintStart_toStartOf="@+id/imageView2"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/tomato"
-        android:contentDescription="@string/image_tomato" />
+        app:srcCompat="@drawable/tomato" />
 
     <TextView
         android:id="@+id/textView3"

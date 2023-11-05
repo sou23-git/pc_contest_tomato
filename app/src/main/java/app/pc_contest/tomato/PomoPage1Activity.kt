@@ -1,5 +1,8 @@
 package app.pc_contest.tomato
 
+import android.animation.Animator
+import android.animation.AnimatorSet
+import android.animation.ObjectAnimator
 import android.annotation.SuppressLint
 import android.app.ActivityManager
 import android.content.Intent
@@ -69,5 +72,22 @@ class PomoPage1Activity : AppCompatActivity() {
             val intentHelp = Intent(this, HelpPageActivity::class.java)
             startActivity(intentHelp)
         }
+
+        buttonHome.setOnClickListener {
+            iconAnimation(buttonHome)
+        }
+    }
+
+    private fun iconAnimation(img: ImageButton) {
+        Log.d("pomo1", "animation!")
+        val animatorList: MutableList<Animator> = ArrayList()
+
+        animatorList.add(ObjectAnimator.ofFloat(img, "translationX", 0f, 600f).setDuration(150))
+        animatorList.add(ObjectAnimator.ofFloat(img, "translationX", -600f, 600f).setDuration(300))
+        animatorList.add(ObjectAnimator.ofFloat(img, "translationX", -600f, 0f).setDuration(150))
+
+        val set = AnimatorSet()
+        set.playSequentially(animatorList)
+        set.start()
     }
 }

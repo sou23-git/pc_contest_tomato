@@ -31,6 +31,7 @@ import java.net.HttpURLConnection
 import java.net.URL
 
 
+@OptIn(ExperimentalSerializationApi::class)
 class PomoWaitDistance : AppCompatActivity() {
 
     /*private val fileName = "log.csv"
@@ -140,7 +141,6 @@ class PomoWaitDistance : AppCompatActivity() {
 
 
     //API connection
-    @OptIn(ExperimentalSerializationApi::class)
     @WorkerThread
     private suspend fun processBackground(context: Context): String {
         return withContext(Dispatchers.IO) {

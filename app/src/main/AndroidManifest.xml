@@ -22,24 +22,47 @@
         tools:ignore="UnusedAttribute">
 
         <activity
-            android:name=".PomoPage1Activity"
+            android:name=".SplashActivity"
             android:exported="true"
             android:taskAffinity=""
-            android:excludeFromRecents="true">
+            android:excludeFromRecents="true"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".GetSensorValue" />
-        <activity android:name=".PomoThrowFirst" />
-        <activity android:name=".PomoPage2Activity" />
-        <activity android:name=".PomoPage3Activity" />
-        <activity android:name=".PomoWaitDistance" />
-        <activity android:name=".PomoPageClearActivity" />
-        <activity android:name=".LockActivity" />
-        <activity android:name=".LockClearActivity" />
-        <activity android:name=".HelpPageActivity" />
+        <activity android:name=".GetSensorValue"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity"/>
+        <activity android:name=".PomoThrowFirst"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity"/>
+        <activity android:name=".PomoPage1Activity"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity"/>
+        <activity android:name=".PomoPage2Activity"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity"/>
+        <activity android:name=".PomoPage3Activity"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity"/>
+        <activity android:name=".PomoWaitDistance"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity"/>
+        <activity android:name=".PomoPageClearActivity"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity"/>
+        <activity android:name=".LockActivity"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity"/>
+        <activity android:name=".LockClearActivity"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity"/>
+        <activity android:name=".HelpPageActivity"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity"/>
 
         <activity android:name=".SensorToAnswer" />
 

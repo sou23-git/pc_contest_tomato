@@ -1,6 +1,7 @@
 package app.pc_contest.tomato
 
 import android.annotation.SuppressLint
+import android.app.ActivityManager
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
@@ -43,17 +44,29 @@ class PomoThrowFirst: AppCompatActivity() {
         times = intent.getIntExtra("TIMES", 0)
         timesDefault = intent.getIntExtra("TIMES_DEFAULT", 0)
 
-        //countdown
-        val intentTimer = Intent(this@PomoThrowFirst, CountdownTimerService::class.java)
-        intentTimer.putExtra("TIME", 10)
-        intentTimer.putExtra("TYPE", "POMO_INITIAL_THROW")
-        stopService(intentTimer)
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            startForegroundService(intentTimer)
-            Log.d("pomoThrow", "startServiceForeground")
-        }else {
-            startService(intentTimer)
-            Log.d("pomoThrow", "startServiceNormal")
+        //service確認
+        var needStartService = true
+        val manager = getSystemService(ACTIVITY_SERVICE) as ActivityManager
+        for (serviceInfo in manager.getRunningServices(Int.MAX_VALUE)) {
+            if (CountdownTimerService::class.java.name == serviceInfo.service.className) {
+                // 実行中なら起動しない
+                needStartService = false
+                Log.d("pomo2", "service has already running")
+            }
+        }
+        if(needStartService) {
+            //countdown
+            val intentTimer = Intent(this@PomoThrowFirst, CountdownTimerService::class.java)
+            intentTimer.putExtra("TIME", 10)
+            intentTimer.putExtra("TYPE", "POMO_INITIAL_THROW")
+            stopService(intentTimer)
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                startForegroundService(intentTimer)
+                Log.d("pomoThrow", "startServiceForeground")
+            }else {
+                startService(intentTimer)
+                Log.d("pomoThrow", "startServiceNormal")
+            }
         }
 
         imageViewLeft.setOnClickListener {

@@ -1,6 +1,7 @@
 package app.pc_contest.tomato
 
 import android.annotation.SuppressLint
+import android.app.ActivityManager
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
@@ -61,16 +62,30 @@ class PomoPage2Activity : AppCompatActivity() {
             timesDefault = intent.getIntExtra("TIMES_DEFAULT", 0)
         }
 
-        //タイマー実行
-        val intent = Intent(this, CountdownTimerService::class.java)
-        intent.putExtra("TIME", (25 * 60)) //25min
-        intent.putExtra("TYPE", "POMO_TIMER")
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            startForegroundService(intent)
-        }else {
-            startService(intent)
+        //service確認
+        var needStartService = true
+        val manager = getSystemService(ACTIVITY_SERVICE) as ActivityManager
+        for (serviceInfo in manager.getRunningServices(Int.MAX_VALUE)) {
+            if (CountdownTimerService::class.java.name == serviceInfo.service.className) {
+                // 実行中なら起動しない
+                needStartService = false
+                Log.d("pomo2", "service has already running")
+            }
         }
-        Log.d("Pomo1", "startService")
+        if(needStartService) {
+            val intent = Intent(this, CountdownTimerService::class.java)
+            intent.putExtra("TIME", (25 * 60)) //25min
+            intent.putExtra("TYPE", "POMO_TIMER")
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                startForegroundService(intent)
+            }else {
+                startService(intent)
+            }
+            Log.d("Pomo1", "startService")
+        }
+
+
+        //タイマー実行
 
         //戻るボタン無効化設定
         onBackPressedDispatcher.addCallback(callback)
