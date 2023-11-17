@@ -26,22 +26,17 @@ import java.io.BufferedReader
 import java.io.File
 import java.io.InputStreamReader
 import java.io.OutputStreamWriter
-import java.io.PrintStream
 import java.net.HttpURLConnection
 import java.net.URL
 
 
-@OptIn(ExperimentalSerializationApi::class)
 class PomoWaitDistance : AppCompatActivity() {
-
-    /*private val fileName = "log.csv"
-    private val csvFilePath = this.applicationContext.getExternalFilesDir(Environment.DIRECTORY_DOCUMENTS)
-        ?.toString().plus("/").plus(fileName)*/
 
     private lateinit var textView: TextView
 
     private var timesDefault = 0
     private var times = 0
+    private var skip = ""
 
 
     @RequiresApi(Build.VERSION_CODES.O)
@@ -61,6 +56,9 @@ class PomoWaitDistance : AppCompatActivity() {
         }
         if(intent.hasExtra("TIMES")) {
             times = intent.getIntExtra("TIMES", 0)
+        }
+        if(intent.hasExtra("SKIP")) {
+            skip = intent.getStringExtra("SKIP")!!
         }
 
         //val distance = calcDistance(this@PomoWaitDistance)
@@ -141,60 +139,69 @@ class PomoWaitDistance : AppCompatActivity() {
 
 
     //API connection
+    @OptIn(ExperimentalSerializationApi::class)
     @WorkerThread
     private suspend fun processBackground(context: Context): String {
         return withContext(Dispatchers.IO) {
-            val result = StringBuilder()
-            val url = URL("https://ezaki-lab.cloud/~san-tomato/upload")
-            val csvFilePath = context.applicationContext.getExternalFilesDir(Environment.DIRECTORY_DOCUMENTS)
-                .toString().plus("/").plus("log.csv")
-            Log.d("debug", "path : $csvFilePath")
-            val file = File(csvFilePath)
-
-            try {
-                val data: List<List<String>> = csvReader().readAll(file)
-                val dataToJson = JsonMaker(data)
-                val json = Json.encodeToString(dataToJson)
-                println(json)
-                val con = (url.openConnection() as HttpURLConnection).apply {
-                    requestMethod = "POST"
-                    setRequestProperty("Accept", "application/json")
-                    setRequestProperty("Content-Type", "application/json; charset=utf-8")
-                    doInput = true
-                    doOutput = true
-                    connectTimeout = 5000
-                    readTimeout = 5000
-                }
-                Log.d("debug" ,"connection created")
-
-                val os = OutputStreamWriter(con.outputStream)
-                os.write(json)
-                os.flush()
-                Log.d("debug", "string printed")
-
-                //正常なら200が返ってくる
-                if(con.responseCode != 200) {
-                    println("connection error!")
-                }
-
-                //HttpURLConnectionからInputStreamを取得し、読み出す
-                val br = BufferedReader(InputStreamReader(con.inputStream, "UTF-8"))
-                var line: String?
-                while (br.readLine().also { line = it } != null) {
-                    result.append(line)
-                }
-                br.close()
-                Log.d("debug", "getFromInputStream")
-                println(result)
-
-            } catch (e: Exception) {
-                e.printStackTrace()
-                result.append(calcDistance(context))
-                Log.d("debug", "error")
+            if(skip == "150~") {
+                return@withContext "150"
             }
+            if(skip == "~100") {
+                return@withContext "100"
+            }
+            else {
+                val result = StringBuilder()
+                val url = URL("https://ezaki-lab.cloud/~san-tomato/upload")
+                val csvFilePath = context.applicationContext.getExternalFilesDir(Environment.DIRECTORY_DOCUMENTS)
+                    .toString().plus("/").plus("log.csv")
+                Log.d("debug", "path : $csvFilePath")
+                val file = File(csvFilePath)
 
-            Log.d("debug", "return")
-            result.toString()
+                try {
+                    val data: List<List<String>> = csvReader().readAll(file)
+                    val dataToJson = JsonMaker(data)
+                    val json = Json.encodeToString(dataToJson)
+                    println(json)
+                    val con = (url.openConnection() as HttpURLConnection).apply {
+                        requestMethod = "POST"
+                        setRequestProperty("Accept", "application/json")
+                        setRequestProperty("Content-Type", "application/json; charset=utf-8")
+                        doInput = true
+                        doOutput = true
+                        connectTimeout = 5000
+                        readTimeout = 5000
+                    }
+                    Log.d("debug" ,"connection created")
+
+                    val os = OutputStreamWriter(con.outputStream)
+                    os.write(json)
+                    os.flush()
+                    Log.d("debug", "string printed")
+
+                    //正常なら200が返ってくる
+                    if(con.responseCode != 200) {
+                        println("connection error!")
+                    }
+
+                    //HttpURLConnectionからInputStreamを取得し、読み出す
+                    val br = BufferedReader(InputStreamReader(con.inputStream, "UTF-8"))
+                    var line: String?
+                    while (br.readLine().also { line = it } != null) {
+                        result.append(line)
+                    }
+                    br.close()
+                    Log.d("debug", "getFromInputStream")
+                    println(result)
+
+                } catch (e: Exception) {
+                    e.printStackTrace()
+                    result.append(calcDistance(context))
+                    Log.d("debug", "error")
+                }
+
+                Log.d("debug", "return")
+                result.toString()
+            }
         }
     }
 

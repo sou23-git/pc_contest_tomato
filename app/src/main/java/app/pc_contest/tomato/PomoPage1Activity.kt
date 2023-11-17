@@ -4,7 +4,6 @@ import android.animation.Animator
 import android.animation.AnimatorSet
 import android.animation.ObjectAnimator
 import android.annotation.SuppressLint
-import android.app.ActivityManager
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
@@ -14,7 +13,6 @@ import android.widget.NumberPicker
 import androidx.activity.OnBackPressedCallback
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.size
 
 
 class PomoPage1Activity : AppCompatActivity() {
@@ -69,6 +67,7 @@ class PomoPage1Activity : AppCompatActivity() {
         }
 
         buttonHelp.setOnClickListener {
+            Log.d("pomo1", "goto help page")
             val intentHelp = Intent(this, HelpPageActivity::class.java)
             startActivity(intentHelp)
         }

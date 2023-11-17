@@ -68,8 +68,8 @@ class StackHairService : Service() {
         //put center
         params.gravity = Gravity.TOP or Gravity.END
         //more position settings
-        params.x = 20 * dpScale
-        params.y = 80 * dpScale
+        params.x = 200 * dpScale
+        params.y = 800 * dpScale
 
 
         //set TouchListener on View

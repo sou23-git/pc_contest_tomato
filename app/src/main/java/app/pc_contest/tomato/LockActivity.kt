@@ -51,10 +51,11 @@ class LockActivity : AppCompatActivity() {
                     val time = intent.getStringExtra("VALUE")
                     if(time!!.substring(0, 2) == "00" && time.substring(3, 5) == "00" && time.substring(6, 8) == "10") {
                         textTimer.setTextColor(Color.RED)
-                        Log.d("pomo2", "color changed")
+                        Log.d("lock", "color changed")
                     }
-                    textTimer.text = intent.getStringExtra("VALUE").toString()
-                    if(intent.getStringExtra("VALUE") == "TimerEnd") {
+                    textTimer.text = intent.getStringExtra("VALUE").toString().substring(3,8)
+                    if(intent.getStringExtra("VALUE") == "00:00:00") {
+                        Log.d("lock", "lock clear")
                         val intentTemp = Intent(this@LockActivity, LockClearActivity::class.java)
                         startActivity(intentTemp)
                     }

@@ -62,13 +62,13 @@
             android:layout_width="52dp"
             android:layout_height="52dp"
             android:layout_gravity="right"
-            android:layout_marginEnd="8dp"
             android:layout_marginTop="4dp"
+            android:layout_marginEnd="24dp"
             android:background="@color/white"
+            android:contentDescription="@string/button_help"
             android:scaleType="fitXY"
             app:srcCompat="@drawable/help"
-            tools:ignore="RtlHardcoded"
-            android:contentDescription="@string/button_help" />
+            tools:ignore="RtlHardcoded" />
 
     </FrameLayout>
 

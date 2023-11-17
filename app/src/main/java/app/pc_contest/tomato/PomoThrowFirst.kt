@@ -21,11 +21,13 @@ class PomoThrowFirst: AppCompatActivity() {
     private lateinit var textTimer: TextView
     private lateinit var imageViewLeft: ImageView
     private lateinit var imageViewRight: ImageView
+    private lateinit var imageTomato: ImageView
     private var receiver: TimeReceiver? = null
 
     private var times: Int = 0
     private var timesDefault: Int = 0
 
+    @Suppress("DEPRECATION")
     @SuppressLint("SetTextI18n", "MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,6 +38,7 @@ class PomoThrowFirst: AppCompatActivity() {
         textTimer = findViewById(R.id.time_text_view)
         imageViewLeft = findViewById(R.id.imageViewLeft)
         imageViewRight = findViewById(R.id.imageViewRight)
+        imageTomato = findViewById(R.id.imageView3)
         textTimer.setTextColor(Color.RED)
         textTimer.text = "10 秒"
 
@@ -69,11 +72,6 @@ class PomoThrowFirst: AppCompatActivity() {
             }
         }
 
-        imageViewLeft.setOnClickListener {
-            val intent = Intent(this@PomoThrowFirst, PomoWaitDistance::class.java)
-            intent.putExtra("SKIP", "")//デバッグボタンおしてSC
-        }
-
         onBackPressedDispatcher.addCallback(callback)
     }
 
@@ -88,6 +86,33 @@ class PomoThrowFirst: AppCompatActivity() {
 
         LocalBroadcastManager.getInstance(this)
             .registerReceiver(receiver!!, IntentFilter(CountdownTimerService.TIME_INFO))
+
+        imageTomato.setOnClickListener {
+            val intentStopService = Intent(this, CountdownTimerService::class.java)
+            stopService(intentStopService)
+            val intentStopSensor = Intent(this, GetSensorService::class.java)
+            stopService(intentStopSensor)
+            val intentSkipRest = Intent(this, PomoWaitDistance::class.java)
+            intentSkipRest.putExtra("TIMES", timesDefault)
+            intentSkipRest.putExtra("TIMES_DEFAULT", timesDefault)
+            intentSkipRest.putExtra("SKIP", "150~")
+            Log.d("pomoFirst", timesDefault.toString())
+            startActivity(intentSkipRest)
+            Log.d("pomoFirst", "Stopped & Skipped")
+        }
+        imageViewLeft.setOnClickListener {
+            val intentStopService = Intent(this, CountdownTimerService::class.java)
+            stopService(intentStopService)
+            val intentStopSensor = Intent(this, GetSensorService::class.java)
+            stopService(intentStopSensor)
+            val intentSkipRest = Intent(this, PomoWaitDistance::class.java)
+            intentSkipRest.putExtra("TIMES", timesDefault)
+            intentSkipRest.putExtra("TIMES_DEFAULT", timesDefault)
+            intentSkipRest.putExtra("SKIP", "~100")
+            Log.d("pomoFirst", timesDefault.toString())
+            startActivity(intentSkipRest)
+            Log.d("pomoFirst", "Stopped & Skipped")
+        }
     }
 
     override fun onPause() {

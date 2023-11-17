@@ -39,6 +39,7 @@ class PomoPage3Activity : AppCompatActivity() {
     private var timesDefault = 0
 
     private var receiver: TimeReceiver? = null
+    @Suppress("DEPRECATION")
     @SuppressLint("MissingInflatedId", "SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -149,6 +150,7 @@ class PomoPage3Activity : AppCompatActivity() {
             val intentSkipRest = Intent(this, PomoWaitDistance::class.java)
             intentSkipRest.putExtra("TIMES", leftTime)
             intentSkipRest.putExtra("TIMES_DEFAULT", timesDefault)
+            intentSkipRest.putExtra("SKIP", "150~")
             Log.d("Pomo3", timesDefault.toString())
             startActivity(intentSkipRest)
             Log.d("Pomo3", "Stopped & Skipped")
